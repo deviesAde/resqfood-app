@@ -1,0 +1,326 @@
+"use client"
+
+import type React from "react"
+
+import { useState, useRef, useEffect } from "react"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { Bell, X, Star, CheckCircle, Clock, TrendingUp, Users, Settings } from "lucide-react"
+
+interface Notification {
+  id: string
+  type: "success" | "warning" | "info" | "urgent" | "achievement"
+  title: string
+  message: string
+  timestamp: string
+  read: boolean
+  actionLabel?: string
+  actionUrl?: string
+  icon?: React.ReactNode
+}
+
+const sampleNotifications: Notification[] = [
+  {
+    id: "1",
+    type: "urgent",
+    title: "Urgent: Items Expiring Soon!",
+    message: "5 items from Golden Crust Bakery expire in 2 hours. Rescue them now at 60% off!",
+    timestamp: "2 minutes ago",
+    read: false,
+    actionLabel: "View Items",
+    actionUrl: "/marketplace",
+    icon: <Clock className="w-4 h-4" />,
+  },
+  {
+    id: "2",
+    type: "success",
+    title: "Order Confirmed!",
+    message: "Your order of Artisan Sourdough Bread has been confirmed. Pickup ready in 30 minutes.",
+    timestamp: "15 minutes ago",
+    read: false,
+    actionLabel: "Track Order",
+    actionUrl: "/orders",
+    icon: <CheckCircle className="w-4 h-4" />,
+  },
+  {
+    id: "3",
+    type: "achievement",
+    title: "Food Hero Badge Earned! 🏆",
+    message: "Congratulations! You've rescued 50 items and earned the 'Food Hero' badge.",
+    timestamp: "1 hour ago",
+    read: false,
+    actionLabel: "View Profile",
+    actionUrl: "/profile",
+    icon: <Star className="w-4 h-4" />,
+  },
+  {
+    id: "4",
+    type: "info",
+    title: "New Seller Joined",
+    message: "Patisserie Belle just joined resQfood! Check out their fresh pastries and desserts.",
+    timestamp: "3 hours ago",
+    read: true,
+    actionLabel: "Visit Store",
+    actionUrl: "/seller/patisserie-belle",
+    icon: <Users className="w-4 h-4" />,
+  },
+  {
+    id: "5",
+    type: "warning",
+    title: "Price Drop Alert",
+    message: "Premium Coffee Beans from Roast Masters dropped to $12.99 (was $24.99). Limited time!",
+    timestamp: "5 hours ago",
+    read: true,
+    actionLabel: "Buy Now",
+    actionUrl: "/marketplace",
+    icon: <TrendingUp className="w-4 h-4" />,
+  },
+]
+
+interface NotificationDropdownProps {
+  notifications?: Notification[]
+  onNotificationRead?: (id: string) => void
+  onNotificationDismiss?: (id: string) => void
+  className?: string
+}
+
+export function NotificationDropdown({
+  notifications = sampleNotifications,
+  onNotificationRead,
+  onNotificationDismiss,
+  className = "",
+}: NotificationDropdownProps) {
+  const [isOpen, setIsOpen] = useState(false)
+  const [localNotifications, setLocalNotifications] = useState(notifications)
+  const dropdownRef = useRef<HTMLDivElement>(null)
+
+  const unreadCount = localNotifications.filter((n) => !n.read).length
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsOpen(false)
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside)
+    return () => document.removeEventListener("mousedown", handleClickOutside)
+  }, [])
+
+  const handleRead = (id: string) => {
+    setLocalNotifications((prev) => prev.map((notif) => (notif.id === id ? { ...notif, read: true } : notif)))
+    onNotificationRead?.(id)
+  }
+
+  const handleDismiss = (id: string) => {
+    setLocalNotifications((prev) => prev.filter((notif) => notif.id !== id))
+    onNotificationDismiss?.(id)
+  }
+
+  const handleMarkAllRead = () => {
+    setLocalNotifications((prev) => prev.map((n) => ({ ...n, read: true })))
+  }
+
+  const getNotificationStyle = (type: Notification["type"], read: boolean) => {
+    const baseStyle = `border-l-4 transition-all duration-300 hover:bg-gray-50 ${read ? "opacity-75" : ""}`
+
+    switch (type) {
+      case "urgent":
+        return `${baseStyle} border-l-[#CC2B52] bg-gradient-to-r from-[#CC2B52]/5 to-transparent`
+      case "success":
+        return `${baseStyle} border-l-green-500 bg-gradient-to-r from-green-50/50 to-transparent`
+      case "achievement":
+        return `${baseStyle} border-l-[#AF1740] bg-gradient-to-r from-[#AF1740]/5 to-transparent`
+      case "warning":
+        return `${baseStyle} border-l-yellow-500 bg-gradient-to-r from-yellow-50/50 to-transparent`
+      case "info":
+      default:
+        return `${baseStyle} border-l-[#740938] bg-gradient-to-r from-[#DE7C7D]/5 to-transparent`
+    }
+  }
+
+  const getIconColor = (type: Notification["type"]) => {
+    switch (type) {
+      case "urgent":
+        return "text-[#CC2B52]"
+      case "success":
+        return "text-green-500"
+      case "achievement":
+        return "text-[#AF1740]"
+      case "warning":
+        return "text-yellow-500"
+      case "info":
+      default:
+        return "text-[#740938]"
+    }
+  }
+
+  return (
+    <div className={`relative ${className}`} ref={dropdownRef}>
+      {/* Notification Bell Button */}
+      <Button
+        variant="ghost"
+        size="sm"
+        onClick={() => setIsOpen(!isOpen)}
+        className="relative hover:bg-[#DE7C7D]/20 transition-colors"
+      >
+        <Bell className="w-5 h-5 text-gray-600" />
+        {unreadCount > 0 && (
+          <Badge className="absolute -top-1 -right-1 bg-[#CC2B52] text-white text-xs px-1.5 py-0.5 rounded-full min-w-[18px] h-4 flex items-center justify-center animate-pulse">
+            {unreadCount > 9 ? "9+" : unreadCount}
+          </Badge>
+        )}
+      </Button>
+
+      {/* Dropdown Card */}
+      {isOpen && (
+        <div className="absolute right-0 top-full mt-2 z-50 animate-in slide-in-from-top-2 duration-200">
+          <Card className="w-96 max-w-[90vw] border-2 border-[#DE7C7D]/30 rounded-2xl shadow-xl bg-white">
+            <CardContent className="p-0">
+              {/* Header */}
+              <div className="p-4 border-b border-[#DE7C7D]/30 bg-gradient-to-r from-[#DE7C7D]/10 to-white">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-2">
+                    <Bell className="w-5 h-5 text-[#740938]" />
+                    <div>
+                      <h3 className="font-bold text-[#740938]">Notifications</h3>
+                      <p className="text-xs text-gray-600">
+                        {unreadCount > 0 ? `${unreadCount} unread` : "All caught up!"}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-center space-x-1">
+                    {unreadCount > 0 && (
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={handleMarkAllRead}
+                        className="text-[#740938] hover:bg-[#DE7C7D]/20 text-xs px-2 py-1 h-auto"
+                      >
+                        Mark all read
+                      </Button>
+                    )}
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => setIsOpen(false)}
+                      className="text-gray-400 hover:text-gray-600 hover:bg-gray-100 p-1 h-auto"
+                    >
+                      <X className="w-4 h-4" />
+                    </Button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Notifications List */}
+              <div className="max-h-80 overflow-y-auto">
+                {localNotifications.length === 0 ? (
+                  <div className="p-6 text-center">
+                    <Bell className="w-12 h-12 text-gray-300 mx-auto mb-3" />
+                    <h4 className="font-semibold text-gray-500 mb-1">No notifications</h4>
+                    <p className="text-gray-400 text-sm">You're all caught up!</p>
+                  </div>
+                ) : (
+                  <div className="divide-y divide-[#DE7C7D]/10">
+                    {localNotifications.slice(0, 5).map((notification) => (
+                      <div
+                        key={notification.id}
+                        className={`p-3 ${getNotificationStyle(notification.type, notification.read)} cursor-pointer`}
+                        onClick={() => !notification.read && handleRead(notification.id)}
+                      >
+                        <div className="flex items-start space-x-3">
+                          {/* Icon */}
+                          <div className={`flex-shrink-0 ${getIconColor(notification.type)} mt-0.5`}>
+                            {notification.icon || <Bell className="w-4 h-4" />}
+                          </div>
+
+                          {/* Content */}
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-start justify-between">
+                              <div className="flex-1">
+                                <h4
+                                  className={`text-sm font-semibold ${notification.read ? "text-gray-600" : "text-[#740938]"}`}
+                                >
+                                  {notification.title}
+                                </h4>
+                                <p className={`text-xs mt-1 ${notification.read ? "text-gray-500" : "text-gray-700"}`}>
+                                  {notification.message}
+                                </p>
+                                <p className="text-xs text-gray-400 mt-1">{notification.timestamp}</p>
+                              </div>
+
+                              {/* Actions */}
+                              <div className="flex items-center space-x-1 ml-2">
+                                {!notification.read && <div className="w-2 h-2 bg-[#CC2B52] rounded-full"></div>}
+                                <Button
+                                  variant="ghost"
+                                  size="sm"
+                                  onClick={(e) => {
+                                    e.stopPropagation()
+                                    handleDismiss(notification.id)
+                                  }}
+                                  className="text-gray-400 hover:text-gray-600 hover:bg-gray-100 p-0.5 h-auto"
+                                >
+                                  <X className="w-3 h-3" />
+                                </Button>
+                              </div>
+                            </div>
+
+                            {/* Action Button */}
+                            {notification.actionLabel && (
+                              <div className="mt-2">
+                                <Button
+                                  size="sm"
+                                  onClick={(e) => {
+                                    e.stopPropagation()
+                                    handleRead(notification.id)
+                                    // Navigate to actionUrl
+                                  }}
+                                  className={`${
+                                    notification.type === "urgent"
+                                      ? "bg-[#CC2B52] hover:bg-[#AF1740]"
+                                      : notification.type === "success"
+                                        ? "bg-green-500 hover:bg-green-600"
+                                        : notification.type === "achievement"
+                                          ? "bg-[#AF1740] hover:bg-[#740938]"
+                                          : "bg-[#740938] hover:bg-[#AF1740]"
+                                  } text-white rounded-full px-3 py-1 text-xs font-medium shadow-sm hover:shadow-md transition-all`}
+                                >
+                                  {notification.actionLabel}
+                                </Button>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Footer */}
+              {localNotifications.length > 0 && (
+                <div className="p-3 border-t border-[#DE7C7D]/30 bg-gradient-to-r from-[#DE7C7D]/5 to-white">
+                  <div className="flex items-center justify-between">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="text-[#740938] hover:bg-[#DE7C7D]/20 text-xs px-2 py-1 h-auto"
+                    >
+                      View All Notifications
+                    </Button>
+                    <Button variant="ghost" size="sm" className="text-gray-500 hover:bg-gray-100 p-1 h-auto">
+                      <Settings className="w-4 h-4" />
+                    </Button>
+                  </div>
+                </div>
+              )}
+            </CardContent>
+          </Card>
+        </div>
+      )}
+    </div>
+  )
+}
