@@ -497,32 +497,7 @@ export default function CartPage() {
                 </CardContent>
               </Card>
 
-              {/* Quick Actions */}
-              <Card className="border-2 border-[#DE7C7D]/30 rounded-2xl shadow-lg">
-                <CardContent className="p-4 space-y-3">
-                  <Button
-                    variant="outline"
-                    className="w-full border-[#740938] text-[#740938] hover:bg-[#740938] hover:text-white bg-transparent rounded-full justify-start"
-                  >
-                    <Gift className="w-4 h-4 mr-2" />
-                    Add Gift Message
-                  </Button>
-                  <Button
-                    variant="outline"
-                    className="w-full border-[#DE7C7D]/30 text-gray-700 hover:bg-[#DE7C7D]/20 rounded-full justify-start bg-transparent"
-                  >
-                    <Tag className="w-4 h-4 mr-2" />
-                    Save for Later
-                  </Button>
-                  <Button
-                    variant="outline"
-                    className="w-full border-[#DE7C7D]/30 text-gray-700 hover:bg-[#DE7C7D]/20 rounded-full justify-start bg-transparent"
-                  >
-                    <Heart className="w-4 h-4 mr-2" />
-                    Share Cart
-                  </Button>
-                </CardContent>
-              </Card>
+            
             </div>
           </div>
         )}
