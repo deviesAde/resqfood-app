@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
+
 import {
   Heart,
   Leaf,
@@ -92,6 +93,9 @@ export default function LandingPage() {
               >
                 <Link href="/auth/login">Login</Link>
               </Button>
+
+             
+              
             </div>
           </div>
         </div>
