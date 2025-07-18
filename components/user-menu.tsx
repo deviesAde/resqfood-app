@@ -25,9 +25,9 @@ interface UserMenuProps {
 }
 
 export function UserMenu({
-  userName = "Sarah Johnson",
-  userEmail = "sarah.johnson@email.com",
-  userAvatar = "/placeholder.svg?height=40&width=40",
+  userName = "Devies Agbe",
+  userEmail = "deviesagbe@gmail.com",
+  userAvatar = "/profile/profile.jpg",
   cartItemCount = 3,
   notificationCount = 5,
 }: UserMenuProps) {
@@ -50,7 +50,7 @@ export function UserMenu({
             {userName}
           </div>
           <div className="text-xs text-gray-600 dark:text-gray-400">
-            VIP Member
+            {userEmail}
           </div>
         </div>
         <ChevronDown className="w-4 h-4 text-gray-600 dark:text-gray-400" />
@@ -86,9 +86,7 @@ export function UserMenu({
                   {userEmail}
                 </div>
                 <div className="flex items-center space-x-2 mt-1">
-                  <Badge className="bg-gradient-to-r from-[#AF1740] to-[#CC2B52] dark:from-[#740938] dark:to-[#AF1740] text-white text-xs">
-                    VIP Member
-                  </Badge>
+                
                   <Badge className="bg-green-500 dark:bg-green-600 text-white text-xs">
                     Food Hero
                   </Badge>
@@ -151,7 +149,7 @@ export function UserMenu({
                 </Button>
               </Link>
 
-              <Link href="/payment" onClick={() => setIsOpen(false)}>
+              <Link href="/profile?tab=settings" onClick={() => setIsOpen(false)}>
                 <Button
                   variant="ghost"
                   className="w-full justify-start hover:bg-[#DE7C7D]/20 dark:hover:bg-[#740938]/30 rounded-xl"

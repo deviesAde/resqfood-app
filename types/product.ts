@@ -1,0 +1,20 @@
+export type Product = {
+  id: number;
+  name: string;
+  originalPrice: number;
+  discountedPrice: number;
+  discount: number;
+  expiryDays: number;
+  freshnessDays: number;
+  category: string;
+  rating: number;
+  reviews: number;
+  seller: string;
+  location: string;
+  image: string;
+  urgent: boolean;
+  sold: number;
+  status: "available" | "expired";
+  bestBy: string;
+  goodFor: string;
+};
