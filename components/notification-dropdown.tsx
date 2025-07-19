@@ -350,6 +350,7 @@ export function NotificationDropdown({
                     <Button
                       variant="ghost"
                       size="sm"
+                      onClick={() => (window.location.href = "/notifications")}
                       className="text-[#740938] hover:bg-[#DE7C7D]/20 text-xs px-2 py-1 h-auto dark:text-[#DE7C7D] dark:hover:bg-gray-700"
                     >
                       View All Notifications

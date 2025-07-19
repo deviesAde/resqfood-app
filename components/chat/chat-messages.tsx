@@ -1,7 +1,9 @@
-import Image from "next/image";
-import { User } from "lucide-react";
+import type React from "react";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { useEffect, useState } from "react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { formatDistanceToNow } from "date-fns";
+import { id } from "date-fns/locale";
+import Image from "next/image";
 
 interface Message {
   id: number;
@@ -15,7 +17,7 @@ interface Message {
 interface ChatMessagesProps {
   messages: Message[];
   isTyping: boolean;
-  messagesEndRef: React.RefObject<HTMLDivElement>;
+  messagesEndRef: React.RefObject<HTMLDivElement | null>;
   agentName: string;
 }
 
@@ -25,23 +27,8 @@ export function ChatMessages({
   messagesEndRef,
   agentName,
 }: ChatMessagesProps) {
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  const formatTime = (date: Date) => {
-    if (!isMounted) return ""; // Return empty string during SSR
-    return date.toLocaleTimeString([], {
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: true,
-    });
-  };
-
   return (
-    <ScrollArea className="flex-1 p-6 bg-gray-50 dark:bg-gray-950">
+    <ScrollArea className="flex-1 p-6">
       <div className="space-y-6">
         {messages.map((message) => (
           <div
@@ -51,81 +38,78 @@ export function ChatMessages({
             }`}
           >
             <div
-              className={`flex items-start space-x-3 max-w-[80%] ${
-                message.sender === "user"
-                  ? "flex-row-reverse space-x-reverse"
-                  : ""
-              }`}
+              className={`flex max-w-[80%] ${
+                message.sender === "user" ? "flex-row-reverse" : "flex-row"
+              } items-start space-x-3`}
             >
-              <div className="flex-shrink-0">
+              <Avatar className="w-8 h-8 flex-shrink-0">
                 {message.sender === "agent" ? (
                   <Image
-                    src={
-                      message.agentAvatar ||
-                      "/placeholder.svg?height=40&width=40"
-                    }
-                    alt={message.agentName || "Agent"}
-                    width={40}
-                    height={40}
-                    className="w-10 h-10 rounded-full border-2 border-gray-200 dark:border-gray-700"
-                    priority={message.id === messages.length - 1} // Only prioritize last image
+                    src="/placeholder.svg?height=32&width=32"
+                    alt={agentName}
+                    width={32}
+                    height={32}
+                    className="w-8 h-8 rounded-full"
                   />
                 ) : (
-                  <div className="w-10 h-10 bg-gradient-to-r from-[#AF1740] to-[#CC2B52] rounded-full flex items-center justify-center shadow-lg">
-                    <User className="w-5 h-5 text-white" />
-                  </div>
+                  <>
+                    <AvatarImage src="/placeholder.svg?height=32&width=32" />
+                    <AvatarFallback className="bg-[#AF1740] text-white text-sm">
+                      A
+                    </AvatarFallback>
+                  </>
                 )}
-              </div>
+              </Avatar>
               <div
-                className={`rounded-2xl px-6 py-4 shadow-lg ${
-                  message.sender === "user"
-                    ? "bg-gradient-to-r from-[#AF1740] to-[#CC2B52] text-white"
-                    : "bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-50 border border-gray-200 dark:border-gray-700"
+                className={`flex flex-col ${
+                  message.sender === "user" ? "items-end" : "items-start"
                 }`}
               >
-                <p className="text-sm leading-relaxed whitespace-pre-line">
-                  {message.text}
-                </p>
-                <p
-                  className={`text-xs mt-3 ${
+                <div
+                  className={`rounded-2xl px-4 py-3 max-w-full ${
                     message.sender === "user"
-                      ? "text-white/70"
-                      : "text-gray-500 dark:text-gray-400"
+                      ? "bg-[#AF1740] text-white"
+                      : "bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white"
                   }`}
                 >
-                  {formatTime(message.timestamp)}
-                </p>
+                  <p className="text-sm whitespace-pre-wrap leading-relaxed">
+                    {message.text}
+                  </p>
+                </div>
+                <span className="text-xs text-gray-500 dark:text-gray-400 mt-1 px-1">
+                  {formatDistanceToNow(message.timestamp, {
+                    addSuffix: true,
+                    locale: id,
+                  })}
+                </span>
               </div>
             </div>
           </div>
         ))}
-        {/* Typing Indicator - now client-only */}
-        {isMounted && isTyping && (
+
+        {isTyping && (
           <div className="flex justify-start">
-            <div className="flex items-start space-x-3 max-w-[80%]">
-              <Image
-                src="/placeholder.svg?height=40&width=40"
-                alt={agentName}
-                width={40}
-                height={40}
-                className="w-10 h-10 rounded-full border-2 border-gray-200 dark:border-gray-700"
-              />
-              <div className="bg-white dark:bg-gray-800 rounded-2xl px-6 py-4 border border-gray-200 dark:border-gray-700 shadow-lg">
-                <div className="flex items-center space-x-2">
-                  <span className="text-gray-600 dark:text-gray-400 text-sm">
-                    {agentName} is typing
-                  </span>
-                  <div className="flex space-x-1">
-                    <div className="w-2 h-2 bg-[#DE7C7D] rounded-full animate-bounce"></div>
-                    <div
-                      className="w-2 h-2 bg-[#DE7C7D] rounded-full animate-bounce"
-                      style={{ animationDelay: "0.1s" }}
-                    ></div>
-                    <div
-                      className="w-2 h-2 bg-[#DE7C7D] rounded-full animate-bounce"
-                      style={{ animationDelay: "0.2s" }}
-                    ></div>
-                  </div>
+            <div className="flex items-start space-x-3">
+              <Avatar className="w-8 h-8 flex-shrink-0">
+                <Image
+                  src="/placeholder.svg?height=32&width=32"
+                  alt={agentName}
+                  width={32}
+                  height={32}
+                  className="w-8 h-8 rounded-full"
+                />
+              </Avatar>
+              <div className="bg-gray-100 dark:bg-gray-800 rounded-2xl px-4 py-3">
+                <div className="flex space-x-1">
+                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+                  <div
+                    className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
+                    style={{ animationDelay: "0.1s" }}
+                  ></div>
+                  <div
+                    className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
+                    style={{ animationDelay: "0.2s" }}
+                  ></div>
                 </div>
               </div>
             </div>

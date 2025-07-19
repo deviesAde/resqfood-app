@@ -1,5 +1,4 @@
 "use client";
-
 import type React from "react";
 import { useState, useRef, useEffect, useCallback } from "react";
 import { ChatHeader } from "@/components/chat/chat-header";
@@ -24,13 +23,14 @@ export default function ChatPage() {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: 1,
-      text: `Hi there! 👋 Welcome to resQfood! I'm ${agentName}, your dedicated food rescue specialist. I'm here to help you save food, save money, and make a real impact! How can I assist you today?`,
+      text: `Halo! 👋 Selamat datang di resQfood! Saya ${agentName}, spesialis penyelamatan makanan yang siap membantu Anda. Saya di sini untuk membantu Anda menyelamatkan makanan, menghemat uang, dan membuat dampak nyata! Bagaimana saya bisa membantu Anda hari ini?`,
       sender: "agent",
       timestamp: new Date(),
       agentName: agentName,
       agentAvatar: agentAvatar,
     },
   ]);
+
   const [newMessage, setNewMessage] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -46,37 +46,49 @@ export default function ChatPage() {
   const getSmartAgentResponse = useCallback(
     (userMessage: string): string => {
       const message = userMessage.toLowerCase();
+
       if (
         message.includes("password") ||
+        message.includes("kata sandi") ||
         message.includes("login") ||
+        message.includes("masuk") ||
         message.includes("sign in")
       ) {
-        return "I can definitely help with login issues! 🔐 Here are your options:\n\n• Use the 'Forgot Password' link on the login page\n• I can guide you through the reset process\n• Check if Caps Lock is on\n• Try clearing your browser cache\n\nWould you like me to walk you through any of these steps?";
+        return "Saya pasti bisa membantu dengan masalah login! 🔐 Berikut adalah pilihan Anda:\n\n• Gunakan tautan 'Lupa Kata Sandi' di halaman login\n• Saya bisa memandu Anda melalui proses reset\n• Periksa apakah Caps Lock aktif\n• Coba hapus cache browser Anda\n\nApakah Anda ingin saya memandu Anda melalui salah satu langkah ini?";
       }
+
       if (
         message.includes("account") ||
+        message.includes("akun") ||
         message.includes("register") ||
+        message.includes("daftar") ||
         message.includes("sign up") ||
-        message.includes("join")
+        message.includes("bergabung")
       ) {
-        return "Awesome! Creating your resQfood account is super easy! 🎉\n\n✨ **Welcome Bonus**: Get 20% off your first food rescue!\n\n**Quick steps:**\n1. Click 'Join resQfood'\n2. Fill out the simple form\n3. Verify your email\n4. Start saving food & money!\n\nNeed help with any specific part of the registration?";
+        return "Luar biasa! Membuat akun resQfood Anda sangat mudah! 🎉\n\n✨ **Bonus Selamat Datang**: Dapatkan diskon 20% untuk penyelamatan makanan pertama Anda!\n\n**Langkah cepat:**\n1. Klik 'Bergabung dengan resQfood'\n2. Isi formulir sederhana\n3. Verifikasi email Anda\n4. Mulai menyelamatkan makanan & uang!\n\nButuh bantuan dengan bagian tertentu dari pendaftaran?";
       }
+
       if (
         message.includes("food") ||
+        message.includes("makanan") ||
         message.includes("rescue") ||
-        message.includes("how") ||
-        message.includes("work")
+        message.includes("penyelamatan") ||
+        message.includes("bagaimana") ||
+        message.includes("cara kerja")
       ) {
-        return "Great question! Food rescue is our passion! 🥗💚\n\n**Here's how it works:**\n• We partner with local stores & restaurants\n• They offer surplus food at 50-70% off\n• You rescue it before it goes to waste\n• Everyone wins - you save money, planet stays happy!\n\n**Your impact so far:** 2.3M+ meals rescued by our community!\n\nWant to know about specific food categories or locations?";
+        return "Pertanyaan yang bagus! Penyelamatan makanan adalah passion kami! 🥗💚\n\n**Begini cara kerjanya:**\n• Kami bermitra dengan toko & restoran lokal\n• Mereka menawarkan makanan surplus dengan diskon 50-70%\n• Anda menyelamatkannya sebelum terbuang sia-sia\n• Semua menang - Anda hemat uang, planet tetap bahagia!\n\n**Dampak Anda sejauh ini:** 2,3 juta+ makanan diselamatkan oleh komunitas kami!\n\nIngin tahu tentang kategori makanan atau lokasi tertentu?";
       }
+
       if (
         message.includes("hi") ||
+        message.includes("halo") ||
         message.includes("hello") ||
-        message.includes("hey")
+        message.includes("hai")
       ) {
-        return `Hello! So great to meet you! 😊✨\n\nI'm ${agentName}, and I'm super excited to help you start your food rescue journey! Whether you're here to:\n\n🥗 Learn about food rescue\n💰 Start saving money on groceries\n🌍 Make an environmental impact\n🔐 Get help with your account\n\nI've got you covered! What brings you to resQfood today?`;
+        return `Halo! Senang sekali bertemu dengan Anda! 😊✨\n\nSaya ${agentName}, dan saya sangat senang membantu Anda memulai perjalanan penyelamatan makanan! Apakah Anda di sini untuk:\n\n🥗 Belajar tentang penyelamatan makanan\n💰 Mulai menghemat uang untuk belanja\n🌍 Membuat dampak lingkungan\n🔐 Mendapat bantuan dengan akun Anda\n\nSaya siap membantu! Apa yang membawa Anda ke resQfood hari ini?`;
       }
-      return "Thanks for reaching out! 🌟 I'd love to help you with that!\n\nFor detailed assistance, I can:\n• Answer questions about food rescue\n• Help with account issues\n• Connect you with our specialist team\n• Guide you through getting started\n\n**Quick options:**\n📧 Email: help@resqfood.com\n📞 Call: 1-800-RESQFOOD\n💬 Keep chatting with me!\n\nWhat would be most helpful for you right now?";
+
+      return "Terima kasih telah menghubungi! 🌟 Saya senang membantu Anda dengan itu!\n\nUntuk bantuan detail, saya bisa:\n• Menjawab pertanyaan tentang penyelamatan makanan\n• Membantu dengan masalah akun\n• Menghubungkan Anda dengan tim spesialis kami\n• Memandu Anda untuk memulai\n\n**Pilihan cepat:**\n📧 Email: help@resqfood.com\n📞 Telepon: 1-800-RESQFOOD\n💬 Terus mengobrol dengan saya!\n\nApa yang paling membantu untuk Anda sekarang?";
     },
     [agentName]
   );
@@ -89,6 +101,7 @@ export default function ChatPage() {
         sender: "user",
         timestamp: new Date(),
       };
+
       setMessages((prev) => [...prev, userMessage]);
       setNewMessage("");
       setIsTyping(true);
@@ -126,12 +139,18 @@ export default function ChatPage() {
   );
 
   const quickActions = [
-    { text: "I need help with my password", label: "🔐 Password Help" },
-    { text: "How do I create an account?", label: "📝 Create Account" },
-    { text: "Tell me about food rescue", label: "🥗 Food Rescue" },
-    { text: "What are your prices?", label: "💰 Pricing" },
-    { text: "Is resQfood available in my area?", label: "📍 Locations" },
-    { text: "How do I start rescuing food?", label: "🚀 Get Started" },
+    {
+      text: "Saya butuh bantuan dengan kata sandi",
+      label: "🔐 Bantuan Kata Sandi",
+    },
+    { text: "Bagaimana cara membuat akun?", label: "📝 Buat Akun" },
+    {
+      text: "Ceritakan tentang penyelamatan makanan",
+      label: "🥗 Penyelamatan Makanan",
+    },
+    { text: "Berapa harganya?", label: "💰 Harga" },
+    { text: "Apakah resQfood tersedia di daerah saya?", label: "📍 Lokasi" },
+    { text: "Bagaimana cara mulai menyelamatkan makanan?", label: "🚀 Mulai" },
   ];
 
   return (
@@ -165,14 +184,14 @@ export default function ChatPage() {
                   <div className="flex items-center space-x-2">
                     <div className="w-2 h-2 bg-green-400 rounded-full"></div>
                     <p className="text-white/90 text-sm">
-                      Food Rescue Specialist • Online
+                      Spesialis Penyelamatan Makanan • Online
                     </p>
                   </div>
                 </div>
               </div>
               <div className="text-right text-white/90 text-sm">
-                <p>Average response time</p>
-                <p className="text-[#DE7C7D] font-semibold">30 seconds</p>
+                <p>Waktu respons rata-rata</p>
+                <p className="text-[#DE7C7D] font-semibold">30 detik</p>
               </div>
             </div>
             <ChatMessages

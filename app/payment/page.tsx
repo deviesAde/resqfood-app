@@ -40,7 +40,7 @@ const cartItems: CartItem[] = [
     quantity: 2,
     expiryHours: 4,
     category: "Roti & Kue",
-    image: "/placeholder.svg?height=80&width=80",
+    image: "/products/1/roti3.png",
     urgent: true,
   },
   {
@@ -54,7 +54,7 @@ const cartItems: CartItem[] = [
     quantity: 1,
     expiryHours: 24,
     category: "Produk Susu",
-    image: "/placeholder.svg?height=80&width=80",
+    image: "/products/4/susu1.png",
     urgent: false,
   },
   {
@@ -68,8 +68,8 @@ const cartItems: CartItem[] = [
     quantity: 1,
     expiryHours: 6,
     category: "Roti & Kue",
-    image: "/placeholder.svg?height=80&width=80",
-    urgent: true,
+    image: "/products/4/kroisant.png",
+    urgent: false,
   },
 ];
 

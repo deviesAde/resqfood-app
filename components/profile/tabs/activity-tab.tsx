@@ -26,10 +26,10 @@ export function ActivityTab({ recentActivity }: ActivityTabProps) {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-3xl font-bold text-[#740938] dark:text-gray-50">
-            Recent Activity
+            Aktivitas Terkini
           </h2>
           <p className="text-gray-600 dark:text-gray-400">
-            Your food rescue journey
+            Perjalanan penyelamatan makanan Anda
           </p>
         </div>
         <Button
@@ -37,7 +37,7 @@ export function ActivityTab({ recentActivity }: ActivityTabProps) {
           className="border-[#740938] text-[#740938] hover:bg-[#740938] hover:text-white bg-transparent rounded-full dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white"
         >
           <Download className="w-4 h-4 mr-2" />
-          Export History
+          Ekspor Riwayat
         </Button>
       </div>
       <div className="space-y-4">
@@ -89,7 +89,7 @@ export function ActivityTab({ recentActivity }: ActivityTabProps) {
                     <div className="text-right">
                       {activity.amount && (
                         <div className="font-bold text-[#AF1740] text-lg">
-                          ${activity.amount}
+                          Rp{activity.amount.toLocaleString("id-ID")}
                         </div>
                       )}
                       <Badge

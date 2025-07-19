@@ -1,14 +1,16 @@
-
-  "use client";
+"use client";
 
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
-import { Users, Store, Package, TrendingUp, AlertTriangle, Eye, Ban, CheckCircle, Download, Heart, BarChart3, PieChart, Search, Filter, Settings, Bell, Menu, ChevronLeft, ChevronRight, Home, UserCheck, DollarSign, User, MessageSquare, Shield, Database, Globe, RefreshCw, Save, Sun, Moon, Plus, Edit, Trash2 } from 'lucide-react';
-import Link from "next/link";
-import { useTheme } from "next-themes";
-
+import {
+  Users,
+  Store,
+  Package,
+  BarChart3,
+  PieChart,
+  Settings,
+  Home,
+  MessageSquare,
+} from "lucide-react";
 import { TopNavigation } from "@/components/dashboard/top-navigation";
 import { Sidebar } from "@/components/dashboard/sidebar";
 import { OverviewTab } from "@/components/dashboard/overview-tab";
@@ -23,6 +25,7 @@ import { SettingsTab } from "@/components/dashboard/settings-tab";
 export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState("overview");
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Dummy data for CRUD operations
   const [users, setUsers] = useState([
@@ -125,8 +128,8 @@ export default function AdminDashboard() {
   const stats = {
     totalUsers: users.length,
     activeSellers: sellers.filter((s) => s.status === "terverifikasi").length,
-    productsListed: 1234, // This can be dynamic if you add product management
-    ordersTracked: 8956, // This can be dynamic
+    productsListed: 1234,
+    ordersTracked: 8956,
     monthlyRevenue: 45678,
     totalRevenue: 234567,
   };
@@ -145,21 +148,35 @@ export default function AdminDashboard() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#DE7C7D]/10 to-rose-50 dark:from-gray-900 dark:to-gray-800 text-gray-900 dark:text-gray-100">
       <TopNavigation
-        sidebarCollapsed={sidebarCollapsed}
-        setSidebarCollapsed={setSidebarCollapsed}
+      
+        mobileMenuOpen={mobileMenuOpen}
+        setMobileMenuOpen={setMobileMenuOpen}
       />
-      <div className="flex">
+
+      <div className="flex relative">
+        {/* Mobile overlay */}
+        {mobileMenuOpen && (
+          <div
+            className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
+            onClick={() => setMobileMenuOpen(false)}
+          />
+        )}
+
         <Sidebar
           sidebarCollapsed={sidebarCollapsed}
           setSidebarCollapsed={setSidebarCollapsed}
           activeTab={activeTab}
           setActiveTab={setActiveTab}
           sidebarItems={sidebarItems}
-         
+          mobileMenuOpen={mobileMenuOpen}
+          setMobileMenuOpen={setMobileMenuOpen}
         />
-        <div className="flex-1 transition-all duration-300">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            {activeTab === "overview" && <OverviewTab stats={stats} flaggedProducts={flaggedProducts} />}
+
+        <div className="flex-1 transition-all duration-300 min-h-screen w-full lg:w-auto">
+          <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 xl:px-8 py-4 sm:py-6 lg:py-8">
+            {activeTab === "overview" && (
+              <OverviewTab stats={stats} flaggedProducts={flaggedProducts} />
+            )}
             {activeTab === "users" && (
               <UsersTab users={users} setUsers={setUsers} />
             )}
@@ -182,5 +199,3 @@ export default function AdminDashboard() {
     </div>
   );
 }
-;
-

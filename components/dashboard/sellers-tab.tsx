@@ -259,7 +259,7 @@ export function SellersTab({ sellers, setSellers }: SellersTabProps) {
                       </Badge>
                     </td>
                     <td className="py-4 font-semibold text-[#AF1740] dark:text-gray-100">
-                      ${seller.revenue.toLocaleString()}
+                      Rp{seller.revenue.toLocaleString("id-ID")}
                     </td>
                     <td className="py-4">
                       <div className="flex space-x-2">

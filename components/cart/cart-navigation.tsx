@@ -24,7 +24,7 @@ export function CartNavigation({ totalItems }: CartNavigationProps) {
               <Image
                 src="/logo/logo.png"
                 alt="resQfood Logo"
-                width={32} // Adjust width as needed
+                width={32} 
                 height={32} // Adjust height as needed
                 className="rounded-lg group-hover:scale-105 transition-transform"
               />

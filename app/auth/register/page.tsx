@@ -16,7 +16,7 @@ export default function Component() {
       {/* Full Screen Background Image */}
       <div className="absolute inset-0">
         <Image
-          src="/placeholder.svg?height=1080&width=1920"
+          src="/auth/login.jpg"
           alt="Beautiful rescued organic vegetables and fruits in a vibrant market setting"
           fill
           className="object-cover"
@@ -39,8 +39,8 @@ export default function Component() {
                 <span className="text-[#DE7C7D]">Save Planet</span>
               </h1>
               <p className="text-2xl opacity-90 leading-relaxed max-w-lg">
-                Join the movement to rescue perfectly good food from waste and
-                make a real difference in your community.
+                Bergabunglah dengan gerakan mengurangi sampah makanan dengan
+                belanja cerdas dan menyelamatkan lebih banyak. Temukan makanan
               </p>
             </div>
 
@@ -51,7 +51,7 @@ export default function Component() {
                   <Recycle className="w-8 h-8 text-white" />
                 </div>
                 <p className="text-3xl font-bold">2.3M+</p>
-                <p className="text-sm opacity-80">Meals Rescued</p>
+                <p className="text-sm opacity-80">Food Rescued</p>
               </div>
               <div className="text-center">
                 <div className="flex items-center justify-center w-16 h-16 bg-[#AF1740] rounded-2xl mb-3">
@@ -73,14 +73,14 @@ export default function Component() {
             <div className="bg-white/15 backdrop-blur-md rounded-2xl p-6 border border-white/20 max-w-md">
               <div className="flex items-center space-x-4 mb-4">
                 <Image
-                  src="/placeholder.svg?height=50&width=50"
-                  alt="Sarah M. - Food rescue hero"
+                  src="/auth/profile/profile.png"
+                  alt="Daniel Baskara. - Food rescue hero"
                   width={50}
                   height={50}
                   className="w-12 h-12 rounded-full object-cover border-2 border-white/30"
                 />
                 <div>
-                  <h4 className="text-white font-semibold">Sarah M.</h4>
+                  <h4 className="text-white font-semibold">Daniel Baskara</h4>
                   <div className="flex items-center space-x-1">
                     {[...Array(5)].map((_, i) => (
                       <Star
@@ -92,8 +92,9 @@ export default function Component() {
                 </div>
               </div>
               <p className="text-white/90 italic">
-                "I've saved over $500 this month while helping reduce food
-                waste. resQfood changed my life!"
+                "Belanja di resQfood bukan hanya menghemat uang, tapi juga
+                membuat saya merasa baik karena menyelamatkan makanan yang
+                seharusnya terbuang."
               </p>
             </div>
           </div>
@@ -104,16 +105,19 @@ export default function Component() {
               {/* Logo and Brand */}
               <div className="text-center mb-8">
                 <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-[#AF1740] to-[#CC2B52] rounded-2xl mb-4 shadow-lg">
-                  <div className="flex items-center space-x-1">
-                    <Leaf className="w-6 h-6 text-white" />
-                    <Heart className="w-4 h-4 text-white" />
-                  </div>
+                  <Image
+                    src="/logo/logo.png"
+                    alt="resQfood Logo"
+                    width={48}
+                    height={48}
+                    className="rounded-lg"
+                  />
                 </div>
                 <h2 className="text-3xl font-bold text-white mb-2">
                   Join resQfood
                 </h2>
                 <p className="text-white/80 text-sm font-medium">
-                  Become a food rescue hero today
+                  Menjadi bagian dari komunitas penyelamat makanan
                 </p>
               </div>
 
@@ -129,7 +133,7 @@ export default function Component() {
                         Welcome Bonus
                       </p>
                       <p className="text-white/80 text-xs">
-                        Get 20% off your first rescue
+                        Dapatkan diskon 20% untuk penyelamatan pertama Anda
                       </p>
                     </div>
                   </div>
@@ -162,7 +166,7 @@ export default function Component() {
                       htmlFor="lastName"
                       className="text-white/90 font-medium text-sm"
                     >
-                      Last Name
+                      Nama Depan
                     </Label>
                     <Input
                       id="lastName"
@@ -178,7 +182,7 @@ export default function Component() {
                     htmlFor="email"
                     className="text-white/90 font-medium text-sm"
                   >
-                    Email Address
+                    Alamat Email
                   </Label>
                   <Input
                     id="email"
@@ -259,14 +263,19 @@ export default function Component() {
                   </div>
                 </div>
 
-                <Button className="w-full h-12 bg-gradient-to-r from-[#AF1740] to-[#CC2B52] hover:from-[#CC2B52] hover:to-[#AF1740] text-white font-semibold rounded-xl shadow-lg transition-all duration-300 transform hover:scale-[1.02] hover:shadow-xl">
-                  Start My Food Rescue Journey 🚀
-                </Button>
+                <Link href="/marketplace">
+                  <Button
+                    asChild
+                    className="w-full h-12 bg-gradient-to-r from-[#AF1740] to-[#CC2B52] hover:from-[#CC2B52] hover:to-[#AF1740] text-white font-semibold rounded-xl shadow-lg transition-all duration-300 transform hover:scale-[1.02] hover:shadow-xl"
+                  >
+                    <span>Mulai Menyelamatkan</span>
+                  </Button>
+                </Link>
 
                 <div className="relative">
                   <Separator className="bg-white/20" />
                   <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-transparent px-3 text-xs text-white/70">
-                    or sign up with
+                    Atau daftar dengan
                   </span>
                 </div>
 
@@ -306,12 +315,12 @@ export default function Component() {
 
                 <div className="text-center">
                   <div className="text-xs text-white/80">
-                    Already rescuing food?{" "}
+                    Sudah Menjadi Penyelamat?{" "}
                     <Link
                       href="/auth/login"
                       className="text-[#DE7C7D] hover:text-white font-semibold transition-colors underline"
                     >
-                      Sign in here
+                      Masuk Sekarang
                     </Link>
                   </div>
                 </div>

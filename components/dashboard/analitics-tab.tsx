@@ -23,13 +23,13 @@ export function AnalyticsTab() {
           </CardHeader>
           <CardContent>
             <p className="text-gray-600 dark:text-gray-400">
-              Total Pendapatan: <span className="font-bold text-[#AF1740]">$234,567</span>
+              Total Pendapatan: <span className="font-bold text-[#AF1740]">RP 234,567,000</span>
             </p>
             <p className="text-gray-600 dark:text-gray-400">
-              Pendapatan Bulan Ini: <span className="font-bold text-[#CC2B52]">$45,678</span>
+              Pendapatan Bulan Ini: <span className="font-bold text-[#CC2B52]">RP 45,678,00</span>
             </p>
             <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
-              Data pendapatan disajikan di sini. (Grafik dihapus)
+              Data pendapatan disajikan di sini. 
             </p>
           </CardContent>
         </Card>
@@ -48,7 +48,7 @@ export function AnalyticsTab() {
               Total Pengguna: <span className="font-bold text-[#740938]">2,847</span>
             </p>
             <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
-              Data pertumbuhan pengguna disajikan di sini. (Grafik dihapus)
+              Data pertumbuhan pengguna disajikan di sini. 
             </p>
           </CardContent>
         </Card>
@@ -70,7 +70,7 @@ export function AnalyticsTab() {
               Minuman: <span className="font-bold text-[#740938]">20%</span>
             </p>
             <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
-              Data distribusi kategori disajikan di sini. (Grafik dihapus)
+              Data distribusi kategori disajikan di sini. 
             </p>
           </CardContent>
         </Card>

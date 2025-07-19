@@ -178,13 +178,13 @@ export function SettingsTab({ profileData, setProfileData }: SettingsTabProps) {
             <Gift className="w-12 h-12 mx-auto mb-4 text-[#DE7C7D] dark:text-gray-400" />
             <h3 className="text-lg font-bold mb-2">Invite Friends</h3>
             <p className="text-[#DE7C7D] text-sm mb-4 dark:text-gray-300">
-              Share the love! Get $5 credit for each friend who joins resQfood.
+              Bagikan teman Anda dan dapatkan diskon untuk pembelian berikutnya!
             </p>
             <div className="bg-white/20 rounded-lg p-3 mb-4">
               <div className="text-sm text-[#DE7C7D] mb-1 dark:text-gray-300">
-                Your referral code
+              Kode Anda
               </div>
-              <div className="font-bold text-lg">SARAH2024</div>
+              <div className="font-bold text-lg">AGB2025</div>
             </div>
             <Button className="bg-white text-[#740938] hover:bg-[#DE7C7D]/20 rounded-full px-6 font-semibold shadow-lg w-full">
               Share Code

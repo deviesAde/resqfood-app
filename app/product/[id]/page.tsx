@@ -26,8 +26,9 @@ import {
   Clock,
 } from "lucide-react";
 import Link from "next/link";
-import { useParams } from "next/navigation";
-import Image from "next/image"; // Import Image component
+import { useParams, usePathname } from "next/navigation";
+import Image from "next/image";
+import { ShareModal } from "@/components/share-modals"; // Import the new ShareModal component
 
 const productDetails = {
   1: {
@@ -44,9 +45,9 @@ const productDetails = {
     seller: "Toko Roti Emas",
     location: "Jakarta Pusat",
     images: [
-      "/placeholder.svg?height=600&width=600",
-      "/placeholder.svg?height=600&width=600",
-      "/placeholder.svg?height=600&width=600",
+      "/products/1/roti.png",
+      "/products/1/roti2.png",
+      "/products/1/roti3.png",
     ],
     urgent: true,
     sold: 45,
@@ -81,7 +82,7 @@ const productDetails = {
     reviews: [
       {
         id: 1,
-        user: "Sarah M.",
+        user: "DANIEL S.",
         rating: 5,
         comment:
           "Roti yang luar biasa! Segar dan lezat. Nilai yang bagus untuk uang.",
@@ -144,27 +145,24 @@ const productDetails = {
   },
   3: {
     id: 3,
-    name: "Biji Kopi Premium",
-    originalPrice: 249900,
-    discountedPrice: 129900,
+    name: "Biskuit Cokelat Premium",
+    originalPrice: 20000,
+    discountedPrice: 12990,
     discount: 48,
     expiryDays: 7,
     bestBy: "25 Juli 2025",
-    category: "Minuman",
+    category: "Camilan",
     rating: 4.7,
     reviewsCount: 56,
-    seller: "Master Roaster Kopi",
+    seller: "Kedai Cokelat",
     location: "Surabaya",
-    images: [
-      "/placeholder.svg?height=600&width=600",
-      "/placeholder.svg?height=600&width=600",
-    ],
+    images: ["/products/3/biskuit.png", "/products/3/biskuit2.png"],
     urgent: false,
     sold: 78,
     status: "available",
     description:
-      "Biji kopi Arabika berkualitas tinggi, bersumber secara etis dan baru dipanggang. Nikmati secangkir kopi yang kaya dan aromatik setiap pagi. Biji kopi ini sempurna untuk espresso, drip, atau French press, menawarkan aroma cokelat dan karamel.",
-    ingredients: ["100% biji kopi Arabika"],
+      "Biskuit cokelat premium yang terbuat dari cokelat Belgia asli. Renyah di luar, lembut di dalam. Camilan sempurna untuk pecinta cokelat.",
+    ingredients: ["100% cokelat Belgia", "Tepung terigu", "Gula", "Mentega"],
     nutritionFacts: {
       calories: 5,
       protein: "0.3g",
@@ -175,13 +173,13 @@ const productDetails = {
     allergens: [],
     pickupTimes: ["Kapan saja selama jam kerja"],
     sellerInfo: {
-      name: "Master Roaster Kopi",
+      name: "Kedai Cokelat",
       rating: 4.7,
       totalReviews: 210,
       yearsInBusiness: 10,
-      specialties: ["Panggang Kopi", "Campuran Espresso", "Single Origin"],
+      specialties: ["Camilan Cokelat", "Camilan Harian"],
       phone: "+62 812-7890-1234",
-      email: "penjualan@masterroaster.com",
+      email: "kontak@kedaicokelat.com",
       address: "Jl. Kopi No. 789, Surabaya",
     },
     reviews: [
@@ -189,7 +187,8 @@ const productDetails = {
         id: 3,
         user: "David L.",
         rating: 5,
-        comment: "Kopi yang fantastis! Aromanya luar biasa dan rasanya lembut.",
+        comment:
+          "Biskuit cokelat masih enak, meskipun hampir kedaluwarsa. Rasa yang luar biasa!",
         date: "2024-01-15",
         verified: true,
       },
@@ -198,7 +197,7 @@ const productDetails = {
         user: "Emily C.",
         rating: 4,
         comment:
-          "Nilai yang bagus untuk biji premium. Agak kuat untuk selera saya, tapi tetap enak.",
+          "Maknan Penyelamat yang enak! Saya suka teksturnya. Hanya saja saya berharap bisa lebih banyak.",
         date: "2024-01-12",
         verified: false,
       },
@@ -206,34 +205,24 @@ const productDetails = {
   },
   4: {
     id: 4,
-    name: "Kroisan Cokelat Gourmet",
+    name: "Susu Kaleng ",
     originalPrice: 129900,
     discountedPrice: 59900,
     discount: 54,
     expiryDays: 1,
     bestBy: "19 Juli 2025",
-    category: "Roti & Kue",
+    category: "Produk Susu",
     rating: 4.6,
     reviewsCount: 31,
-    seller: "Patisserie Indah",
+    seller: "beruang Susu",
     location: "Jakarta Selatan",
-    images: [
-      "/placeholder.svg?height=600&width=600",
-      "/placeholder.svg?height=600&width=600",
-    ],
+    images: ["/products/4/susu1.png", "/products/4/susu2.png"],
     urgent: true,
-    sold: 23,
+    sold: 400,
     status: "available",
     description:
-      "Kroisan renyah, bermentega, diisi dengan cokelat hitam kaya. Camilan sempurna untuk sarapan atau hidangan penutup. Dipanggang segar setiap hari dengan bahan-bahan premium.",
-    ingredients: [
-      "Tepung terigu",
-      "Mentega",
-      "Cokelat",
-      "Gula",
-      "Ragi",
-      "Garam",
-    ],
+      "Susu kaleng segar yang kaya kalsium, terbuat dari susu sapi lokal. Sempurna untuk minuman sehari-hari",
+    ingredients: ["Susu sapi segar", "Vitamin D3", "Asam askorbat (vitamin C)"],
     nutritionFacts: {
       calories: 350,
       protein: "6g",
@@ -244,11 +233,11 @@ const productDetails = {
     allergens: ["Gluten", "Susu", "Kedelai"],
     pickupTimes: ["Hari Ini 15:00 - 19:00"],
     sellerInfo: {
-      name: "Patisserie Indah",
+      name: "beruang Susu",
       rating: 4.7,
       totalReviews: 95,
       yearsInBusiness: 6,
-      specialties: ["Kue Pastry Prancis", "Kue Pesanan"],
+      specialties: ["Susu Segar", "Produk Susu Lokal"],
       phone: "+62 812-2345-6789",
       email: "kontak@patisserieindah.com",
       address: "Jl. Manis No. 456, Jakarta Selatan",
@@ -259,7 +248,7 @@ const productDetails = {
         user: "Olivia P.",
         rating: 5,
         comment:
-          "Kroisan ini luar biasa! Sangat segar dan cokelatnya menakjubkan.",
+          "Hampir kedaluwarsa, tapi rasanya masih enak! Susu segar yang lezat.",
         date: "2024-01-18",
         verified: true,
       },
@@ -267,7 +256,7 @@ const productDetails = {
   },
   5: {
     id: 5,
-    name: "Mozzarella Segar",
+    name: "Mozzarella ",
     originalPrice: 99900,
     discountedPrice: 49900,
     discount: 50,
@@ -278,10 +267,7 @@ const productDetails = {
     reviewsCount: 42,
     seller: "Artisan Keju",
     location: "Yogyakarta",
-    images: [
-      "/placeholder.svg?height=600&width=600",
-      "/placeholder.svg?height=600&width=600",
-    ],
+    images: ["/products/5/moza1.png", "/products/5/moza2.png"],
     urgent: false,
     sold: 67,
     status: "available",
@@ -331,10 +317,7 @@ const productDetails = {
     reviewsCount: 29,
     seller: "PT. Gigitan Sehat",
     location: "Denpasar",
-    images: [
-      "/placeholder.svg?height=600&width=600",
-      "/placeholder.svg?height=600&width=600",
-    ],
+    images: ["/products/6/bar2.png", "/products/6/bar1.png"],
     urgent: false,
     sold: 54,
     status: "available",
@@ -391,10 +374,7 @@ const productDetails = {
     reviewsCount: 15,
     seller: "Kebun Hijau",
     location: "Semarang",
-    images: [
-      "/placeholder.svg?height=600&width=600",
-      "/placeholder.svg?height=600&width=600",
-    ],
+    images: ["/products/6/image.png"],
     urgent: false,
     sold: 12,
     status: "expired",
@@ -429,10 +409,14 @@ export default function ProductDetailPage() {
   const productId = params.id as string;
   const product =
     productDetails[Number(productId) as keyof typeof productDetails];
-
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [showAllReviews, setShowAllReviews] = useState(false);
+  const [showShareDialog, setShowShareDialog] = useState(false); // State for share dialog
+  const pathname = usePathname(); // Get current pathname
+
+  const productUrl =
+    typeof window !== "undefined" ? `${window.location.origin}${pathname}` : "";
 
   if (!product) {
     return (
@@ -470,7 +454,7 @@ export default function ProductDetailPage() {
               >
                 <ArrowLeft className="w-5 h-5 text-[#740938] dark:text-[#DE7C7D] group-hover:text-[#AF1740] transition-colors" />
                 <Image
-                  src="/public/logo/logo.png" // Use your logo image
+                  src="/logo/logo.png" // Use your logo image
                   alt="resQfood Logo"
                   width={32}
                   height={32}
@@ -487,6 +471,7 @@ export default function ProductDetailPage() {
                 variant="ghost"
                 size="sm"
                 className="hover:bg-[#DE7C7D]/20"
+                onClick={() => setShowShareDialog(true)} // Open share dialog
               >
                 <Share2 className="w-4 h-4 text-[#740938] dark:text-[#DE7C7D]" />
               </Button>
@@ -1004,6 +989,13 @@ export default function ProductDetailPage() {
           </div>
         </div>
       </div>
+
+      {/* Share Dialog Component */}
+      <ShareModal
+        isOpen={showShareDialog}
+        onClose={() => setShowShareDialog(false)}
+        productUrl={productUrl}
+      />
     </div>
   );
 }

@@ -28,19 +28,19 @@ export function AchievementsTab({
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-3xl font-bold text-[#740938] dark:text-gray-50">
-            Achievements
+            Pencapaian
           </h2>
           <p className="text-gray-600 dark:text-gray-400">
-            Track your progress and unlock rewards
+            Lacak kemajuan Anda dan buka hadiah
           </p>
         </div>
         <div className="text-right">
           <div className="text-2xl font-bold text-[#AF1740]">
-            {totalPoints} Points
+            {totalPoints} Poin
           </div>
           <div className="text-sm text-gray-600 dark:text-gray-400">
-            {achievements.filter((a) => a.earned).length} of{" "}
-            {achievements.length} earned
+            {achievements.filter((a) => a.earned).length} dari{" "}
+            {achievements.length} didapatkan
           </div>
         </div>
       </div>
@@ -108,9 +108,9 @@ export function AchievementsTab({
                   }`}
                 >
                   {achievement.earned ? (
-                    <span>Earned {achievement.earnedDate}</span>
+                    <span>Didapatkan {achievement.earnedDate}</span>
                   ) : (
-                    <span>{achievement.progress || 0}% complete</span>
+                    <span>{achievement.progress || 0}% selesai</span>
                   )}
                 </div>
                 <div
@@ -120,7 +120,7 @@ export function AchievementsTab({
                       : "text-gray-600 dark:text-gray-50"
                   }`}
                 >
-                  +{achievement.points} pts
+                  +{achievement.points} poin
                 </div>
               </div>
               {!achievement.earned && achievement.progress && (

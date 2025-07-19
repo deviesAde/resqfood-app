@@ -1,17 +1,20 @@
 "use client";
 
-import React from "react";
-
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-
+import { cn } from "@/lib/utils";
 
 interface SidebarProps {
   sidebarCollapsed: boolean;
   setSidebarCollapsed: (collapsed: boolean) => void;
   activeTab: string;
   setActiveTab: (tab: string) => void;
-  sidebarItems: { id: string; label: string; icon: React.ElementType }[];
+  sidebarItems: Array<{
+    id: string;
+    label: string;
+    icon: any;
+  }>;
+  mobileMenuOpen: boolean;
+  setMobileMenuOpen: (open: boolean) => void;
 }
 
 export function Sidebar({
@@ -20,104 +23,76 @@ export function Sidebar({
   activeTab,
   setActiveTab,
   sidebarItems,
+  mobileMenuOpen,
+  setMobileMenuOpen,
 }: SidebarProps) {
+  const handleTabClick = (tabId: string) => {
+    setActiveTab(tabId);
+    setMobileMenuOpen(false); // Close mobile menu when tab is selected
+  };
+
   return (
-    <div
-      className={`${
-        sidebarCollapsed ? "w-20" : "w-80"
-      } bg-white dark:bg-gray-900 border-r border-[#DE7C7D]/30 dark:border-gray-700 transition-all duration-300 ease-in-out shadow-lg relative min-h-screen`}
-    >
-      {/* Collapse Toggle */}
-      <Button
-        variant="ghost"
-        size="sm"
-        onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-        className="absolute -right-3 top-6 bg-white dark:bg-gray-800 border border-[#DE7C7D]/30 dark:border-gray-700 rounded-full p-1 shadow-md hover:shadow-lg transition-all z-10"
-      >
-        {sidebarCollapsed ? (
-          <ChevronRight className="w-4 h-4 text-[#740938] dark:text-gray-300" />
-        ) : (
-          <ChevronLeft className="w-4 h-4 text-[#740938] dark:text-gray-300" />
+    <>
+      {/* Desktop Sidebar */}
+      <aside
+        className={cn(
+          "hidden lg:flex flex-col bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 transition-all duration-300 sticky top-16 h-[calc(100vh-4rem)]",
+          sidebarCollapsed ? "w-16" : "w-64"
         )}
-      </Button>
-      {/* Admin Info */}
-      <div
-        className={`p-6 border-b border-[#DE7C7D]/30 dark:border-gray-700 ${
-          sidebarCollapsed ? "px-3" : ""
-        }`}
       >
-        {!sidebarCollapsed ? (
-          <div className="flex items-center space-x-3">
-            <div className="w-12 h-12 bg-gradient-to-br from-[#740938] to-[#AF1740] rounded-full flex items-center justify-center">
-              <span className="text-white font-bold text-lg">A</span>
-            </div>
-            <div>
-              <h3 className="font-semibold text-[#740938] dark:text-gray-100">
-                Panel Admin
-              </h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                Super Administrator
-              </p>
-            </div>
-          </div>
-        ) : (
-          <div className="flex justify-center">
-            <div className="w-10 h-10 bg-gradient-to-br from-[#740938] to-[#AF1740] rounded-full flex items-center justify-center">
-              <span className="text-white font-bold">A</span>
-            </div>
-          </div>
-        )}
-      </div>
-      {/* Navigation */}
-      <div className={`p-6 ${sidebarCollapsed ? "px-3" : ""}`}>
-        <nav className="space-y-2">
-          {sidebarItems.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => setActiveTab(item.id)}
-              className={`w-full flex items-center ${
-                sidebarCollapsed ? "justify-center px-3" : "space-x-3 px-4"
-              } py-3 rounded-xl transition-all duration-200 ${
-                activeTab === item.id
-                  ? "bg-gradient-to-r from-[#AF1740] to-[#CC2B52] text-white shadow-lg scale-105"
-                  : "text-gray-700 dark:text-gray-300 hover:bg-[#DE7C7D]/20 dark:hover:bg-gray-800 hover:text-[#740938] dark:hover:text-gray-100 hover:scale-102"
-              }`}
-              title={sidebarCollapsed ? item.label : ""}
-            >
-              {React.createElement(item.icon, { className: "w-5 h-5" })}
-              {!sidebarCollapsed && (
-                <span className="font-medium">{item.label}</span>
-              )}
-            </button>
-          ))}
+        <nav className="flex-1 p-2 space-y-1 overflow-y-auto">
+          {sidebarItems.map((item) => {
+            const Icon = item.icon;
+            return (
+              <Button
+                key={item.id}
+                variant={activeTab === item.id ? "default" : "ghost"}
+                className={cn(
+                  "w-full justify-start gap-3 h-10",
+                  activeTab === item.id &&
+                    "bg-[#DE7C7D] hover:bg-[#DE7C7D]/90 text-white",
+                  sidebarCollapsed && "justify-center px-2"
+                )}
+                onClick={() => handleTabClick(item.id)}
+              >
+                <Icon className="h-5 w-5 flex-shrink-0" />
+                {!sidebarCollapsed && (
+                  <span className="truncate text-sm">{item.label}</span>
+                )}
+              </Button>
+            );
+          })}
         </nav>
-      </div>
-      {/* Quick Stats */}
-      {!sidebarCollapsed && (
-        <div className="p-6 bg-gradient-to-br from-[#DE7C7D]/20 to-[#AF1740]/10 m-6 rounded-2xl dark:from-gray-800 dark:to-gray-700">
-          <h4 className="font-semibold text-[#740938] dark:text-gray-100 mb-3">
-            Kesehatan Platform
-          </h4>
-          <div className="space-y-2 text-sm">
-            <div className="flex justify-between">
-              <span className="text-gray-600 dark:text-gray-400">
-                Pengguna Aktif:
-              </span>
-                <span className="font-semibold text-[#CC2B52]">1,234</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-600 dark:text-gray-400">
-                Pendapatan:
-              </span>
-                <span className="font-semibold text-[#CC2B52]">RP.12,345,000</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-600 dark:text-gray-400">Status:</span>
-              <span className="font-semibold text-green-600">Sehat</span>
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
+      </aside>
+
+      {/* Mobile Sidebar */}
+      <aside
+        className={cn(
+          "lg:hidden fixed top-16 left-0 z-50 w-64 h-[calc(100vh-4rem)] bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 transform transition-transform duration-300 ease-in-out",
+          mobileMenuOpen ? "translate-x-0" : "-translate-x-full"
+        )}
+      >
+        <nav className="flex-1 p-2 space-y-1 overflow-y-auto h-full">
+          {sidebarItems.map((item) => {
+            const Icon = item.icon;
+            return (
+              <Button
+                key={item.id}
+                variant={activeTab === item.id ? "default" : "ghost"}
+                className={cn(
+                  "w-full justify-start gap-3 h-10",
+                  activeTab === item.id &&
+                    "bg-[#DE7C7D] hover:bg-[#DE7C7D]/90 text-white"
+                )}
+                onClick={() => handleTabClick(item.id)}
+              >
+                <Icon className="h-5 w-5 flex-shrink-0" />
+                <span className="truncate text-sm">{item.label}</span>
+              </Button>
+            );
+          })}
+        </nav>
+      </aside>
+    </>
   );
 }

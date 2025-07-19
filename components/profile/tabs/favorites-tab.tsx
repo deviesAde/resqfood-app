@@ -22,10 +22,10 @@ export function FavoritesTab({ favoriteItems }: FavoritesTabProps) {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-3xl font-bold text-[#740938] dark:text-gray-50">
-            Favorite Items
+            Favorit Saya
           </h2>
           <p className="text-gray-600 dark:text-gray-400">
-            Items you love to rescue
+            Makanan yang sering Anda selamatkan
           </p>
         </div>
         <Button
@@ -33,7 +33,7 @@ export function FavoritesTab({ favoriteItems }: FavoritesTabProps) {
           className="border-[#740938] text-[#740938] hover:bg-[#740938] hover:text-white bg-transparent rounded-full dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white"
         >
           <Share className="w-4 h-4 mr-2" />
-          Share Favorites
+          Bagikan Favorit
         </Button>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -63,15 +63,15 @@ export function FavoritesTab({ favoriteItems }: FavoritesTabProps) {
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
                   <span className="text-gray-600 dark:text-gray-400">
-                    Times ordered:
+                    Jumlah dipesan:
                   </span>
                   <span className="font-semibold text-[#AF1740]">
-                    {item.timesOrdered}
+                    {item.timesOrdered}x
                   </span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-600 dark:text-gray-400">
-                    Last ordered:
+                    Terakhir dipesan:
                   </span>
                   <span className="text-gray-700 dark:text-gray-300">
                     {item.lastOrdered}
@@ -79,7 +79,7 @@ export function FavoritesTab({ favoriteItems }: FavoritesTabProps) {
                 </div>
               </div>
               <Button className="w-full mt-4 bg-gradient-to-r from-[#AF1740] to-[#CC2B52] hover:from-[#740938] hover:to-[#AF1740] text-white rounded-full">
-                Order Again
+                Pesan Lagi
               </Button>
             </CardContent>
           </Card>
