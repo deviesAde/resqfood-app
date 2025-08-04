@@ -4,9 +4,9 @@ import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { useToast } from "@/hooks/use-toast";
 import {
   Plus,
-  Upload,
   Edit,
   Trash2,
   ExternalLink,
@@ -16,6 +16,8 @@ import {
   MoreVertical,
 } from "lucide-react";
 import AddProductModal from "../modals/add-product-modal";
+import EditProductModal from "../modals/edit-product-modal";
+import ProductDetailModal from "../modals/product-detail-modal";
 import { useProducts } from "../hooks/use-products";
 import {
   DropdownMenu,
@@ -23,15 +25,110 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
+
+interface Product {
+  id: number;
+  name: string;
+  category: string;
+  originalPrice: number;
+  discountedPrice: number;
+  expiryDate: string;
+  image?: string;
+  status: "active" | "sold" | "inactive";
+  views: number;
+  orders: number;
+  description?: string;
+}
 
 export default function ProductsTab() {
   const [showAddProduct, setShowAddProduct] = useState(false);
-  const { products, deleteProduct } = useProducts();
+  const [showEditProduct, setShowEditProduct] = useState(false);
+  const [showProductDetail, setShowProductDetail] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [deleteProductId, setDeleteProductId] = useState<number | null>(null);
+  const { products, deleteProduct, addProduct, updateProduct } = useProducts();
+  const { toast } = useToast();
 
   const handleDelete = (id: number) => {
-    if (confirm("Apakah Anda yakin ingin menghapus produk ini?")) {
-      deleteProduct(id);
+    setDeleteProductId(id);
+  };
+
+  const handleEdit = (product: Product) => {
+    setSelectedProduct(product);
+    setShowEditProduct(true);
+  };
+
+  const handleViewDetail = (product: Product) => {
+    setSelectedProduct(product);
+    setShowProductDetail(true);
+  };
+
+  const confirmDelete = () => {
+    if (deleteProductId) {
+      deleteProduct(deleteProductId);
+      toast({
+        title: "Produk Berhasil Dihapus",
+        description: "Produk telah dihapus dari daftar Anda.",
+        className: "bg-green-50 border-green-200 text-green-800",
+      });
+      setDeleteProductId(null);
     }
+  };
+
+  const handleProductAdded = (productData: any) => {
+    const newProduct = {
+      id: Date.now(),
+      name: productData.name,
+      category: productData.category,
+      originalPrice: productData.originalPrice,
+      discountedPrice: productData.discountedPrice,
+      expiryDate: productData.expiryDate,
+      image: productData.image,
+      description: productData.description,
+      status: "active" as const,
+      views: 0,
+      orders: 0,
+    };
+
+    addProduct(newProduct);
+    toast({
+      title: "Produk Berhasil Ditambahkan! 🎉",
+      description: "Produk Anda telah berhasil diupload dan siap dijual.",
+      className: "bg-green-50 border-green-200 text-green-800",
+    });
+    setShowAddProduct(false);
+  };
+
+  const handleProductUpdated = (productData: any) => {
+    if (selectedProduct) {
+      const updatedProduct = {
+        ...selectedProduct,
+        ...productData,
+      };
+      updateProduct(selectedProduct.id, updatedProduct);
+      toast({
+        title: "Produk Berhasil Diperbarui! ✅",
+        description: "Perubahan produk Anda telah disimpan.",
+        className: "bg-green-50 border-green-200 text-green-800",
+      });
+      setShowEditProduct(false);
+      setSelectedProduct(null);
+    }
+  };
+
+  const handleEditFromDetail = () => {
+    setShowProductDetail(false);
+    setShowEditProduct(true);
   };
 
   return (
@@ -46,14 +143,7 @@ export default function ProductsTab() {
               Kelola daftar makanan penyelamatan Anda
             </p>
           </div>
-          <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 w-full sm:w-auto">
-            <Button
-              variant="outline"
-              className="border-[#AF1740] dark:border-[#AF1740] text-[#AF1740] dark:text-[#AF1740] hover:bg-[#AF1740] hover:text-white rounded-full bg-transparent text-sm sm:text-base flex-1 sm:flex-none"
-            >
-              <Upload className="w-4 h-4 mr-2" />
-              Upload Massal
-            </Button>
+          <div className="flex justify-end w-full sm:w-auto">
             <Button
               onClick={() => setShowAddProduct(true)}
               className="bg-gradient-to-r from-[#AF1740] to-[#CC2B52] hover:from-[#740938] hover:to-[#AF1740] text-white rounded-full shadow-lg hover:shadow-xl transition-all text-sm sm:text-base flex-1 sm:flex-none"
@@ -76,12 +166,16 @@ export default function ProductsTab() {
                   <img
                     src={product.image || "/placeholder.svg?height=80&width=80"}
                     alt={product.name}
-                    className="w-16 h-16 rounded-lg object-cover border border-[#DE7C7D]/30 dark:border-gray-600 shrink-0"
+                    className="w-16 h-16 rounded-lg object-cover border border-[#DE7C7D]/30 dark:border-gray-600 shrink-0 cursor-pointer"
+                    onClick={() => handleViewDetail(product)}
                   />
                   <div className="flex-1 min-w-0 space-y-2">
                     <div className="flex items-start justify-between">
                       <div className="min-w-0 flex-1">
-                        <h3 className="font-semibold text-[#740938] dark:text-white text-sm truncate">
+                        <h3
+                          className="font-semibold text-[#740938] dark:text-white text-sm truncate cursor-pointer hover:text-[#AF1740]"
+                          onClick={() => handleViewDetail(product)}
+                        >
                           {product.name}
                         </h3>
                         <p className="text-xs text-gray-600 dark:text-gray-300">
@@ -95,13 +189,15 @@ export default function ProductsTab() {
                           </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
-                          <DropdownMenuItem>
+                          <DropdownMenuItem onClick={() => handleEdit(product)}>
                             <Edit className="w-4 h-4 mr-2" />
                             Edit
                           </DropdownMenuItem>
-                          <DropdownMenuItem>
+                          <DropdownMenuItem
+                            onClick={() => handleViewDetail(product)}
+                          >
                             <ExternalLink className="w-4 h-4 mr-2" />
-                            Lihat
+                            Lihat Detail
                           </DropdownMenuItem>
                           <DropdownMenuItem
                             onClick={() => handleDelete(product.id)}
@@ -113,7 +209,6 @@ export default function ProductsTab() {
                         </DropdownMenuContent>
                       </DropdownMenu>
                     </div>
-
                     <div className="flex items-center justify-between">
                       <div>
                         <p className="font-bold text-[#AF1740] text-sm">
@@ -139,7 +234,6 @@ export default function ProductsTab() {
                           : "Tidak Aktif"}
                       </Badge>
                     </div>
-
                     <div className="flex items-center justify-between text-xs text-gray-600 dark:text-gray-300">
                       <div className="flex items-center space-x-1">
                         <Clock className="w-3 h-3 text-[#CC2B52]" />
@@ -201,13 +295,19 @@ export default function ProductsTab() {
                           <img
                             src={
                               product.image ||
-                              "/placeholder.svg?height=60&width=60"
+                              "/placeholder.svg?height=60&width=60" ||
+                              "/placeholder.svg" ||
+                              "/placeholder.svg"
                             }
                             alt={product.name}
-                            className="w-12 h-12 lg:w-16 lg:h-16 rounded-lg object-cover border border-[#DE7C7D]/30 dark:border-gray-600 shrink-0"
+                            className="w-12 h-12 lg:w-16 lg:h-16 rounded-lg object-cover border border-[#DE7C7D]/30 dark:border-gray-600 shrink-0 cursor-pointer"
+                            onClick={() => handleViewDetail(product)}
                           />
                           <div className="min-w-0 flex-1">
-                            <p className="font-semibold text-[#740938] dark:text-white text-sm lg:text-base truncate">
+                            <p
+                              className="font-semibold text-[#740938] dark:text-white text-sm lg:text-base truncate cursor-pointer hover:text-[#AF1740]"
+                              onClick={() => handleViewDetail(product)}
+                            >
                               {product.name}
                             </p>
                             <p className="text-xs lg:text-sm text-gray-600 dark:text-gray-300">
@@ -272,6 +372,7 @@ export default function ProductsTab() {
                           <Button
                             size="sm"
                             variant="outline"
+                            onClick={() => handleEdit(product)}
                             className="border-[#740938] dark:border-[#740938] text-[#740938] dark:text-[#740938] hover:bg-[#740938] hover:text-white bg-transparent text-xs lg:text-sm p-1 lg:p-2"
                           >
                             <Edit className="w-3 h-3 lg:w-4 lg:h-4" />
@@ -287,6 +388,7 @@ export default function ProductsTab() {
                           <Button
                             size="sm"
                             variant="outline"
+                            onClick={() => handleViewDetail(product)}
                             className="border-[#AF1740] dark:border-[#AF1740] text-[#AF1740] dark:text-[#AF1740] hover:bg-[#AF1740] hover:text-white bg-transparent text-xs lg:text-sm p-1 lg:p-2 hidden sm:flex"
                           >
                             <ExternalLink className="w-3 h-3 lg:w-4 lg:h-4" />
@@ -302,10 +404,65 @@ export default function ProductsTab() {
         </Card>
       </div>
 
+      {/* Add Product Modal */}
       <AddProductModal
         isOpen={showAddProduct}
         onClose={() => setShowAddProduct(false)}
+        onProductAdded={handleProductAdded}
       />
+
+      {/* Edit Product Modal */}
+      <EditProductModal
+        isOpen={showEditProduct}
+        onClose={() => {
+          setShowEditProduct(false);
+          setSelectedProduct(null);
+        }}
+        onProductUpdated={handleProductUpdated}
+        product={selectedProduct}
+      />
+
+      {/* Product Detail Modal */}
+      <ProductDetailModal
+        isOpen={showProductDetail}
+        onClose={() => {
+          setShowProductDetail(false);
+          setSelectedProduct(null);
+        }}
+        product={selectedProduct}
+        onEdit={handleEditFromDetail}
+      />
+
+      {/* Delete Confirmation Dialog */}
+      <AlertDialog
+        open={deleteProductId !== null}
+        onOpenChange={() => setDeleteProductId(null)}
+      >
+        <AlertDialogContent className="bg-white dark:bg-gray-800 border-2 border-red-200 dark:border-red-800">
+          <AlertDialogHeader>
+            <AlertDialogTitle className="text-red-600 dark:text-red-400 flex items-center gap-2">
+              <Trash2 className="w-5 h-5" />
+              Konfirmasi Hapus Produk
+            </AlertDialogTitle>
+            <AlertDialogDescription className="text-gray-600 dark:text-gray-300">
+              Apakah Anda yakin ingin menghapus produk ini? Tindakan ini tidak
+              dapat dibatalkan dan produk akan dihapus secara permanen dari
+              daftar Anda.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel className="border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700">
+              Batal
+            </AlertDialogCancel>
+            <AlertDialogAction
+              onClick={confirmDelete}
+              className="bg-red-600 hover:bg-red-700 text-white"
+            >
+              Ya, Hapus Produk
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </>
   );
 }

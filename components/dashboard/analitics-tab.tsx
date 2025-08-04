@@ -2,7 +2,18 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BarChart3, Users, DollarSign, Package } from 'lucide-react';
 
-export function AnalyticsTab() {
+type AnalyticsTabProps = {
+  stats: {
+    totalUsers: number;
+    activeSellers: number;
+    productsListed: number;
+    ordersTracked: number;
+    monthlyRevenue: number;
+    totalRevenue: number;
+  };
+};
+
+export function AnalyticsTab({ stats }: AnalyticsTabProps) {
   return (
     <div className="space-y-8">
       <div>
@@ -23,13 +34,15 @@ export function AnalyticsTab() {
           </CardHeader>
           <CardContent>
             <p className="text-gray-600 dark:text-gray-400">
-              Total Pendapatan: <span className="font-bold text-[#AF1740]">RP 234,567,000</span>
+              Total Pendapatan:{" "}
+              <span className="font-bold text-[#AF1740]">RP 234,567,000</span>
             </p>
             <p className="text-gray-600 dark:text-gray-400">
-              Pendapatan Bulan Ini: <span className="font-bold text-[#CC2B52]">RP 45,678,00</span>
+              Pendapatan Bulan Ini:{" "}
+              <span className="font-bold text-[#CC2B52]">RP 45,678,00</span>
             </p>
             <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
-              Data pendapatan disajikan di sini. 
+              Data pendapatan disajikan di sini.
             </p>
           </CardContent>
         </Card>
@@ -42,13 +55,15 @@ export function AnalyticsTab() {
           </CardHeader>
           <CardContent>
             <p className="text-gray-600 dark:text-gray-400">
-              Pengguna Baru Bulan Ini: <span className="font-bold text-green-600">300</span>
+              Pengguna Baru Bulan Ini:{" "}
+              <span className="font-bold text-green-600">300</span>
             </p>
             <p className="text-gray-600 dark:text-gray-400">
-              Total Pengguna: <span className="font-bold text-[#740938]">2,847</span>
+              Total Pengguna:{" "}
+              <span className="font-bold text-[#740938]">2,847</span>
             </p>
             <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
-              Data pertumbuhan pengguna disajikan di sini. 
+              Data pertumbuhan pengguna disajikan di sini.
             </p>
           </CardContent>
         </Card>
@@ -61,16 +76,18 @@ export function AnalyticsTab() {
           </CardHeader>
           <CardContent>
             <p className="text-gray-600 dark:text-gray-400">
-              Makanan Segar: <span className="font-bold text-[#AF1740]">40%</span>
+              Makanan Segar:{" "}
+              <span className="font-bold text-[#AF1740]">40%</span>
             </p>
             <p className="text-gray-600 dark:text-gray-400">
-              Makanan Olahan: <span className="font-bold text-[#CC2B52]">30%</span>
+              Makanan Olahan:{" "}
+              <span className="font-bold text-[#CC2B52]">30%</span>
             </p>
             <p className="text-gray-600 dark:text-gray-400">
               Minuman: <span className="font-bold text-[#740938]">20%</span>
             </p>
             <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
-              Data distribusi kategori disajikan di sini. 
+              Data distribusi kategori disajikan di sini.
             </p>
           </CardContent>
         </Card>

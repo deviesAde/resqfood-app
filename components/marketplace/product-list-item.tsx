@@ -17,6 +17,18 @@ interface ProductListItemProps {
   product: Product;
 }
 
+// Helper function to format currency in Indonesian Rupiah
+const formatRupiah = (amount: number): string => {
+  return new Intl.NumberFormat("id-ID", {
+    style: "currency",
+    currency: "IDR",
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  })
+    .format(amount)
+    .replace("IDR", "Rp");
+};
+
 export function ProductListItem({ product }: ProductListItemProps) {
   const isExpired = product.status === "expired";
   const isUrgent = product.expiryDays <= 1 && !isExpired;
@@ -128,10 +140,10 @@ export function ProductListItem({ product }: ProductListItemProps) {
                     : "text-[#AF1740] dark:text-[#CC2B52]"
                 }`}
               >
-                ${product.discountedPrice}
+                {formatRupiah(product.discountedPrice)}
               </span>
               <span className="text-gray-500 line-through text-lg sm:text-xl">
-                ${product.originalPrice}
+                {formatRupiah(product.originalPrice)}
               </span>
               <div className="flex items-center space-x-1">
                 <Clock className="w-4 h-4 text-gray-500" />

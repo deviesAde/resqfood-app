@@ -2,57 +2,63 @@
 
 import { useState } from "react";
 
-export interface Product {
+interface Product {
   id: number;
   name: string;
+  category: string;
   originalPrice: number;
   discountedPrice: number;
   expiryDate: string;
-  category: string;
+  image?: string;
   status: "active" | "sold" | "inactive";
   views: number;
   orders: number;
-  image: string;
   description?: string;
-  purchaseLink?: string;
 }
 
+// Sample data
 const initialProducts: Product[] = [
   {
     id: 1,
-    name: "Roti Sourdough Artisan",
-    originalPrice: 89900,
-    discountedPrice: 39900,
-    expiryDate: "2024-01-16",
-    category: "Produk Roti",
+    name: "Nasi Gudeg Jogja",
+    category: "Makanan Siap Saji",
+    originalPrice: 25000,
+    discountedPrice: 15000,
+    expiryDate: "2024-12-25",
+    image: "/placeholder.svg?height=200&width=200",
     status: "active",
     views: 45,
     orders: 12,
-    image: "/placeholder.svg?height=100&width=100",
+    description:
+      "Gudeg khas Jogja dengan cita rasa autentik, terdiri dari nangka muda, ayam, dan telur. Masih segar dan siap santap.",
   },
   {
     id: 2,
-    name: "Croissant Cokelat",
-    originalPrice: 129900,
-    discountedPrice: 59900,
-    expiryDate: "2024-01-15",
-    category: "Produk Roti",
-    status: "sold",
+    name: "Roti Tawar Gandum",
+    category: "Roti & Kue",
+    originalPrice: 18000,
+    discountedPrice: 10000,
+    expiryDate: "2024-12-24",
+    image: "/placeholder.svg?height=200&width=200",
+    status: "active",
     views: 32,
     orders: 8,
-    image: "/placeholder.svg?height=100&width=100",
+    description:
+      "Roti tawar gandum segar, cocok untuk sarapan atau camilan sehat. Tekstur lembut dan rasa yang nikmat.",
   },
   {
     id: 3,
-    name: "Bagel Segar",
-    originalPrice: 69900,
-    discountedPrice: 29900,
-    expiryDate: "2024-01-17",
-    category: "Produk Roti",
-    status: "active",
+    name: "Salad Buah Segar",
+    category: "Buah & Sayur",
+    originalPrice: 20000,
+    discountedPrice: 12000,
+    expiryDate: "2024-12-23",
+    image: "/placeholder.svg?height=200&width=200",
+    status: "sold",
     views: 28,
-    orders: 5,
-    image: "/placeholder.svg?height=100&width=100",
+    orders: 15,
+    description:
+      "Salad buah segar dengan berbagai macam buah pilihan. Sehat, segar, dan kaya vitamin.",
   },
 ];
 
@@ -63,10 +69,10 @@ export function useProducts() {
     setProducts((prev) => [...prev, product]);
   };
 
-  const updateProduct = (id: number, updates: Partial<Product>) => {
+  const updateProduct = (id: number, updatedProduct: Partial<Product>) => {
     setProducts((prev) =>
       prev.map((product) =>
-        product.id === id ? { ...product, ...updates } : product
+        product.id === id ? { ...product, ...updatedProduct } : product
       )
     );
   };

@@ -57,12 +57,7 @@ export default function DashboardTab() {
                 <Plus className="w-4 h-4 mr-2" />
                 Tambah Produk
               </Button>
-              <Button
-                variant="outline"
-                className="border-white text-white hover:bg-white hover:text-[#740938] rounded-full px-4 sm:px-6 bg-transparent text-sm sm:text-base flex-1 sm:flex-none"
-              >
-                Lihat Toko
-              </Button>
+             
             </div>
           </div>
         </div>
@@ -246,6 +241,10 @@ export default function DashboardTab() {
       <AddProductModal
         isOpen={showAddProduct}
         onClose={() => setShowAddProduct(false)}
+        onProductAdded={(productData) => {
+          // Handle the newly added product (e.g., refresh list, show notification)
+          setShowAddProduct(false);
+        }}
       />
     </>
   );

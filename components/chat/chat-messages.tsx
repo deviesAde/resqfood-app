@@ -45,7 +45,7 @@ export function ChatMessages({
               <Avatar className="w-8 h-8 flex-shrink-0">
                 {message.sender === "agent" ? (
                   <Image
-                    src="/placeholder.svg?height=32&width=32"
+                    src="/landing/avatar.png"
                     alt={agentName}
                     width={32}
                     height={32}
@@ -53,7 +53,7 @@ export function ChatMessages({
                   />
                 ) : (
                   <>
-                    <AvatarImage src="/placeholder.svg?height=32&width=32" />
+                    <AvatarImage src="/landing/user.png" />
                     <AvatarFallback className="bg-[#AF1740] text-white text-sm">
                       A
                     </AvatarFallback>
@@ -92,7 +92,7 @@ export function ChatMessages({
             <div className="flex items-start space-x-3">
               <Avatar className="w-8 h-8 flex-shrink-0">
                 <Image
-                  src="/placeholder.svg?height=32&width=32"
+                  src="/landing/avatar.png"
                   alt={agentName}
                   width={32}
                   height={32}

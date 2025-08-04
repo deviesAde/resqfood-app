@@ -174,8 +174,7 @@ export default function WhatsAppChat({ onClose }: WhatsAppChatProps) {
   const [messages, setMessages] = useState<Message[]>(sampleMessages);
   const [newMessage, setNewMessage] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
-  const [showChatArea, setShowChatArea] = useState(false); // State for responsiveness
-
+  const [showChatArea, setShowChatArea] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -184,7 +183,7 @@ export default function WhatsAppChat({ onClose }: WhatsAppChatProps) {
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages, showChatArea]); // Scroll when messages change or view switches
+  }, [messages, showChatArea]);
 
   const handleSendMessage = () => {
     if (newMessage.trim()) {
@@ -198,7 +197,7 @@ export default function WhatsAppChat({ onClose }: WhatsAppChatProps) {
       };
       setMessages([...messages, message]);
       setNewMessage("");
-      // Simulate message status updates
+
       setTimeout(() => {
         setMessages((prev) =>
           prev.map((msg) =>
@@ -220,16 +219,16 @@ export default function WhatsAppChat({ onClose }: WhatsAppChatProps) {
   const getStatusIcon = (status: Message["status"]) => {
     switch (status) {
       case "sending":
-        return <Clock className="w-3 h-3 text-gray-400 dark:text-gray-500" />;
+        return <Clock className="w-3 h-3 text-gray-400 dark:text-gray-400" />;
       case "sent":
-        return <Check className="w-3 h-3 text-gray-400 dark:text-gray-500" />;
+        return <Check className="w-3 h-3 text-gray-400 dark:text-gray-400" />;
       case "delivered":
         return (
-          <CheckCheck className="w-3 h-3 text-gray-400 dark:text-gray-500" />
+          <CheckCheck className="w-3 h-3 text-gray-400 dark:text-gray-400" />
         );
       case "read":
         return (
-          <CheckCheck className="w-3 h-3 text-[#AF1740] dark:text-[#F8A5B2]" />
+          <CheckCheck className="w-3 h-3 text-[#AF1740] dark:text-[#AF1740]" />
         );
     }
   };
@@ -239,22 +238,22 @@ export default function WhatsAppChat({ onClose }: WhatsAppChatProps) {
   );
 
   return (
-    <div className="flex flex-col md:flex-row h-full min-h-[600px] bg-white dark:bg-gray-800/50 rounded-2xl shadow-xl border-2 border-[#DE7C7D]/30 dark:border-[#DE7C7D]/50 overflow-hidden">
+    <div className="flex flex-col md:flex-row h-full min-h-[600px] bg-white dark:bg-gray-900 rounded-2xl shadow-xl border-2 border-[#DE7C7D]/30 dark:border-gray-700 overflow-hidden">
       {/* Contacts Sidebar */}
       <div
         className={`${
           showChatArea ? "hidden" : "flex"
-        } w-full md:w-80 border-r border-[#DE7C7D]/30 dark:border-[#DE7C7D]/50 flex-col bg-white dark:bg-[#1A1A1A]`}
+        } w-full md:w-80 border-r border-[#DE7C7D]/30 dark:border-gray-700 flex-col bg-white dark:bg-gray-800`}
       >
         {/* Header */}
-        <div className="bg-[#740938] p-4 text-white dark:bg-[#AF1740]">
+        <div className="bg-[#740938] dark:bg-gray-900 p-4 text-white">
           <div className="flex items-center justify-between mb-3">
             <h2 className="text-lg font-semibold">Pesan</h2>
             <div className="flex items-center space-x-2">
               <Button
                 variant="ghost"
                 size="sm"
-                className="text-white hover:bg-white/20 p-1"
+                className="text-white hover:bg-white/20 dark:hover:bg-gray-700 p-1"
               >
                 <MoreVertical className="w-4 h-4" />
               </Button>
@@ -263,7 +262,7 @@ export default function WhatsAppChat({ onClose }: WhatsAppChatProps) {
                   variant="ghost"
                   size="sm"
                   onClick={onClose}
-                  className="text-white hover:bg-white/20 p-1"
+                  className="text-white hover:bg-white/20 dark:hover:bg-gray-700 p-1"
                 >
                   <X className="w-4 h-4" />
                 </Button>
@@ -276,10 +275,11 @@ export default function WhatsAppChat({ onClose }: WhatsAppChatProps) {
               placeholder="Cari percakapan..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10 bg-white/20 border-white/30 text-white placeholder:text-white/70 focus:bg-white/30 rounded-full dark:bg-white/20 dark:border-white/30 dark:text-white dark:placeholder:text-white/70 dark:focus:bg-white/30"
+              className="pl-10 bg-white/20 dark:bg-gray-700 border-white/30 dark:border-gray-600 text-white placeholder:text-white/70 dark:placeholder:text-gray-300 focus:bg-white/30 dark:focus:bg-gray-600 rounded-full"
             />
           </div>
         </div>
+
         {/* Contacts List */}
         <div className="flex-1 overflow-y-auto">
           {filteredContacts.map((contact) => (
@@ -289,9 +289,9 @@ export default function WhatsAppChat({ onClose }: WhatsAppChatProps) {
                 setSelectedContact(contact);
                 setShowChatArea(true);
               }}
-              className={`p-4 border-b border-[#DE7C7D]/20 dark:border-[#DE7C7D]/40 cursor-pointer transition-all hover:bg-[#DE7C7D]/20 dark:hover:bg-[#DE7C7D]/30 ${
+              className={`p-4 border-b border-[#DE7C7D]/20 dark:border-gray-700 cursor-pointer transition-all hover:bg-[#DE7C7D]/20 dark:hover:bg-gray-700 ${
                 selectedContact.id === contact.id
-                  ? "bg-[#DE7C7D]/30 dark:bg-[#DE7C7D]/40"
+                  ? "bg-[#DE7C7D]/30 dark:bg-gray-700"
                   : ""
               }`}
             >
@@ -300,29 +300,29 @@ export default function WhatsAppChat({ onClose }: WhatsAppChatProps) {
                   <div
                     className={`w-12 h-12 rounded-full flex items-center justify-center text-white font-semibold ${
                       contact.role === "admin"
-                        ? "bg-[#740938] dark:bg-[#AF1740]"
-                        : "bg-[#AF1740] dark:bg-[#CC2B52]"
+                        ? "bg-[#740938] dark:bg-[#740938]"
+                        : "bg-[#AF1740] dark:bg-[#740938]"
                     }`}
                   >
                     {contact.avatar}
                   </div>
                   {contact.isOnline && (
-                    <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 dark:bg-green-400 rounded-full border-2 border-white dark:border-[#1A1A1A]"></div>
+                    <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white dark:border-gray-800"></div>
                   )}
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-2">
-                      <h3 className="font-semibold text-[#740938] dark:text-[#F8A5B2] truncate">
+                      <h3 className="font-semibold text-[#740938] dark:text-gray-100 truncate">
                         {contact.name}
                       </h3>
                       {contact.isVerified && (
-                        <Shield className="w-4 h-4 text-[#AF1740] dark:text-[#F8A5B2]" />
+                        <Shield className="w-4 h-4 text-[#AF1740] dark:text-blue-400" />
                       )}
                       {contact.rating && (
                         <div className="flex items-center space-x-1">
-                          <Star className="w-3 h-3 text-yellow-400 dark:text-yellow-300 fill-current" />
-                          <span className="text-xs text-gray-600 dark:text-gray-400">
+                          <Star className="w-3 h-3 text-yellow-400 fill-current" />
+                          <span className="text-xs text-gray-600 dark:text-gray-300">
                             {contact.rating}
                           </span>
                         </div>
@@ -333,13 +333,13 @@ export default function WhatsAppChat({ onClose }: WhatsAppChatProps) {
                         {contact.timestamp}
                       </span>
                       {contact.unreadCount > 0 && (
-                        <Badge className="bg-[#AF1740] dark:bg-[#F8A5B2] text-white text-xs px-2 py-1 rounded-full min-w-[20px] h-5 flex items-center justify-center">
+                        <Badge className="bg-[#AF1740] dark:bg-[#AF1740] text-white text-xs px-2 py-1 rounded-full min-w-[20px] h-5 flex items-center justify-center">
                           {contact.unreadCount}
                         </Badge>
                       )}
                     </div>
                   </div>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 truncate mt-1">
+                  <p className="text-sm text-gray-600 dark:text-gray-300 truncate mt-1">
                     {contact.lastMessage}
                   </p>
                   <div className="flex items-center mt-1">
@@ -347,8 +347,8 @@ export default function WhatsAppChat({ onClose }: WhatsAppChatProps) {
                       variant="outline"
                       className={`text-xs ${
                         contact.role === "admin"
-                          ? "border-[#740938] text-[#740938] dark:border-[#F8A5B2] dark:text-[#F8A5B2]"
-                          : "border-[#CC2B52] text-[#CC2B52] dark:border-[#F8A5B2] dark:text-[#F8A5B2]"
+                          ? "border-[#740938] text-[#740938] dark:border-[#740938] dark:text-[#740938]"
+                          : "border-[#CC2B52] text-[#CC2B52] dark:border-[#CC2B52] dark:text-[#CC2B52]"
                       }`}
                     >
                       {contact.role === "admin" ? "Dukungan" : "Pelanggan"}
@@ -360,6 +360,7 @@ export default function WhatsAppChat({ onClose }: WhatsAppChatProps) {
           ))}
         </div>
       </div>
+
       {/* Chat Area */}
       <div
         className={`${
@@ -367,14 +368,14 @@ export default function WhatsAppChat({ onClose }: WhatsAppChatProps) {
         } flex-1 flex-col md:flex`}
       >
         {/* Chat Header */}
-        <div className="bg-[#740938] p-4 text-white dark:bg-[#AF1740]">
+        <div className="bg-[#740938] dark:bg-gray-900 p-4 text-white">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={() => setShowChatArea(false)}
-                className="text-white hover:bg-white/20 p-2 md:block"
+                className="text-white hover:bg-white/20 dark:hover:bg-gray-700 p-2 md:block"
               >
                 <ArrowLeft className="w-4 h-4" />
               </Button>
@@ -382,8 +383,8 @@ export default function WhatsAppChat({ onClose }: WhatsAppChatProps) {
                 <div
                   className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-semibold ${
                     selectedContact.role === "admin"
-                      ? "bg-white/20"
-                      : "bg-white/20"
+                      ? "bg-white/20 dark:bg-blue-600"
+                      : "bg-white/20 dark:bg-green-600"
                   }`}
                 >
                   {selectedContact.avatar}
@@ -399,7 +400,7 @@ export default function WhatsAppChat({ onClose }: WhatsAppChatProps) {
                     <Shield className="w-4 h-4 text-white" />
                   )}
                 </div>
-                <p className="text-sm text-white/80">
+                <p className="text-sm text-white/80 dark:text-gray-300">
                   {selectedContact.isOnline
                     ? "Online"
                     : "Terakhir terlihat baru-baru ini"}
@@ -410,29 +411,30 @@ export default function WhatsAppChat({ onClose }: WhatsAppChatProps) {
               <Button
                 variant="ghost"
                 size="sm"
-                className="text-white hover:bg-white/20 p-2"
+                className="text-white hover:bg-white/20 dark:hover:bg-gray-700 p-2"
               >
                 <Phone className="w-4 h-4" />
               </Button>
               <Button
                 variant="ghost"
                 size="sm"
-                className="text-white hover:bg-white/20 p-2"
+                className="text-white hover:bg-white/20 dark:hover:bg-gray-700 p-2"
               >
                 <Video className="w-4 h-4" />
               </Button>
               <Button
                 variant="ghost"
                 size="sm"
-                className="text-white hover:bg-white/20 p-2"
+                className="text-white hover:bg-white/20 dark:hover:bg-gray-700 p-2"
               >
                 <MoreVertical className="w-4 h-4" />
               </Button>
             </div>
           </div>
         </div>
+
         {/* Messages */}
-        <div className="flex-1 overflow-y-auto p-4 bg-white dark:bg-gray-950">
+        <div className="flex-1 overflow-y-auto p-4 bg-gray-50 dark:bg-gray-900">
           {messages.map((message) => (
             <div
               key={message.id}
@@ -443,19 +445,20 @@ export default function WhatsAppChat({ onClose }: WhatsAppChatProps) {
               <div
                 className={`max-w-xs lg:max-w-md px-4 py-2 rounded-2xl ${
                   message.sender === "user"
-                    ? "bg-[#DE7C7D]/20 text-[#740938] rounded-br-md dark:bg-[#740938]/30 dark:text-[#F8A5B2]"
-                    : "bg-white text-gray-800 shadow-sm border border-[#DE7C7D]/20 rounded-bl-md dark:bg-[#2A2A2A] dark:text-gray-200 dark:border-[#DE7C7D]/30"
+                    ? "bg-[#DE7C7D]/20 dark:bg-[#DE7C7D]/20 text-[#740938] dark:text-white rounded-br-md"
+                    : "bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-100 shadow-sm border border-[#DE7C7D]/20 dark:border-gray-600 rounded-bl-md"
                 }`}
               >
                 {message.type === "text" && (
                   <p className="text-sm">{message.text}</p>
                 )}
+
                 {message.type === "order" && message.orderData && (
-                  <Card className="border border-[#AF1740]/20 bg-[#AF1740]/10 dark:border-[#F8A5B2]/20 dark:bg-[#F8A5B2]/10">
+                  <Card className="border border-[#AF1740]/20 dark:border-gray-600 bg-[#AF1740]/10 dark:bg-gray-800">
                     <CardContent className="p-3">
                       <div className="flex items-center space-x-2 mb-2">
-                        <Package className="w-4 h-4 text-[#740938] dark:text-[#F8A5B2]" />
-                        <span className="font-semibold text-[#740938] dark:text-[#F8A5B2] text-sm">
+                        <Package className="w-4 h-4 text-[#740938] dark:text-[#740938]" />
+                        <span className="font-semibold text-[#740938] dark:text-[#740938] text-sm">
                           Pesanan #{message.orderData.id}
                         </span>
                       </div>
@@ -468,11 +471,11 @@ export default function WhatsAppChat({ onClose }: WhatsAppChatProps) {
                             {item}
                           </p>
                         ))}
-                        <div className="flex justify-between items-center pt-2 border-t border-[#AF1740]/20 dark:border-[#F8A5B2]/20">
-                          <span className="text-sm font-semibold text-[#740938] dark:text-[#F8A5B2]">
+                        <div className="flex justify-between items-center pt-2 border-t border-[#AF1740]/20 dark:border-gray-600">
+                          <span className="text-sm font-semibold text-[#740938] dark:text-[#740938]">
                             Total: ${message.orderData.total}
                           </span>
-                          <Badge className="bg-[#AF1740] dark:bg-[#F8A5B2] text-white text-xs">
+                          <Badge className="bg-[#AF1740] dark:bg-[#740938] text-white text-xs">
                             {message.orderData.status}
                           </Badge>
                         </div>
@@ -480,27 +483,29 @@ export default function WhatsAppChat({ onClose }: WhatsAppChatProps) {
                     </CardContent>
                   </Card>
                 )}
+
                 {message.type === "location" && message.locationData && (
-                  <Card className="border border-[#CC2B52]/20 bg-[#CC2B52]/10 dark:border-[#F8A5B2]/20 dark:bg-[#F8A5B2]/10">
+                  <Card className="border border-[#CC2B52]/20 dark:border-gray-600 bg-[#CC2B52]/10 dark:bg-gray-800">
                     <CardContent className="p-3">
                       <div className="flex items-center space-x-2 mb-2">
-                        <MapPin className="w-4 h-4 text-[#740938] dark:text-[#F8A5B2]" />
-                        <span className="font-semibold text-[#740938] dark:text-[#F8A5B2] text-sm">
+                        <MapPin className="w-4 h-4 text-[#740938] dark:text-blue-400" />
+                        <span className="font-semibold text-[#740938] dark:text-blue-400 text-sm">
                           Lokasi
                         </span>
                       </div>
                       <p className="text-xs text-gray-700 dark:text-gray-300 mb-2">
                         {message.locationData.address}
                       </p>
-                      <div className="bg-[#DE7C7D]/20 dark:bg-[#740938]/30 rounded-lg p-2 text-center">
-                        <MapPin className="w-8 h-8 text-[#AF1740] dark:text-[#F8A5B2] mx-auto mb-1" />
-                        <p className="text-xs text-gray-600 dark:text-gray-400">
+                      <div className="bg-[#DE7C7D]/20 dark:bg-gray-700 rounded-lg p-2 text-center">
+                        <MapPin className="w-8 h-8 text-[#AF1740] dark:text-blue-400 mx-auto mb-1" />
+                        <p className="text-xs text-gray-600 dark:text-gray-300">
                           Ketuk untuk melihat di peta
                         </p>
                       </div>
                     </CardContent>
                   </Card>
                 )}
+
                 <div
                   className={`flex items-center justify-between mt-1 ${
                     message.sender === "user" ? "flex-row-reverse" : "flex-row"
@@ -518,13 +523,14 @@ export default function WhatsAppChat({ onClose }: WhatsAppChatProps) {
           ))}
           <div ref={messagesEndRef} />
         </div>
+
         {/* Message Input */}
-        <div className="p-4 border-t border-[#DE7C7D]/30 dark:border-[#DE7C7D]/50 bg-white dark:bg-[#1A1A1A]">
+        <div className="p-4 border-t border-[#DE7C7D]/30 dark:border-gray-700 bg-white dark:bg-gray-800">
           <div className="flex items-center space-x-2">
             <Button
               variant="ghost"
               size="sm"
-              className="text-[#740938] hover:bg-[#DE7C7D]/20 p-2 dark:text-[#F8A5B2] dark:hover:bg-[#740938]/30"
+              className="text-[#740938] dark:text-gray-300 hover:bg-[#DE7C7D]/20 dark:hover:bg-gray-700 p-2"
             >
               <Paperclip className="w-4 h-4" />
             </Button>
@@ -534,20 +540,20 @@ export default function WhatsAppChat({ onClose }: WhatsAppChatProps) {
                 value={newMessage}
                 onChange={(e) => setNewMessage(e.target.value)}
                 onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
-                className="pr-20 border-2 border-[#DE7C7D]/30 focus:border-[#AF1740] rounded-full bg-[#DE7C7D]/10 dark:bg-[#740938]/20 dark:border-[#740938]/50 dark:focus:border-[#F8A5B2] dark:text-gray-50 dark:placeholder:text-gray-400"
+                className="pr-20 border-2 border-[#DE7C7D]/30 dark:border-gray-600 focus:border-[#AF1740] dark:focus:border-green-500 rounded-full bg-[#DE7C7D]/10 dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder:text-gray-500 dark:placeholder:text-gray-400"
               />
               <div className="absolute right-2 top-1/2 transform -translate-y-1/2 flex items-center space-x-1">
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="text-[#740938] hover:bg-[#DE7C7D]/20 p-1 dark:text-[#F8A5B2] dark:hover:bg-[#740938]/30"
+                  className="text-[#740938] dark:text-gray-300 hover:bg-[#DE7C7D]/20 dark:hover:bg-gray-600 p-1"
                 >
                   <Smile className="w-4 h-4" />
                 </Button>
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="text-[#740938] hover:bg-[#DE7C7D]/20 p-1 dark:text-[#F8A5B2] dark:hover:bg-[#740938]/30"
+                  className="text-[#740938] dark:text-gray-300 hover:bg-[#DE7C7D]/20 dark:hover:bg-gray-600 p-1"
                 >
                   <Mic className="w-4 h-4" />
                 </Button>
@@ -556,7 +562,7 @@ export default function WhatsAppChat({ onClose }: WhatsAppChatProps) {
             <Button
               onClick={handleSendMessage}
               disabled={!newMessage.trim()}
-              className="bg-[#AF1740] hover:bg-[#740938] text-white rounded-full p-2 shadow-lg hover:shadow-xl transition-all dark:bg-[#740938] dark:hover:bg-[#AF1740]"
+              className="bg-[#AF1740] hover:bg-[#740938] dark:bg-green-600 dark:hover:bg-green-700 text-white rounded-full p-2 shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <Send className="w-4 h-4" />
             </Button>

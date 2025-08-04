@@ -29,7 +29,7 @@ export function AgentInfoSidebar({
         <div className="text-center mb-6">
           <div className="relative inline-block">
             <Image
-              src="/placeholder.svg?height=80&width=80"
+              src="/landing/avatar.png"
               alt={`${agentName} - Food Rescue Specialist`}
               width={80}
               height={80}

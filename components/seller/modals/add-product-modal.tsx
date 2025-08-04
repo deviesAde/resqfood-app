@@ -1,262 +1,309 @@
 "use client";
-
+import { useState } from "react";
 import type React from "react";
 
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Plus, Upload } from "lucide-react";
-import { useProducts } from "../hooks/use-products";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Upload, X, ImageIcon } from "lucide-react";
 
 interface AddProductModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onProductAdded: (productData: any) => void;
 }
 
 export default function AddProductModal({
   isOpen,
   onClose,
+  onProductAdded,
 }: AddProductModalProps) {
-  const { addProduct } = useProducts();
   const [formData, setFormData] = useState({
     name: "",
+    category: "",
     originalPrice: "",
     discountedPrice: "",
     expiryDate: "",
-    category: "",
     description: "",
-    purchaseLink: "",
+    image: null as File | null,
   });
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [isUploading, setIsUploading] = useState(false);
 
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+  const handleInputChange = (field: string, value: string) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setFormData((prev) => ({ ...prev, image: file }));
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setImagePreview(e.target?.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
-    const newProduct = {
-      id: Date.now(),
-      name: formData.name,
-      originalPrice: Number.parseFloat(formData.originalPrice),
-      discountedPrice: Number.parseFloat(formData.discountedPrice),
-      expiryDate: formData.expiryDate,
-      category: formData.category,
-      description: formData.description,
-      purchaseLink: formData.purchaseLink,
-      status: "active" as const,
-      views: 0,
-      orders: 0,
-      image: "/placeholder.svg?height=100&width=100",
+  const removeImage = () => {
+    setFormData((prev) => ({ ...prev, image: null }));
+    setImagePreview(null);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsUploading(true);
+
+    // Simulate upload delay
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+
+    const productData = {
+      ...formData,
+      originalPrice: Number.parseInt(formData.originalPrice),
+      discountedPrice: Number.parseInt(formData.discountedPrice),
+      image: imagePreview, // In real app, this would be the uploaded image URL
     };
 
-    addProduct(newProduct);
+    onProductAdded(productData);
 
+    // Reset form
     setFormData({
       name: "",
+      category: "",
       originalPrice: "",
       discountedPrice: "",
       expiryDate: "",
-      category: "",
       description: "",
-      purchaseLink: "",
+      image: null,
     });
-
-    onClose();
+    setImagePreview(null);
+    setIsUploading(false);
   };
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto dark:bg-gray-800 dark:border-gray-600">
+      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto bg-white dark:bg-gray-800">
         <DialogHeader>
-          <DialogTitle className="text-[#740938] dark:text-white flex items-center text-lg sm:text-xl">
-            <Plus className="w-5 h-5 mr-2" />
+          <DialogTitle className="text-xl font-bold text-[#740938] dark:text-white">
             Tambah Produk Baru
           </DialogTitle>
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
+          {/* Image Upload */}
+          <div className="space-y-2">
+            <Label className="text-sm font-medium text-gray-700 dark:text-gray-300">
+              Foto Produk
+            </Label>
+            <div className="border-2 border-dashed border-[#DE7C7D]/30 dark:border-gray-600 rounded-lg p-6">
+              {imagePreview ? (
+                <div className="relative">
+                  <img
+                    src={imagePreview || "/placeholder.svg"}
+                    alt="Preview"
+                    className="w-full h-48 object-cover rounded-lg"
+                  />
+                  <Button
+                    type="button"
+                    onClick={removeImage}
+                    className="absolute top-2 right-2 bg-red-500 hover:bg-red-600 text-white p-1 rounded-full"
+                    size="sm"
+                  >
+                    <X className="w-4 h-4" />
+                  </Button>
+                </div>
+              ) : (
+                <div className="text-center">
+                  <ImageIcon className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+                  <p className="text-gray-600 dark:text-gray-300 mb-2">
+                    Klik untuk upload foto produk
+                  </p>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageUpload}
+                    className="hidden"
+                    id="image-upload"
+                  />
+                  <Label
+                    htmlFor="image-upload"
+                    className="cursor-pointer inline-flex items-center px-4 py-2 bg-[#AF1740] text-white rounded-lg hover:bg-[#740938] transition-colors"
+                  >
+                    <Upload className="w-4 h-4 mr-2" />
+                    Pilih Foto
+                  </Label>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Product Details */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-2">
               <Label
                 htmlFor="name"
-                className="text-[#740938] dark:text-white font-semibold text-sm sm:text-base"
+                className="text-sm font-medium text-gray-700 dark:text-gray-300"
               >
-                Nama Produk
+                Nama Produk *
               </Label>
               <Input
                 id="name"
-                name="name"
                 value={formData.name}
-                onChange={handleInputChange}
-                placeholder="contoh: Roti Sourdough Segar"
-                className="mt-1 border-2 border-[#DE7C7D]/30 dark:border-gray-600 focus:border-[#AF1740] dark:focus:border-[#AF1740] rounded-lg dark:bg-gray-700 dark:text-white"
+                onChange={(e) => handleInputChange("name", e.target.value)}
+                placeholder="Masukkan nama produk"
                 required
+                className="border-[#DE7C7D]/30 dark:border-gray-600"
               />
             </div>
-            <div>
+
+            <div className="space-y-2">
               <Label
                 htmlFor="category"
-                className="text-[#740938] dark:text-white font-semibold text-sm sm:text-base"
+                className="text-sm font-medium text-gray-700 dark:text-gray-300"
               >
-                Kategori
+                Kategori *
               </Label>
-              <Input
-                id="category"
-                name="category"
+              <Select
                 value={formData.category}
-                onChange={handleInputChange}
-                placeholder="contoh: Produk Roti"
-                className="mt-1 border-2 border-[#DE7C7D]/30 dark:border-gray-600 focus:border-[#AF1740] dark:focus:border-[#AF1740] rounded-lg dark:bg-gray-700 dark:text-white"
-                required
-              />
+                onValueChange={(value) => handleInputChange("category", value)}
+              >
+                <SelectTrigger className="border-[#DE7C7D]/30 dark:border-gray-600">
+                  <SelectValue placeholder="Pilih kategori" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="makanan-siap-saji">
+                    Makanan Siap Saji
+                  </SelectItem>
+                  <SelectItem value="roti-kue">Roti & Kue</SelectItem>
+                  <SelectItem value="buah-sayur">Buah & Sayur</SelectItem>
+                  <SelectItem value="minuman">Minuman</SelectItem>
+                  <SelectItem value="makanan-beku">Makanan Beku</SelectItem>
+                  <SelectItem value="lainnya">Lainnya</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
-          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div>
+            <div className="space-y-2">
               <Label
                 htmlFor="originalPrice"
-                className="text-[#740938] dark:text-white font-semibold text-sm sm:text-base"
+                className="text-sm font-medium text-gray-700 dark:text-gray-300"
               >
-                Harga Asli (Rp)
+                Harga Asli *
               </Label>
               <Input
                 id="originalPrice"
-                name="originalPrice"
                 type="number"
-                step="0.01"
                 value={formData.originalPrice}
-                onChange={handleInputChange}
-                placeholder="89900"
-                className="mt-1 border-2 border-[#DE7C7D]/30 dark:border-gray-600 focus:border-[#AF1740] dark:focus:border-[#AF1740] rounded-lg dark:bg-gray-700 dark:text-white"
+                onChange={(e) =>
+                  handleInputChange("originalPrice", e.target.value)
+                }
+                placeholder="50000"
                 required
+                className="border-[#DE7C7D]/30 dark:border-gray-600"
               />
             </div>
-            <div>
+
+            <div className="space-y-2">
               <Label
                 htmlFor="discountedPrice"
-                className="text-[#740938] dark:text-white font-semibold text-sm sm:text-base"
+                className="text-sm font-medium text-gray-700 dark:text-gray-300"
               >
-                Harga Diskon (Rp)
+                Harga Diskon *
               </Label>
               <Input
                 id="discountedPrice"
-                name="discountedPrice"
                 type="number"
-                step="0.01"
                 value={formData.discountedPrice}
-                onChange={handleInputChange}
-                placeholder="39900"
-                className="mt-1 border-2 border-[#DE7C7D]/30 dark:border-gray-600 focus:border-[#AF1740] dark:focus:border-[#AF1740] rounded-lg dark:bg-gray-700 dark:text-white"
+                onChange={(e) =>
+                  handleInputChange("discountedPrice", e.target.value)
+                }
+                placeholder="25000"
                 required
+                className="border-[#DE7C7D]/30 dark:border-gray-600"
               />
             </div>
-            <div>
+
+            <div className="space-y-2 md:col-span-2">
               <Label
                 htmlFor="expiryDate"
-                className="text-[#740938] dark:text-white font-semibold text-sm sm:text-base"
+                className="text-sm font-medium text-gray-700 dark:text-gray-300"
               >
-                Tanggal Kedaluwarsa
+                Tanggal Kedaluwarsa *
               </Label>
               <Input
                 id="expiryDate"
-                name="expiryDate"
                 type="date"
                 value={formData.expiryDate}
-                onChange={handleInputChange}
-                className="mt-1 border-2 border-[#DE7C7D]/30 dark:border-gray-600 focus:border-[#AF1740] dark:focus:border-[#AF1740] rounded-lg dark:bg-gray-700 dark:text-white"
+                onChange={(e) =>
+                  handleInputChange("expiryDate", e.target.value)
+                }
                 required
+                className="border-[#DE7C7D]/30 dark:border-gray-600"
+              />
+            </div>
+
+            <div className="space-y-2 md:col-span-2">
+              <Label
+                htmlFor="description"
+                className="text-sm font-medium text-gray-700 dark:text-gray-300"
+              >
+                Deskripsi Produk
+              </Label>
+              <Textarea
+                id="description"
+                value={formData.description}
+                onChange={(e) =>
+                  handleInputChange("description", e.target.value)
+                }
+                placeholder="Deskripsikan kondisi dan detail produk..."
+                rows={3}
+                className="border-[#DE7C7D]/30 dark:border-gray-600"
               />
             </div>
           </div>
 
-          <div>
-            <Label
-              htmlFor="description"
-              className="text-[#740938] dark:text-white font-semibold text-sm sm:text-base"
-            >
-              Deskripsi
-            </Label>
-            <Textarea
-              id="description"
-              name="description"
-              value={formData.description}
-              onChange={handleInputChange}
-              placeholder="Deskripsikan produk Anda..."
-              className="mt-1 border-2 border-[#DE7C7D]/30 dark:border-gray-600 focus:border-[#AF1740] dark:focus:border-[#AF1740] rounded-lg dark:bg-gray-700 dark:text-white"
-              rows={3}
-            />
-          </div>
-
-          <div>
-            <Label
-              htmlFor="purchaseLink"
-              className="text-[#740938] dark:text-white font-semibold text-sm sm:text-base"
-            >
-              Link Pembelian Eksternal
-            </Label>
-            <Input
-              id="purchaseLink"
-              name="purchaseLink"
-              type="url"
-              value={formData.purchaseLink}
-              onChange={handleInputChange}
-              placeholder="https://shopee.com/link-produk-anda"
-              className="mt-1 border-2 border-[#DE7C7D]/30 dark:border-gray-600 focus:border-[#AF1740] dark:focus:border-[#AF1740] rounded-lg dark:bg-gray-700 dark:text-white"
-              required
-            />
-          </div>
-
-          <div>
-            <Label className="text-[#740938] dark:text-white font-semibold text-sm sm:text-base">
-              Gambar Produk
-            </Label>
-            <div className="mt-1 border-2 border-dashed border-[#DE7C7D]/50 dark:border-gray-600 rounded-lg p-6 sm:p-8 text-center hover:border-[#AF1740] dark:hover:border-[#AF1740] transition-colors bg-[#DE7C7D]/10 dark:bg-gray-700">
-              <Upload className="w-10 h-10 sm:w-12 sm:h-12 text-[#740938] mx-auto mb-4" />
-              <p className="text-[#740938] dark:text-white font-semibold mb-2 text-sm sm:text-base">
-                Upload gambar produk
-              </p>
-              <p className="text-gray-600 dark:text-gray-300 text-xs sm:text-sm">
-                PNG, JPG hingga 5MB
-              </p>
-              <Button
-                type="button"
-                variant="outline"
-                className="mt-4 border-[#740938] text-[#740938] hover:bg-[#740938] hover:text-white bg-transparent text-sm"
-              >
-                Pilih File
-              </Button>
-            </div>
-          </div>
-
-          <div className="flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-4 pt-4">
+          {/* Submit Buttons */}
+          <div className="flex flex-col sm:flex-row gap-3 pt-4">
             <Button
               type="button"
               variant="outline"
               onClick={onClose}
-              className="border-gray-300 text-gray-600 hover:bg-gray-100 rounded-lg bg-transparent"
+              className="flex-1 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 bg-transparent"
+              disabled={isUploading}
             >
               Batal
             </Button>
             <Button
               type="submit"
-              className="bg-gradient-to-r from-[#AF1740] to-[#CC2B52] hover:from-[#740938] hover:to-[#AF1740] text-white rounded-lg px-8 shadow-lg hover:shadow-xl transition-all"
+              className="flex-1 bg-gradient-to-r from-[#AF1740] to-[#CC2B52] hover:from-[#740938] hover:to-[#AF1740] text-white"
+              disabled={isUploading}
             >
-              Tambah Produk
+              {isUploading ? (
+                <>
+                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
+                  Mengupload...
+                </>
+              ) : (
+                <>
+                  <Upload className="w-4 h-4 mr-2" />
+                  Upload Produk
+                </>
+              )}
             </Button>
           </div>
         </form>

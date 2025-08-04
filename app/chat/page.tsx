@@ -18,7 +18,7 @@ interface Message {
 
 export default function ChatPage() {
   const agentName = "Dhiya Ulhaq"; // Set agent name here
-  const agentAvatar = "/placeholder.svg?height=40&width=40";
+  const agentAvatar = "/landing/avatar.png";
 
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -169,7 +169,7 @@ export default function ChatPage() {
               <div className="flex items-center space-x-4">
                 <div className="relative">
                   <Image
-                    src="/placeholder.svg?height=50&width=50"
+                    src="/landing/avatar.png"
                     alt={agentName}
                     width={50}
                     height={50}

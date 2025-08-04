@@ -1,5 +1,4 @@
 "use client";
-
 import { useState } from "react";
 import {
   Users,
@@ -134,23 +133,54 @@ export default function AdminDashboard() {
     totalRevenue: 234567,
   };
 
+  // Enhanced sidebar items with badges for notifications
   const sidebarItems = [
     { id: "overview", label: "Ikhtisar", icon: Home },
-    { id: "users", label: "Pengguna", icon: Users },
-    { id: "sellers", label: "Penjual", icon: Store },
-    { id: "products", label: "Produk", icon: Package },
+    {
+      id: "users",
+      label: "Pengguna",
+      icon: Users,
+      badge:
+        users.filter((u) => u.status === "tertunda").length > 0
+          ? users.filter((u) => u.status === "tertunda").length
+          : undefined,
+    },
+    {
+      id: "sellers",
+      label: "Penjual",
+      icon: Store,
+      badge:
+        sellers.filter((s) => s.status === "tertunda").length > 0
+          ? sellers.filter((s) => s.status === "tertunda").length
+          : undefined,
+    },
+    {
+      id: "products",
+      label: "Produk",
+      icon: Package,
+      badge:
+        flaggedProducts.filter((p) => p.severity === "tinggi").length > 0
+          ? flaggedProducts.filter((p) => p.severity === "tinggi").length
+          : undefined,
+    },
     { id: "analytics", label: "Analitik", icon: BarChart3 },
     { id: "reports", label: "Laporan", icon: PieChart },
-    { id: "messages", label: "Pesan", icon: MessageSquare },
+    {
+      id: "messages",
+      label: "Pesan",
+      icon: MessageSquare,
+      badge: 3, // Mock unread messages
+    },
     { id: "settings", label: "Pengaturan", icon: Settings },
   ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#DE7C7D]/10 to-rose-50 dark:from-gray-900 dark:to-gray-800 text-gray-900 dark:text-gray-100">
       <TopNavigation
-      
         mobileMenuOpen={mobileMenuOpen}
         setMobileMenuOpen={setMobileMenuOpen}
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
       />
 
       <div className="flex relative">
@@ -174,6 +204,17 @@ export default function AdminDashboard() {
 
         <div className="flex-1 transition-all duration-300 min-h-screen w-full lg:w-auto">
           <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 xl:px-8 py-4 sm:py-6 lg:py-8">
+            {/* Breadcrumb Navigation */}
+            <div className="mb-6">
+              <div className="flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400">
+                <Home className="w-4 h-4" />
+                <span>/</span>
+                <span className="capitalize text-[#740938] dark:text-[#DE7C7D] font-medium">
+                  {sidebarItems.find((item) => item.id === activeTab)?.label}
+                </span>
+              </div>
+            </div>
+
             {activeTab === "overview" && (
               <OverviewTab stats={stats} flaggedProducts={flaggedProducts} />
             )}
@@ -189,7 +230,7 @@ export default function AdminDashboard() {
                 setFlaggedProducts={setFlaggedProducts}
               />
             )}
-            {activeTab === "analytics" && <AnalyticsTab />}
+            {activeTab === "analytics" && <AnalyticsTab stats={stats} />}
             {activeTab === "reports" && <ReportsTab />}
             {activeTab === "messages" && <MessagesTab />}
             {activeTab === "settings" && <SettingsTab />}
