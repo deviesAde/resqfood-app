@@ -16,12 +16,17 @@ import {
 import { useState } from "react";
 import AddProductModal from "../modals/add-product-modal";
 
+// Format number consistently for both SSR and CSR
+const formatNumber = (num: number) => {
+  return new Intl.NumberFormat("en-US").format(num);
+};
+
 const sellerStats = {
   activeListings: 12,
   soldToday: 8,
   totalRating: 4.8,
   itemsRescued: 120,
-  monthlyRevenue: 1247000, 
+  monthlyRevenue: 1247000,
   totalOrders: 89,
 };
 
@@ -41,11 +46,11 @@ export default function DashboardTab() {
               <p className="text-[#DE7C7D] text-sm sm:text-base lg:text-lg leading-relaxed">
                 Anda telah menyelamatkan{" "}
                 <span className="font-bold text-white">
-                  {sellerStats.itemsRescued} item
+                  {formatNumber(sellerStats.itemsRescued)} item
                 </span>{" "}
                 bulan ini dan meraih{" "}
                 <span className="font-bold text-white">
-                  Rp{sellerStats.monthlyRevenue.toLocaleString()}
+                  Rp{formatNumber(sellerStats.monthlyRevenue)}
                 </span>
               </p>
             </div>
@@ -57,108 +62,84 @@ export default function DashboardTab() {
                 <Plus className="w-4 h-4 mr-2" />
                 Tambah Produk
               </Button>
-             
             </div>
           </div>
         </div>
 
         {/* Key Performance Metrics */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
-          <Card className="border-2 border-[#DE7C7D]/30 dark:border-gray-600 rounded-xl lg:rounded-2xl hover:shadow-xl transition-all duration-300 hover:scale-105 bg-gradient-to-br from-white to-[#DE7C7D]/10 dark:from-gray-800 dark:to-gray-700">
-            <CardContent className="p-3 sm:p-4 lg:p-6">
-              <div className="flex items-center justify-between">
-                <div className="min-w-0 flex-1">
-                  <p className="text-gray-600 dark:text-gray-300 text-xs sm:text-sm truncate">
-                    Listing Aktif
-                  </p>
-                  <p className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#740938] dark:text-white">
-                    {sellerStats.activeListings}
-                  </p>
+          {[
+            {
+              title: "Listing Aktif",
+              value: sellerStats.activeListings,
+              icon: Package,
+              gradient: "from-[#AF1740] to-[#CC2B52]",
+              trend: "+3 minggu ini",
+            },
+            {
+              title: "Terjual Hari Ini",
+              value: sellerStats.soldToday,
+              icon: DollarSign,
+              gradient: "from-[#740938] to-[#AF1740]",
+              trend: "+15% dari kemarin",
+            },
+            {
+              title: "Rating Pelanggan",
+              value: sellerStats.totalRating,
+              icon: Star,
+              gradient: "from-[#CC2B52] to-[#DE7C7D]",
+              trend: "Berdasarkan 47 ulasan",
+              isRating: true,
+            },
+            {
+              title: "Item Diselamatkan",
+              value: sellerStats.itemsRescued,
+              icon: Heart,
+              gradient: "from-[#AF1740] to-[#740938]",
+              trend: "Bulan ini",
+            },
+          ].map((metric, index) => (
+            <Card
+              key={index}
+              className="border-2 border-[#DE7C7D]/30 dark:border-gray-600 rounded-xl lg:rounded-2xl hover:shadow-xl transition-all duration-300 hover:scale-105 bg-gradient-to-br from-white to-[#DE7C7D]/10 dark:from-gray-800 dark:to-gray-700"
+            >
+              <CardContent className="p-3 sm:p-4 lg:p-6">
+                <div className="flex items-center justify-between">
+                  <div className="min-w-0 flex-1">
+                    <p className="text-gray-600 dark:text-gray-300 text-xs sm:text-sm truncate">
+                      {metric.title}
+                    </p>
+                    <p className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#740938] dark:text-white">
+                      {metric.isRating
+                        ? metric.value
+                        : formatNumber(metric.value)}
+                    </p>
+                  </div>
+                  <div
+                    className={`w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-gradient-to-br ${metric.gradient} rounded-full flex items-center justify-center shrink-0 ml-2`}
+                  >
+                    <metric.icon className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-white" />
+                  </div>
                 </div>
-                <div className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-gradient-to-br from-[#AF1740] to-[#CC2B52] rounded-full flex items-center justify-center shrink-0 ml-2">
-                  <Package className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-white" />
+                <div className="flex items-center mt-2">
+                  {metric.isRating ? (
+                    <Star className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-400 mr-1 fill-current" />
+                  ) : (
+                    <TrendingUp className="w-3 h-3 sm:w-4 sm:h-4 text-green-500 mr-1" />
+                  )}
+                  <span
+                    className={`text-xs sm:text-sm ${
+                      metric.isRating
+                        ? "text-gray-600 dark:text-gray-300"
+                        : "text-green-500"
+                    }`}
+                  >
+                    {metric.trend}
+                  </span>
                 </div>
-              </div>
-              <div className="flex items-center mt-2">
-                <TrendingUp className="w-3 h-3 sm:w-4 sm:h-4 text-green-500 mr-1" />
-                <span className="text-green-500 text-xs sm:text-sm">
-                  +3 minggu ini
-                </span>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="border-2 border-[#DE7C7D]/30 dark:border-gray-600 rounded-xl lg:rounded-2xl hover:shadow-xl transition-all duration-300 hover:scale-105 bg-gradient-to-br from-white to-[#DE7C7D]/10 dark:from-gray-800 dark:to-gray-700">
-            <CardContent className="p-3 sm:p-4 lg:p-6">
-              <div className="flex items-center justify-between">
-                <div className="min-w-0 flex-1">
-                  <p className="text-gray-600 dark:text-gray-300 text-xs sm:text-sm truncate">
-                    Terjual Hari Ini
-                  </p>
-                  <p className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#740938] dark:text-white">
-                    {sellerStats.soldToday}
-                  </p>
-                </div>
-                <div className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-gradient-to-br from-[#740938] to-[#AF1740] rounded-full flex items-center justify-center shrink-0 ml-2">
-                  <DollarSign className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-white" />
-                </div>
-              </div>
-              <div className="flex items-center mt-2">
-                <TrendingUp className="w-3 h-3 sm:w-4 sm:h-4 text-green-500 mr-1" />
-                <span className="text-green-500 text-xs sm:text-sm">
-                  +15% dari kemarin
-                </span>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="border-2 border-[#DE7C7D]/30 dark:border-gray-600 rounded-xl lg:rounded-2xl hover:shadow-xl transition-all duration-300 hover:scale-105 bg-gradient-to-br from-white to-[#DE7C7D]/10 dark:from-gray-800 dark:to-gray-700">
-            <CardContent className="p-3 sm:p-4 lg:p-6">
-              <div className="flex items-center justify-between">
-                <div className="min-w-0 flex-1">
-                  <p className="text-gray-600 dark:text-gray-300 text-xs sm:text-sm truncate">
-                    Rating Pelanggan
-                  </p>
-                  <p className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#740938] dark:text-white">
-                    {sellerStats.totalRating}
-                  </p>
-                </div>
-                <div className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-gradient-to-br from-[#CC2B52] to-[#DE7C7D] rounded-full flex items-center justify-center shrink-0 ml-2">
-                  <Star className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-white" />
-                </div>
-              </div>
-              <div className="flex items-center mt-2">
-                <Star className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-400 mr-1 fill-current" />
-                <span className="text-gray-600 dark:text-gray-300 text-xs sm:text-sm">
-                  Berdasarkan 47 ulasan
-                </span>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="border-2 border-[#DE7C7D]/30 dark:border-gray-600 rounded-xl lg:rounded-2xl hover:shadow-xl transition-all duration-300 hover:scale-105 bg-gradient-to-br from-white to-[#DE7C7D]/10 dark:from-gray-800 dark:to-gray-700">
-            <CardContent className="p-3 sm:p-4 lg:p-6">
-              <div className="flex items-center justify-between">
-                <div className="min-w-0 flex-1">
-                  <p className="text-gray-600 dark:text-gray-300 text-xs sm:text-sm truncate">
-                    Item Diselamatkan
-                  </p>
-                  <p className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#740938] dark:text-white">
-                    {sellerStats.itemsRescued}
-                  </p>
-                </div>
-                <div className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-gradient-to-br from-[#AF1740] to-[#740938] rounded-full flex items-center justify-center shrink-0 ml-2">
-                  <Heart className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-white" />
-                </div>
-              </div>
-              <div className="flex items-center mt-2">
-                <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-green-500 mr-1" />
-                <span className="text-green-500 text-xs sm:text-sm">
-                  Bulan ini
-                </span>
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+          ))}
         </div>
 
         {/* Recent Activity & Quick Actions */}
@@ -171,47 +152,51 @@ export default function DashboardTab() {
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-3 sm:space-y-4">
-              <div className="flex items-center space-x-3 p-3 sm:p-4 bg-green-50 dark:bg-green-900/20 rounded-xl border border-green-200 dark:border-green-800">
-                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-green-500 rounded-full flex items-center justify-center shrink-0">
-                  <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+              {[
+                {
+                  title: "Roti Sourdough terjual",
+                  description: "2 jam lalu • Rp39,900",
+                  icon: CheckCircle,
+                  bg: "bg-green-50 dark:bg-green-900/20",
+                  border: "border-green-200 dark:border-green-800",
+                  iconBg: "bg-green-500",
+                },
+                {
+                  title: "Produk baru ditambahkan",
+                  description: "5 jam lalu • Bagel Segar",
+                  icon: Plus,
+                  bg: "bg-[#DE7C7D]/20 dark:bg-[#DE7C7D]/10",
+                  border: "border-[#DE7C7D]/30 dark:border-[#DE7C7D]/20",
+                  iconBg: "bg-[#AF1740]",
+                },
+                {
+                  title: "Ulasan bintang 5 baru",
+                  description: '1 hari lalu • "Kualitas luar biasa!"',
+                  icon: Star,
+                  bg: "bg-yellow-50 dark:bg-yellow-900/20",
+                  border: "border-yellow-200 dark:border-yellow-800",
+                  iconBg: "bg-yellow-500",
+                },
+              ].map((activity, index) => (
+                <div
+                  key={index}
+                  className={`flex items-center space-x-3 p-3 sm:p-4 ${activity.bg} rounded-xl ${activity.border}`}
+                >
+                  <div
+                    className={`w-8 h-8 sm:w-10 sm:h-10 ${activity.iconBg} rounded-full flex items-center justify-center shrink-0`}
+                  >
+                    <activity.icon className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-semibold text-[#740938] dark:text-white text-sm sm:text-base">
+                      {activity.title}
+                    </p>
+                    <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300">
+                      {activity.description}
+                    </p>
+                  </div>
                 </div>
-                <div className="flex-1 min-w-0">
-                  <p className="font-semibold text-[#740938] dark:text-white text-sm sm:text-base">
-                    Roti Sourdough terjual
-                  </p>
-                  <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300">
-                    2 jam lalu • Rp39.900
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-center space-x-3 p-3 sm:p-4 bg-[#DE7C7D]/20 dark:bg-[#DE7C7D]/10 rounded-xl border border-[#DE7C7D]/30 dark:border-[#DE7C7D]/20">
-                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-[#AF1740] rounded-full flex items-center justify-center shrink-0">
-                  <Plus className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="font-semibold text-[#740938] dark:text-white text-sm sm:text-base">
-                    Produk baru ditambahkan
-                  </p>
-                  <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300">
-                    5 jam lalu • Bagel Segar
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-center space-x-3 p-3 sm:p-4 bg-yellow-50 dark:bg-yellow-900/20 rounded-xl border border-yellow-200 dark:border-yellow-800">
-                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-yellow-500 rounded-full flex items-center justify-center shrink-0">
-                  <Star className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="font-semibold text-[#740938] dark:text-white text-sm sm:text-base">
-                    Ulasan bintang 5 baru
-                  </p>
-                  <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300">
-                    1 hari lalu • "Kualitas luar biasa!"
-                  </p>
-                </div>
-              </div>
+              ))}
             </CardContent>
           </Card>
 
@@ -242,7 +227,6 @@ export default function DashboardTab() {
         isOpen={showAddProduct}
         onClose={() => setShowAddProduct(false)}
         onProductAdded={(productData) => {
-          // Handle the newly added product (e.g., refresh list, show notification)
           setShowAddProduct(false);
         }}
       />

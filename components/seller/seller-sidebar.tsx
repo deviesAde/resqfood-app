@@ -311,6 +311,9 @@ function SidebarContent({
       <AddProductModal
         isOpen={showAddProduct}
         onClose={() => setShowAddProduct(false)}
+        onProductAdded={(productData) =>
+          console.log("Product added:", productData)
+        }
       />
     </>
   );

@@ -41,7 +41,6 @@ export default function AdminDashboard() {
   }, []);
 
   // Dummy data for CRUD operations
-  // Dummy data untuk operasi CRUD
   const [users, setUsers] = useState([
     {
       id: 1,
@@ -148,7 +147,6 @@ export default function AdminDashboard() {
     totalRevenue: 234567,
   };
 
-  // Enhanced sidebar items with badges for notifications
   const sidebarItems = [
     { id: "overview", label: "Ringkasan", icon: Home },
     {
@@ -184,45 +182,67 @@ export default function AdminDashboard() {
       id: "messages",
       label: "Pesan",
       icon: MessageSquare,
-      badge: 3, // Mock unread messages
+      badge: 3,
     },
     { id: "settings", label: "Pengaturan", icon: Settings },
   ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#DE7C7D]/10 to-rose-50 dark:from-gray-900 dark:to-gray-800 text-gray-900 dark:text-gray-100">
-      <TopNavigation
-        mobileMenuOpen={mobileMenuOpen}
-        setMobileMenuOpen={setMobileMenuOpen}
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
-      />
-
-      <div className="flex relative">
-        {/* Mobile overlay */}
-        {mobileMenuOpen && (
+      <div className="flex flex-col lg:flex-row">
+        {/* Sidebar for mobile - appears above content */}
+        {isMobile && (
           <div
-            className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
-            onClick={() => setMobileMenuOpen(false)}
-          />
+            className={`fixed inset-0 z-40 transform ${
+              mobileMenuOpen ? "translate-x-0" : "-translate-x-full"
+            } transition-transform duration-300 ease-in-out lg:hidden`}
+          >
+            <Sidebar
+              sidebarCollapsed={false}
+              setSidebarCollapsed={setSidebarCollapsed}
+              activeTab={activeTab}
+              setActiveTab={setActiveTab}
+              sidebarItems={sidebarItems}
+              mobileMenuOpen={mobileMenuOpen}
+              setMobileMenuOpen={setMobileMenuOpen}
+              isMobile={isMobile}
+            />
+          </div>
         )}
 
-        <Sidebar
-          sidebarCollapsed={sidebarCollapsed}
-          setSidebarCollapsed={setSidebarCollapsed}
-          activeTab={activeTab}
-          setActiveTab={setActiveTab}
-          sidebarItems={sidebarItems}
-          mobileMenuOpen={mobileMenuOpen}
-          setMobileMenuOpen={setMobileMenuOpen}
-          isMobile={isMobile}
-        />
+        {/* Sidebar for desktop */}
+        {!isMobile && (
+          <div
+            className={`hidden lg:block fixed h-full z-30 ${
+              sidebarCollapsed ? "w-20" : "w-64"
+            }`}
+          >
+            <Sidebar
+              sidebarCollapsed={sidebarCollapsed}
+              setSidebarCollapsed={setSidebarCollapsed}
+              activeTab={activeTab}
+              setActiveTab={setActiveTab}
+              sidebarItems={sidebarItems}
+              mobileMenuOpen={mobileMenuOpen}
+              setMobileMenuOpen={setMobileMenuOpen}
+              isMobile={isMobile}
+            />
+          </div>
+        )}
 
+        {/* Main content area */}
         <div
-          className={`flex-1 transition-all duration-300 min-h-screen ${
-            sidebarCollapsed ? "lg:ml-20" : "lg:ml-64"
-          } ${mobileMenuOpen ? "ml-64" : "ml-0"}`}
+          className={`flex-1 min-h-screen transition-all duration-300 ${
+            !isMobile && (sidebarCollapsed ? "lg:ml-20" : "lg:ml-64")
+          }`}
         >
+          <TopNavigation
+            mobileMenuOpen={mobileMenuOpen}
+            setMobileMenuOpen={setMobileMenuOpen}
+            activeTab={activeTab}
+            setActiveTab={setActiveTab}
+          />
+
           <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 xl:px-8 py-4 sm:py-6 lg:py-8">
             {/* Breadcrumb Navigation */}
             <div className="mb-6">
