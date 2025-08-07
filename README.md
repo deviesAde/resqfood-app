@@ -122,10 +122,21 @@ http://localhost:3000
 - Ini adalah versi frontend statis — **belum memiliki sistem login, cart, atau transaksi**
 - Cocok untuk **prototipe** dan **pengujian UI/UX**
 
-## 📄 Lisensi
+## 📄 Akses Halaman
+Untuk mensimulasikan login dengan role berbeda, gunakan kredensial berikut:
 
-Lisensi proyek ini **belum ditentukan**. Akan diperbarui di masa mendatang.
+| Role   | Email              | Password |
+|--------|--------------------|----------|
+| Admin  | admin@gmail.com    | admin    |
+| Seller | seller@gmail.com   | seller   |
+| User   | user@gmail.com     | user     |
+
+> ⚠️ Catatan: Login ini hanya simulasi — tidak ada proses autentikasi atau penyimpanan sesi nyata. Digunakan untuk menampilkan tampilan antarmuka yang berbeda sesuai role.
+
+
+
 
 ## 🔗 Tautan Terkait
 
 - 🔗 Repository GitHub: [https://github.com/deviesAde/resqfood-app](https://github.com/deviesAde/resqfood-app)
+- 🚀 Demo Live (Vercel): https://resqfood-app.vercel.app/
