@@ -38,76 +38,95 @@ Platform ini memungkinkan toko, restoran, dan produsen makanan untuk menjual pro
 
 ## 📁 Struktur Proyek
 
-
-
+```bash
 resqfood-app/
-├── app/ # Routing dan halaman utama (Next.js App Router)
-├── components/ # Komponen UI reusable
-├── hooks/ # Custom hooks (jika ada)
-├── lib/ # Utilitas / helper
-├── public/ # Aset publik (gambar, ikon, dsb.)
-├── styles/ # File Tailwind & style global
-├── types/ # Tipe data TypeScript
-├── .gitignore
-├── components.json
-├── next.config.mjs
-├── package.json
-├── package-lock.json / pnpm-lock.yaml
-├── postcss.config.mjs
-├── tailwind.config.ts
-└── tsconfig.json
+├── app/                  # Routing dan halaman utama (Next.js App Router)
+│   ├── (auth)/           # Halaman autentikasi
+│   ├── (main)/           # Halaman utama yang dilindungi
+│   ├── api/              # Endpoint API
+│   ├── layout.tsx        # Layout utama
+│   └── page.tsx          # Halaman beranda
+├── components/           # Komponen UI reusable
+│   ├── auth/             # Komponen autentikasi
+│   ├── dashboard/        # Komponen dashboard
+│   ├── products/         # Komponen produk
+│   ├── ui/               # Komponen UI dasar (button, card, etc.)
+│   └── ...               # Komponen lainnya
+├── hooks/                # Custom hooks
+│   ├── use-auth.ts       # Hook autentikasi
+│   └── use-products.ts   # Hook produk
+├── lib/                  # Utilitas dan helper
+│   ├── constants.ts      # Konstanta aplikasi
+│   ├── utils.ts          # Fungsi utilitas
+│   └── api/              # Klien API
+├── public/               # Aset publik
+│   ├── images/           # Gambar aplikasi
+│   └── icons/            # Ikon aplikasi
+├── styles/               # File styling
+│   ├── globals.css       # CSS global
+│   └── tailwind.css      # Konfigurasi Tailwind
+├── types/                # Tipe TypeScript
+│   ├── auth.d.ts         # Tipe autentikasi
+│   └── products.d.ts     # Tipe produk
+├── .env.example          # Template environment variables
+├── .gitignore            # Daftar file yang diignore Git
+├── next.config.mjs       # Konfigurasi Next.js
+├── package.json          # Dependensi proyek
+├── postcss.config.mjs    # Konfigurasi PostCSS
+├── tailwind.config.ts    # Konfigurasi Tailwind CSS
+└── tsconfig.json         # Konfigurasi TypeScript
 
-yaml
-Copy
-Edit
-
----
+```
 
 
-## ⚙️ Instalasi
+
+
+
+
+
+
+
+
 
 1. **Clone repository**
-   ```bash
-   git clone https://github.com/deviesAde/resqfood-app.git
-   cd resqfood-app
-Install dependencies
-Jika menggunakan npm:
+```bash
+git clone https://github.com/deviesAde/resqfood-app.git
+cd resqfood-app
+```
 
-bash
-Copy
-Edit
+2. **Install dependencies**
+
+Jika menggunakan **npm**:
+```bash
 npm install
-Jika menggunakan pnpm:
+```
 
-bash
-Copy
-Edit
+Jika menggunakan **pnpm**:
+```bash
 pnpm install
-Jalankan aplikasi
+```
 
-bash
-Copy
-Edit
+3. **Jalankan aplikasi**
+```bash
 npm run dev
-Buka browser dan akses:
+```
 
-arduino
-Copy
-Edit
+4. **Akses di browser**
+```
 http://localhost:3000
+```
 
-🧑‍💻 Cara Penggunaan
-Jalankan aplikasi dengan npm run dev
+## 🧑‍💻 Cara Penggunaan
 
-Jelajahi halaman produk dan informasi makanan
+- Jalankan aplikasi dengan `npm run dev`
+- Jelajahi halaman produk dan informasi makanan
+- Ini adalah versi frontend statis — **belum memiliki sistem login, cart, atau transaksi**
+- Cocok untuk **prototipe** dan **pengujian UI/UX**
 
-Ini adalah versi frontend statis — belum memiliki sistem login, cart, atau transaksi
+## 📄 Lisensi
 
-Ideal untuk prototipe dan pengujian UI/UX
+Lisensi proyek ini **belum ditentukan**. Akan diperbarui di masa mendatang.
 
+## 🔗 Tautan Terkait
 
-📄 Lisensi
-Lisensi proyek ini belum ditentukan. Akan diperbarui di masa mendatang.
-
-🔗 Tautan Terkait
-🔗 Repository GitHub: https://github.com/deviesAde/resqfood-app
+- 🔗 Repository GitHub: [https://github.com/deviesAde/resqfood-app](https://github.com/deviesAde/resqfood-app)
