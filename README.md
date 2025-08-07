@@ -68,7 +68,6 @@ resqfood-app/
 ├── types/                # Tipe TypeScript
 │   ├── auth.d.ts         # Tipe autentikasi
 │   └── products.d.ts     # Tipe produk
-├── .env.example          # Template environment variables
 ├── .gitignore            # Daftar file yang diignore Git
 ├── next.config.mjs       # Konfigurasi Next.js
 ├── package.json          # Dependensi proyek
