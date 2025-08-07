@@ -25,8 +25,8 @@ export default function HeaderLanding({ scrollToSection }: HeaderLandingProps) {
   const navItems = [
     { label: "Tentang Kami", action: () => scrollToSection("about") },
     { label: "Cara Kerja", action: () => scrollToSection("how-it-works") },
-    { label: "Marketplace", href: "/marketplace" },
-    { label: "Blog", href: "/artikel" },
+    { label: "Belanja", href: "/marketplace" },
+    { label: "Artikel", href: "/artikel" },
   ];
 
   return (

@@ -28,18 +28,18 @@ import type {
   ProfileData,
   TabItem,
 } from "@/types/profile";
-import { ProfileHeader } from "@/components/profile/profile-header"; // Import the new ProfileHeader
+import { ProfileHeader } from "@/components/profile/profile-header";
 
-// Mock Data - In a real application, this would come from an API or database
+// Data Contoh - Di aplikasi nyata, ini akan berasal dari API atau database
 const userStats: UserStats = {
   itemsRescued: 127,
   totalSaved: 456.78,
   co2Prevented: 89.2,
   wasteReduced: 45.6,
-  memberSince: "January 2024",
+  memberSince: "Januari 2024",
   currentStreak: 12,
   totalOrders: 89,
-  favoriteCategory: "Baked Goods",
+  favoriteCategory: "Produk Roti",
   totalSpent: 1234.56,
   averageRating: 4.8,
   reviewsGiven: 23,
@@ -48,38 +48,38 @@ const userStats: UserStats = {
 const achievements: Achievement[] = [
   {
     id: 1,
-    title: "Food Hero",
-    description: "Rescued 50+ items",
+    title: "Pahlawan Makanan",
+    description: "Menyelamatkan 50+ item",
     icon: <Heart className="w-6 h-6" />,
     earned: true,
-    earnedDate: "March 15, 2024",
+    earnedDate: "15 Maret 2024",
     color: "from-[#AF1740] to-[#CC2B52]",
     points: 500,
   },
   {
     id: 2,
-    title: "Eco Warrior",
-    description: "Prevented 25kg+ waste",
+    title: "Pejuang Lingkungan",
+    description: "Mencegah 25kg+ limbah",
     icon: <Leaf className="w-6 h-6" />,
     earned: true,
-    earnedDate: "March 20, 2024",
+    earnedDate: "20 Maret 2024",
     color: "from-green-500 to-emerald-500",
     points: 750,
   },
   {
     id: 3,
-    title: "Streak Master",
-    description: "10 day rescue streak",
+    title: "Raja Streak",
+    description: "Streak penyelamatan 10 hari",
     icon: <Target className="w-6 h-6" />,
     earned: true,
-    earnedDate: "March 25, 2024",
+    earnedDate: "25 Maret 2024",
     color: "from-orange-500 to-red-500",
     points: 300,
   },
   {
     id: 4,
-    title: "Community Champion",
-    description: "Refer 5 friends",
+    title: "Juara Komunitas",
+    description: "Mengajak 5 teman",
     icon: <Users className="w-6 h-6" />,
     earned: false,
     progress: 60,
@@ -88,8 +88,8 @@ const achievements: Achievement[] = [
   },
   {
     id: 5,
-    title: "Bulk Saver",
-    description: "Order 100+ items",
+    title: "Penabung Handal",
+    description: "Memesan 100+ item",
     icon: <Package className="w-6 h-6" />,
     earned: false,
     progress: 85,
@@ -98,11 +98,11 @@ const achievements: Achievement[] = [
   },
   {
     id: 6,
-    title: "VIP Member",
-    description: "Spend $1000+",
+    title: "Anggota VIP",
+    description: "Menghabiskan $1000+",
     icon: <Crown className="w-6 h-6" />,
     earned: true,
-    earnedDate: "April 1, 2024",
+    earnedDate: "1 April 2024",
     color: "from-yellow-500 to-amber-500",
     points: 1500,
   },
@@ -112,49 +112,49 @@ const recentActivity: ActivityItem[] = [
   {
     id: 1,
     type: "purchase",
-    action: "Rescued 3 items",
-    details: "Sourdough bread, croissants, and bagels from Golden Crust",
-    timestamp: "2 hours ago",
-    impact: "Saved $12.50, prevented 2.1kg waste",
-    amount: 12.5,
+    action: "Menyelamatkan 3 item",
+    details: "Roti sourdough, croissant, dan bagel dari Golden Crust",
+    timestamp: "2 jam lalu",
+    impact: "Menghemat Rp175.000, mencegah 2.1kg limbah",
+    amount: 175000,
     icon: <ShoppingBag className="w-4 h-4" />,
   },
   {
     id: 2,
     type: "achievement",
-    action: "Earned achievement",
-    details: "VIP Member badge for spending $1000+",
-    timestamp: "1 day ago",
-    impact: "Milestone reached! +1500 points",
+    action: "Mendapatkan pencapaian",
+    details: "Lencana Anggota VIP untuk belanja $1000+",
+    timestamp: "1 hari lalu",
+    impact: "Pencapaian tercapai! +1500 poin",
     icon: <Award className="w-4 h-4" />,
   },
   {
     id: 3,
     type: "review",
-    action: "Left review",
-    details: "5-star review for Fresh Valley Farm",
-    timestamp: "3 days ago",
-    impact: "Helped other food heroes",
+    action: "Memberi ulasan",
+    details: "Ulasan 5 bintang untuk Fresh Valley Farm",
+    timestamp: "3 hari lalu",
+    impact: "Membantu pahlawan makanan lainnya",
     rating: 5,
     icon: <Star className="w-4 h-4" />,
   },
   {
     id: 4,
     type: "purchase",
-    action: "Rescued 2 items",
-    details: "Organic yogurt and cheese from Fresh Valley",
-    timestamp: "5 days ago",
-    impact: "Saved $8.99, prevented 1.5kg waste",
-    amount: 8.99,
+    action: "Menyelamatkan 2 item",
+    details: "Yogurt dan keju organik dari Fresh Valley",
+    timestamp: "5 hari lalu",
+    impact: "Menghemat Rp125.000, mencegah 1.5kg limbah",
+    amount: 125000,
     icon: <ShoppingBag className="w-4 h-4" />,
   },
   {
     id: 5,
     type: "referral",
-    action: "Friend joined",
-    details: "Mike Chen joined using your referral code",
-    timestamp: "1 week ago",
-    impact: "Earned $5 credit",
+    action: "Teman bergabung",
+    details: "Mike Chen bergabung menggunakan kode referral Anda",
+    timestamp: "1 minggu lalu",
+    impact: "Mendapatkan kredit Rp70.000",
     icon: <Users className="w-4 h-4" />,
   },
 ];
@@ -166,7 +166,7 @@ const favoriteItems: FavoriteItem[] = [
     seller: "Golden Crust Bakery",
     image: "/products/1/roti2.png",
     timesOrdered: 8,
-    lastOrdered: "2 days ago",
+    lastOrdered: "2 hari lalu",
   },
   {
     id: 2,
@@ -174,7 +174,7 @@ const favoriteItems: FavoriteItem[] = [
     seller: "Fresh Valley Farm",
     image: "/products/4/susu2.png",
     timesOrdered: 6,
-    lastOrdered: "5 days ago",
+    lastOrdered: "5 hari lalu",
   },
   {
     id: 3,
@@ -182,7 +182,7 @@ const favoriteItems: FavoriteItem[] = [
     seller: "Roast Masters",
     image: "/products/4/kroisant.png",
     timesOrdered: 4,
-    lastOrdered: "1 week ago",
+    lastOrdered: "1 minggu lalu",
   },
 ];
 
@@ -190,11 +190,11 @@ export default function ProfilePage() {
   const [activeTab, setActiveTab] = useState<string>("overview");
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [profileData, setProfileData] = useState<ProfileData>({
-    name: "devies agbe",
+    name: "Devies Agbe",
     email: "deviesagbe@email.com",
-    phone: "+1234567890",
+    phone: "+6281234567890",
     location: "Jakarta, Indonesia",
-    bio: "Passionate about reducing food waste and supporting local businesses. Love discovering new flavors while making a positive impact on our planet! 🌍",
+    bio: "Bersemangat mengurangi limbah makanan dan mendukung bisnis lokal. Suka menemukan rasa baru sambil membuat dampak positif untuk planet kita! 🌍",
     avatar: "/profile/profile.jpg",
     birthday: "1990-06-15",
     preferences: {
@@ -206,15 +206,14 @@ export default function ProfilePage() {
 
   const handleSave = () => {
     setIsEditing(false);
-    // Here you would typically save to backend
-    console.log("Profile saved:", profileData);
+    // Di sini biasanya akan menyimpan ke backend
+    console.log("Profil disimpan:", profileData);
   };
 
   const handleCancel = () => {
     setIsEditing(false);
-    // Reset form data if needed (e.g., fetch original data again)
-    // For now, we'll just log
-    console.log("Edit cancelled.");
+    // Reset data form jika diperlukan
+    console.log("Edit dibatalkan.");
   };
 
   const totalPoints = achievements
@@ -222,16 +221,16 @@ export default function ProfilePage() {
     .reduce((sum, a) => sum + a.points, 0);
 
   const tabs: TabItem[] = [
-    { id: "overview", label: "Overview", icon: Users },
-    { id: "achievements", label: "Achievements", icon: Award },
-    { id: "activity", label: "Activity", icon: History },
-    { id: "favorites", label: "Favorites", icon: Heart },
-    { id: "settings", label: "Settings", icon: Settings },
+    { id: "overview", label: "Ringkasan", icon: Users },
+    { id: "achievements", label: "Pencapaian", icon: Award },
+    { id: "activity", label: "Aktivitas", icon: History },
+    { id: "favorites", label: "Favorit", icon: Heart },
+    { id: "settings", label: "Pengaturan", icon: Settings },
   ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#DE7C7D]/10 to-rose-50 dark:from-gray-900 dark:to-gray-950">
-      <ProfileHeader /> {/* Use the new ProfileHeader component */}
+      <ProfileHeader />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           {/* Sidebar */}
@@ -243,7 +242,7 @@ export default function ProfilePage() {
             activeTab={activeTab}
             setActiveTab={setActiveTab}
           />
-          {/* Main Content */}
+          {/* Konten Utama */}
           <div className="lg:col-span-3 space-y-8">
             {activeTab === "overview" && (
               <OverviewTab

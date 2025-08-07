@@ -149,57 +149,6 @@ export function UserMenu({
                   )}
                 </Button>
               </Link>
-              <Link
-                href="/profile?tab=settings"
-                onClick={() => setIsOpen(false)}
-              >
-                <Button
-                  variant="ghost"
-                  className="w-full justify-start hover:bg-[#DE7C7D]/20 dark:hover:bg-[#740938]/30 rounded-xl"
-                >
-                  <CreditCard className="w-4 h-4 mr-3" />
-                  Metode Pembayaran
-                </Button>
-              </Link>
-              <Link
-                href="/profile?tab=achievements"
-                onClick={() => setIsOpen(false)}
-              >
-                <Button
-                  variant="ghost"
-                  className="w-full justify-start hover:bg-[#DE7C7D]/20 dark:hover:bg-[#740938]/30 rounded-xl"
-                >
-                  <Award className="w-4 h-4 mr-3" />
-                  Pencapaian
-                  <Badge className="ml-auto bg-yellow-500 dark:bg-yellow-600 text-white text-xs">
-                    Baru!
-                  </Badge>
-                </Button>
-              </Link>
-              <Link
-                href="/profile?tab=favorites"
-                onClick={() => setIsOpen(false)}
-              >
-                <Button
-                  variant="ghost"
-                  className="w-full justify-start hover:bg-[#DE7C7D]/20 dark:hover:bg-[#740938]/30 rounded-xl"
-                >
-                  <Heart className="w-4 h-4 mr-3" />
-                  Favorit
-                </Button>
-              </Link>
-              <Link
-                href="/profile?tab=settings"
-                onClick={() => setIsOpen(false)}
-              >
-                <Button
-                  variant="ghost"
-                  className="w-full justify-start hover:bg-[#DE7C7D]/20 dark:hover:bg-[#740938]/30 rounded-xl"
-                >
-                  <Settings className="w-4 h-4 mr-3" />
-                  Pengaturan Akun
-                </Button>
-              </Link>
             </div>
             <div className="border-t border-[#DE7C7D]/30 dark:border-[#740938]/50 mt-4 pt-4">
               <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">

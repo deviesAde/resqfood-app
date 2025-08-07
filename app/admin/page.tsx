@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Users,
   Store,
@@ -25,100 +25,115 @@ export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState("overview");
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 1024);
+      if (window.innerWidth >= 1024) {
+        setMobileMenuOpen(false);
+      }
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   // Dummy data for CRUD operations
+  // Dummy data untuk operasi CRUD
   const [users, setUsers] = useState([
     {
       id: 1,
-      name: "Sarah Johnson",
-      email: "sarah@email.com",
+      name: "Dewi Lestari",
+      email: "dewi.lestari@email.com",
       status: "aktif",
       joinDate: "2024-01-15",
-      avatar: "S",
+      avatar: "D",
     },
     {
       id: 2,
-      name: "Mike Chen",
-      email: "mike@email.com",
+      name: "Andi Wijaya",
+      email: "andi.wijaya@email.com",
       status: "aktif",
       joinDate: "2024-01-14",
-      avatar: "M",
+      avatar: "A",
     },
     {
       id: 3,
-      name: "Lisa Rodriguez",
-      email: "lisa@email.com",
+      name: "Siti Nurhaliza",
+      email: "siti.nurhaliza@email.com",
       status: "diblokir",
       joinDate: "2024-01-13",
-      avatar: "L",
+      avatar: "S",
     },
     {
       id: 4,
-      name: "David Kim",
-      email: "david@email.com",
+      name: "Budi Santoso",
+      email: "budi.santoso@email.com",
       status: "aktif",
       joinDate: "2024-01-12",
-      avatar: "D",
+      avatar: "B",
     },
   ]);
 
   const [sellers, setSellers] = useState([
     {
       id: 1,
-      name: "Golden Crust Bakery",
-      email: "info@goldencrust.com",
+      name: "Warung Bu Tini",
+      email: "butini@warungku.id",
       status: "terverifikasi",
       performance: "sangat baik",
-      revenue: 2340,
+      revenue: 2340000,
     },
     {
       id: 2,
-      name: "Fresh Valley Farm",
-      email: "contact@freshvalley.com",
+      name: "Kopi Nusantara",
+      email: "info@kopinusantara.id",
       status: "terverifikasi",
       performance: "baik",
-      revenue: 1890,
+      revenue: 1890000,
     },
     {
       id: 3,
-      name: "Roast Masters",
-      email: "hello@roastmasters.com",
+      name: "Dapur Mama Ina",
+      email: "contact@mamaina.co.id",
       status: "tertunda",
       performance: "baru",
       revenue: 0,
     },
     {
       id: 4,
-      name: "Patisserie Belle",
-      email: "info@patisseriebelle.com",
+      name: "Toko Oleh-Oleh Malang",
+      email: "admin@oleholehmalang.id",
       status: "terverifikasi",
       performance: "sangat baik",
-      revenue: 3120,
+      revenue: 3120000,
     },
   ]);
 
   const [flaggedProducts, setFlaggedProducts] = useState([
     {
       id: 1,
-      name: "Susu Kedaluwarsa",
-      seller: "Quick Mart",
-      reason: "Lewat tanggal kedaluwarsa",
+      name: "Keripik Singkong Kadaluarsa",
+      seller: "Warung Bu Tini",
+      reason: "Tanggal kedaluwarsa sudah lewat",
       severity: "tinggi",
       date: "2024-01-15",
     },
     {
       id: 2,
-      name: "Roti Berjamur",
-      seller: "Corner Bakery",
-      reason: "Masalah kualitas",
+      name: "Sambal Botolan Berjamur",
+      seller: "Dapur Mama Ina",
+      reason: "Ada jamur dalam kemasan",
       severity: "tinggi",
       date: "2024-01-14",
     },
     {
       id: 3,
-      name: "Kedaluwarsa Tidak Jelas",
-      seller: "Food Hub",
-      reason: "Informasi kedaluwarsa hilang",
+      name: "Label Kadaluarsa Tidak Jelas",
+      seller: "Toko Oleh-Oleh Malang",
+      reason: "Informasi tanggal kedaluwarsa tidak terlihat",
       severity: "sedang",
       date: "2024-01-13",
     },
@@ -135,7 +150,7 @@ export default function AdminDashboard() {
 
   // Enhanced sidebar items with badges for notifications
   const sidebarItems = [
-    { id: "overview", label: "Ikhtisar", icon: Home },
+    { id: "overview", label: "Ringkasan", icon: Home },
     {
       id: "users",
       label: "Pengguna",
@@ -200,9 +215,14 @@ export default function AdminDashboard() {
           sidebarItems={sidebarItems}
           mobileMenuOpen={mobileMenuOpen}
           setMobileMenuOpen={setMobileMenuOpen}
+          isMobile={isMobile}
         />
 
-        <div className="flex-1 transition-all duration-300 min-h-screen w-full lg:w-auto">
+        <div
+          className={`flex-1 transition-all duration-300 min-h-screen ${
+            sidebarCollapsed ? "lg:ml-20" : "lg:ml-64"
+          } ${mobileMenuOpen ? "ml-64" : "ml-0"}`}
+        >
           <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 xl:px-8 py-4 sm:py-6 lg:py-8">
             {/* Breadcrumb Navigation */}
             <div className="mb-6">

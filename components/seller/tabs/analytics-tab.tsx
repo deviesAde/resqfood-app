@@ -31,64 +31,99 @@ import {
   Area,
 } from "recharts";
 
-// Dummy data for sales performance
+// Data dummy untuk performa penjualan
 const salesData = [
-  { month: "Jan", revenue: 4500000, orders: 145, avgOrder: 31034 },
-  { month: "Feb", revenue: 5200000, orders: 167, avgOrder: 31138 },
-  { month: "Mar", revenue: 4800000, orders: 152, avgOrder: 31579 },
-  { month: "Apr", revenue: 6100000, orders: 198, avgOrder: 30808 },
-  { month: "May", revenue: 7300000, orders: 234, avgOrder: 31197 },
-  { month: "Jun", revenue: 6800000, orders: 218, avgOrder: 31193 },
-  { month: "Jul", revenue: 8200000, orders: 267, avgOrder: 30712 },
+  { bulan: "Jan", pendapatan: 4500000, pesanan: 145, rataPesanan: 31034 },
+  { bulan: "Feb", pendapatan: 5200000, pesanan: 167, rataPesanan: 31138 },
+  { bulan: "Mar", pendapatan: 4800000, pesanan: 152, rataPesanan: 31579 },
+  { bulan: "Apr", pendapatan: 6100000, pesanan: 198, rataPesanan: 30808 },
+  { bulan: "Mei", pendapatan: 7300000, pesanan: 234, rataPesanan: 31197 },
+  { bulan: "Jun", pendapatan: 6800000, pesanan: 218, rataPesanan: 31193 },
+  { bulan: "Jul", pendapatan: 8200000, pesanan: 267, rataPesanan: 30712 },
 ];
 
-// Dummy data for environmental impact
+// Data dummy untuk dampak lingkungan
 const impactData = [
-  { month: "Jan", foodSaved: 1200, co2Saved: 3600, waterSaved: 18000 },
-  { month: "Feb", foodSaved: 1450, co2Saved: 4350, waterSaved: 21750 },
-  { month: "Mar", foodSaved: 1320, co2Saved: 3960, waterSaved: 19800 },
-  { month: "Apr", foodSaved: 1680, co2Saved: 5040, waterSaved: 25200 },
-  { month: "May", foodSaved: 1950, co2Saved: 5850, waterSaved: 29250 },
-  { month: "Jun", foodSaved: 1780, co2Saved: 5340, waterSaved: 26700 },
-  { month: "Jul", foodSaved: 2100, co2Saved: 6300, waterSaved: 31500 },
+  {
+    bulan: "Jan",
+    makananDiselamatkan: 1200,
+    co2Dikurangi: 3600,
+    airDihemat: 18000,
+  },
+  {
+    bulan: "Feb",
+    makananDiselamatkan: 1450,
+    co2Dikurangi: 4350,
+    airDihemat: 21750,
+  },
+  {
+    bulan: "Mar",
+    makananDiselamatkan: 1320,
+    co2Dikurangi: 3960,
+    airDihemat: 19800,
+  },
+  {
+    bulan: "Apr",
+    makananDiselamatkan: 1680,
+    co2Dikurangi: 5040,
+    airDihemat: 25200,
+  },
+  {
+    bulan: "Mei",
+    makananDiselamatkan: 1950,
+    co2Dikurangi: 5850,
+    airDihemat: 29250,
+  },
+  {
+    bulan: "Jun",
+    makananDiselamatkan: 1780,
+    co2Dikurangi: 5340,
+    airDihemat: 26700,
+  },
+  {
+    bulan: "Jul",
+    makananDiselamatkan: 2100,
+    co2Dikurangi: 6300,
+    airDihemat: 31500,
+  },
 ];
 
-// Product category data
+// Data kategori produk
 const categoryData = [
-  { name: "Roti & Pastry", value: 35, color: "#AF1740" },
-  { name: "Kue & Dessert", value: 28, color: "#CC2B52" },
-  { name: "Sandwich", value: 20, color: "#DE7C7D" },
-  { name: "Minuman", value: 12, color: "#F4A6A7" },
-  { name: "Lainnya", value: 5, color: "#740938" },
+  { nama: "Roti & Pastry", nilai: 35, warna: "#AF1740" },
+  { nama: "Kue & Dessert", nilai: 28, warna: "#CC2B52" },
+  { nama: "Sandwich", nilai: 20, warna: "#DE7C7D" },
+  { nama: "Minuman", nilai: 12, warna: "#F4A6A7" },
+  { nama: "Lainnya", nilai: 5, warna: "#740938" },
 ];
 
-// Weekly performance data
+// Data performa mingguan
 const weeklyData = [
-  { day: "Sen", orders: 32, revenue: 980000 },
-  { day: "Sel", orders: 28, revenue: 850000 },
-  { day: "Rab", orders: 35, revenue: 1050000 },
-  { day: "Kam", orders: 42, revenue: 1260000 },
-  { day: "Jum", orders: 48, revenue: 1440000 },
-  { day: "Sab", orders: 65, revenue: 1950000 },
-  { day: "Min", orders: 38, revenue: 1140000 },
+  { hari: "Sen", pesanan: 32, pendapatan: 980000 },
+  { hari: "Sel", pesanan: 28, pendapatan: 850000 },
+  { hari: "Rab", pesanan: 35, pendapatan: 1050000 },
+  { hari: "Kam", pesanan: 42, pendapatan: 1260000 },
+  { hari: "Jum", pesanan: 48, pendapatan: 1440000 },
+  { hari: "Sab", pesanan: 65, pendapatan: 1950000 },
+  { hari: "Min", pesanan: 38, pendapatan: 1140000 },
 ];
 
-// Key metrics
+// Metrik utama
 const keyMetrics = {
-  totalRevenue: 42900000,
-  totalOrders: 1381,
-  avgOrderValue: 31067,
-  customerGrowth: 23.5,
-  foodWastePrevented: 11480,
-  co2Reduction: 34440,
-  waterSaved: 172200,
-  customersServed: 892,
+  totalPendapatan: 42900000,
+  totalPesanan: 1381,
+  rataNilaiPesanan: 31067,
+  pertumbuhanPelanggan: 23.5,
+  makananTerbuangDicegah: 11480,
+  penguranganCO2: 34440,
+  airDihemat: 172200,
+  pelangganDilayani: 892,
 };
 
 export default function AnalyticsTab() {
   const [selectedPeriod, setSelectedPeriod] = useState("7d");
 
-  // Export functions
+  // Fungsi ekspor
   const exportToCSV = (data: any[], filename: string) => {
     const csvContent = [
       Object.keys(data[0]).join(","),
@@ -135,18 +170,18 @@ export default function AnalyticsTab() {
             Dashboard Analitik
           </h1>
           <p className="text-gray-600 dark:text-gray-300 text-sm sm:text-base">
-            Lacak performa dan dampak Anda
+            Pantau performa dan dampak bisnis Anda
           </p>
         </div>
         <div className="flex items-center space-x-2">
           <Button
             variant="outline"
             size="sm"
-            onClick={() => exportToCSV(salesData, "sales-data")}
+            onClick={() => exportToCSV(salesData, "data-penjualan")}
             className="text-xs"
           >
             <FileSpreadsheet className="w-4 h-4 mr-1" />
-            Export CSV
+            Ekspor CSV
           </Button>
           <Button
             variant="outline"
@@ -154,31 +189,31 @@ export default function AnalyticsTab() {
             onClick={() =>
               exportToJSON(
                 [
-                  { type: "sales", data: salesData },
-                  { type: "impact", data: impactData }
+                  { jenis: "penjualan", data: salesData },
+                  { jenis: "dampak", data: impactData },
                 ],
-                "analytics-data"
+                "data-analitik"
               )
             }
             className="text-xs"
           >
             <FileText className="w-4 h-4 mr-1" />
-            Export JSON
+            Ekspor JSON
           </Button>
         </div>
       </div>
 
-      {/* Key Metrics Cards */}
+      {/* Kartu Metrik Utama */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
         <Card className="border-2 border-[#DE7C7D]/30 dark:border-gray-600 rounded-xl shadow-lg bg-gradient-to-br from-white to-[#AF1740]/10 dark:from-gray-800 dark:to-[#AF1740]/20">
           <CardContent className="p-3 sm:p-4 lg:p-6">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300">
-                  Total Revenue
+                  Total Pendapatan
                 </p>
                 <p className="text-lg sm:text-xl lg:text-2xl font-bold text-[#740938] dark:text-white">
-                  {formatCurrency(keyMetrics.totalRevenue)}
+                  {formatCurrency(keyMetrics.totalPendapatan)}
                 </p>
                 <div className="flex items-center mt-1">
                   <TrendingUp className="w-3 h-3 sm:w-4 sm:h-4 text-green-500 mr-1" />
@@ -195,10 +230,10 @@ export default function AnalyticsTab() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300">
-                  Total Orders
+                  Total Pesanan
                 </p>
                 <p className="text-lg sm:text-xl lg:text-2xl font-bold text-[#740938] dark:text-white">
-                  {formatNumber(keyMetrics.totalOrders)}
+                  {formatNumber(keyMetrics.totalPesanan)}
                 </p>
                 <div className="flex items-center mt-1">
                   <TrendingUp className="w-3 h-3 sm:w-4 sm:h-4 text-green-500 mr-1" />
@@ -215,10 +250,10 @@ export default function AnalyticsTab() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300">
-                  Food Saved
+                  Makanan Diselamatkan
                 </p>
                 <p className="text-lg sm:text-xl lg:text-2xl font-bold text-[#740938] dark:text-white">
-                  {formatNumber(keyMetrics.foodWastePrevented)} kg
+                  {formatNumber(keyMetrics.makananTerbuangDicegah)} kg
                 </p>
                 <div className="flex items-center mt-1">
                   <TrendingUp className="w-3 h-3 sm:w-4 sm:h-4 text-green-500 mr-1" />
@@ -235,15 +270,15 @@ export default function AnalyticsTab() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300">
-                  Customers
+                  Pelanggan
                 </p>
                 <p className="text-lg sm:text-xl lg:text-2xl font-bold text-[#740938] dark:text-white">
-                  {formatNumber(keyMetrics.customersServed)}
+                  {formatNumber(keyMetrics.pelangganDilayani)}
                 </p>
                 <div className="flex items-center mt-1">
                   <TrendingUp className="w-3 h-3 sm:w-4 sm:h-4 text-green-500 mr-1" />
                   <span className="text-xs text-green-500">
-                    +{keyMetrics.customerGrowth}%
+                    +{keyMetrics.pertumbuhanPelanggan}%
                   </span>
                 </div>
               </div>
@@ -253,16 +288,16 @@ export default function AnalyticsTab() {
         </Card>
       </div>
 
-      {/* Charts Grid */}
+      {/* Grid Grafik */}
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
-        {/* Sales Performance Chart */}
+        {/* Grafik Performa Penjualan */}
         <Card className="border-2 border-[#DE7C7D]/30 dark:border-gray-600 rounded-xl lg:rounded-2xl shadow-lg bg-gradient-to-br from-white to-[#DE7C7D]/10 dark:from-gray-800 dark:to-[#DE7C7D]/20">
           <CardHeader className="dark:bg-gray-800/50">
             <div className="flex items-center justify-between">
               <CardTitle className="text-[#740938] dark:text-white text-base sm:text-lg">
                 Performa Penjualan
               </CardTitle>
-              <Badge variant="secondary" className="text-xs">
+              <Badge variant="secondary" className="text-xs text-white">
                 7 Bulan Terakhir
               </Badge>
             </div>
@@ -277,7 +312,7 @@ export default function AnalyticsTab() {
                     opacity={0.3}
                   />
                   <XAxis
-                    dataKey="month"
+                    dataKey="bulan"
                     stroke="#740938"
                     fontSize={12}
                     className="dark:stroke-white"
@@ -292,14 +327,14 @@ export default function AnalyticsTab() {
                   />
                   <Tooltip
                     formatter={(value: number, name: string) => [
-                      name === "revenue"
+                      name === "pendapatan"
                         ? formatCurrency(value)
                         : formatNumber(value),
-                      name === "revenue"
-                        ? "Revenue"
-                        : name === "orders"
-                        ? "Orders"
-                        : "Avg Order",
+                      name === "pendapatan"
+                        ? "Pendapatan"
+                        : name === "pesanan"
+                        ? "Pesanan"
+                        : "Rata Pesanan",
                     ]}
                     labelStyle={{ color: "#740938" }}
                     contentStyle={{
@@ -311,11 +346,11 @@ export default function AnalyticsTab() {
                   <Legend />
                   <Area
                     type="monotone"
-                    dataKey="revenue"
+                    dataKey="pendapatan"
                     stroke="#AF1740"
                     fill="url(#colorRevenue)"
                     strokeWidth={2}
-                    name="Revenue"
+                    name="Pendapatan"
                   />
                   <defs>
                     <linearGradient
@@ -339,14 +374,14 @@ export default function AnalyticsTab() {
           </CardContent>
         </Card>
 
-        {/* Environmental Impact Chart */}
+        {/* Grafik Dampak Lingkungan */}
         <Card className="border-2 border-[#DE7C7D]/30 dark:border-gray-600 rounded-xl lg:rounded-2xl shadow-lg bg-gradient-to-br from-white to-[#CC2B52]/10 dark:from-gray-800 dark:to-[#CC2B52]/20">
           <CardHeader className="dark:bg-gray-800/50">
             <div className="flex items-center justify-between">
               <CardTitle className="text-[#740938] dark:text-white text-base sm:text-lg">
                 Dampak Lingkungan
               </CardTitle>
-              <Badge variant="secondary" className="text-xs">
+              <Badge variant="secondary" className="text-xs text-white">
                 Bulanan
               </Badge>
             </div>
@@ -361,7 +396,7 @@ export default function AnalyticsTab() {
                     opacity={0.3}
                   />
                   <XAxis
-                    dataKey="month"
+                    dataKey="bulan"
                     stroke="#740938"
                     fontSize={12}
                     className="dark:stroke-white"
@@ -374,16 +409,16 @@ export default function AnalyticsTab() {
                   <Tooltip
                     formatter={(value: number, name: string) => [
                       formatNumber(value) +
-                        (name === "foodSaved"
+                        (name === "makananDiselamatkan"
                           ? " kg"
-                          : name === "co2Saved"
+                          : name === "co2Dikurangi"
                           ? " kg CO₂"
                           : " L"),
-                      name === "foodSaved"
-                        ? "Food Saved"
-                        : name === "co2Saved"
-                        ? "CO₂ Saved"
-                        : "Water Saved",
+                      name === "makananDiselamatkan"
+                        ? "Makanan Diselamatkan"
+                        : name === "co2Dikurangi"
+                        ? "CO₂ Dikurangi"
+                        : "Air Dihemat",
                     ]}
                     labelStyle={{ color: "#740938" }}
                     contentStyle={{
@@ -395,19 +430,19 @@ export default function AnalyticsTab() {
                   <Legend />
                   <Line
                     type="monotone"
-                    dataKey="foodSaved"
+                    dataKey="makananDiselamatkan"
                     stroke="#CC2B52"
                     strokeWidth={3}
                     dot={{ fill: "#CC2B52", strokeWidth: 2, r: 4 }}
-                    name="Food Saved (kg)"
+                    name="Makanan Diselamatkan (kg)"
                   />
                   <Line
                     type="monotone"
-                    dataKey="co2Saved"
+                    dataKey="co2Dikurangi"
                     stroke="#AF1740"
                     strokeWidth={3}
                     dot={{ fill: "#AF1740", strokeWidth: 2, r: 4 }}
-                    name="CO₂ Saved (kg)"
+                    name="CO₂ Dikurangi (kg)"
                   />
                 </LineChart>
               </ResponsiveContainer>
@@ -415,7 +450,7 @@ export default function AnalyticsTab() {
           </CardContent>
         </Card>
 
-        {/* Product Categories Pie Chart */}
+        {/* Grafik Pie Kategori Produk */}
         <Card className="border-2 border-[#DE7C7D]/30 dark:border-gray-600 rounded-xl lg:rounded-2xl shadow-lg bg-gradient-to-br from-white to-[#AF1740]/10 dark:from-gray-800 dark:to-[#AF1740]/20">
           <CardHeader className="dark:bg-gray-800/50">
             <CardTitle className="text-[#740938] dark:text-white text-base sm:text-lg">
@@ -431,19 +466,19 @@ export default function AnalyticsTab() {
                     cx="50%"
                     cy="50%"
                     labelLine={false}
-                    label={({ name, percent }) =>
-                      `${name} ${((percent ?? 0) * 100).toFixed(0)}%`
+                    label={({ nama, percent }) =>
+                      `${nama} ${((percent ?? 0) * 100).toFixed(0)}%`
                     }
                     outerRadius={80}
                     fill="#8884d8"
-                    dataKey="value"
+                    dataKey="nilai"
                   >
                     {categoryData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={entry.color} />
+                      <Cell key={`cell-${index}`} fill={entry.warna} />
                     ))}
                   </Pie>
                   <Tooltip
-                    formatter={(value: number) => [`${value}%`, "Percentage"]}
+                    formatter={(value: number) => [`${value}%`, "Persentase"]}
                     contentStyle={{
                       backgroundColor: "rgba(255, 255, 255, 0.95)",
                       border: "1px solid #DE7C7D",
@@ -456,7 +491,7 @@ export default function AnalyticsTab() {
           </CardContent>
         </Card>
 
-        {/* Weekly Performance */}
+        {/* Performa Mingguan */}
         <Card className="border-2 border-[#DE7C7D]/30 dark:border-gray-600 rounded-xl lg:rounded-2xl shadow-lg bg-gradient-to-br from-white to-[#740938]/10 dark:from-gray-800 dark:to-[#740938]/20">
           <CardHeader className="dark:bg-gray-800/50">
             <CardTitle className="text-[#740938] dark:text-white text-base sm:text-lg">
@@ -473,7 +508,7 @@ export default function AnalyticsTab() {
                     opacity={0.3}
                   />
                   <XAxis
-                    dataKey="day"
+                    dataKey="hari"
                     stroke="#740938"
                     fontSize={12}
                     className="dark:stroke-white"
@@ -485,10 +520,10 @@ export default function AnalyticsTab() {
                   />
                   <Tooltip
                     formatter={(value: number, name: string) => [
-                      name === "revenue"
+                      name === "pendapatan"
                         ? formatCurrency(value)
                         : formatNumber(value),
-                      name === "revenue" ? "Revenue" : "Orders",
+                      name === "pendapatan" ? "Pendapatan" : "Pesanan",
                     ]}
                     labelStyle={{ color: "#740938" }}
                     contentStyle={{
@@ -499,10 +534,10 @@ export default function AnalyticsTab() {
                   />
                   <Legend />
                   <Bar
-                    dataKey="orders"
+                    dataKey="pesanan"
                     fill="#740938"
                     radius={[4, 4, 0, 0]}
-                    name="Orders"
+                    name="Pesanan"
                   />
                 </BarChart>
               </ResponsiveContainer>
@@ -511,14 +546,14 @@ export default function AnalyticsTab() {
         </Card>
       </div>
 
-      {/* Summary Cards */}
+      {/* Kartu Ringkasan */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
         <Card className="border-2 border-green-200 dark:border-green-800 rounded-xl shadow-lg bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20">
           <CardContent className="p-4 sm:p-6">
             <div className="text-center">
               <Leaf className="w-8 h-8 sm:w-10 sm:h-10 text-green-600 mx-auto mb-2" />
               <h3 className="text-lg sm:text-xl font-bold text-green-800 dark:text-green-300">
-                {formatNumber(keyMetrics.co2Reduction)} kg
+                {formatNumber(keyMetrics.penguranganCO2)} kg
               </h3>
               <p className="text-sm text-green-600 dark:text-green-400">
                 CO₂ Dikurangi
@@ -532,7 +567,7 @@ export default function AnalyticsTab() {
             <div className="text-center">
               <Heart className="w-8 h-8 sm:w-10 sm:h-10 text-blue-600 mx-auto mb-2" />
               <h3 className="text-lg sm:text-xl font-bold text-blue-800 dark:text-blue-300">
-                {formatNumber(keyMetrics.waterSaved)} L
+                {formatNumber(keyMetrics.airDihemat)} L
               </h3>
               <p className="text-sm text-blue-600 dark:text-blue-400">
                 Air Dihemat
@@ -546,10 +581,10 @@ export default function AnalyticsTab() {
             <div className="text-center">
               <TrendingUp className="w-8 h-8 sm:w-10 sm:h-10 text-purple-600 mx-auto mb-2" />
               <h3 className="text-lg sm:text-xl font-bold text-purple-800 dark:text-purple-300">
-                {formatCurrency(keyMetrics.avgOrderValue)}
+                {formatCurrency(keyMetrics.rataNilaiPesanan)}
               </h3>
               <p className="text-sm text-purple-600 dark:text-purple-400">
-                Rata-rata Order
+                Rata-rata Pesanan
               </p>
             </div>
           </CardContent>

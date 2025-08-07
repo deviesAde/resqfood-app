@@ -23,7 +23,7 @@ export function ProductCard({ product }: ProductCardProps) {
   const isUrgent = product.expiryDays <= 1 && !isExpired;
   return (
     <Card
-      className={`group hover:shadow-2xl transition-all duration-500 border-2 rounded-2xl overflow-hidden bg-white dark:bg-gray-800 hover:scale-105 ${
+      className={`group hover:shadow-2xl transition-all duration-500 border-2 rounded-2xl overflow-hidden bg-white dark:bg-gray-800 hover:scale-105 w-full max-w-md sm:max-w-lg md:max-w-xl ${
         isExpired
           ? "border-red-300 dark:border-red-700 opacity-75"
           : isUrgent
@@ -47,14 +47,14 @@ export function ProductCard({ product }: ProductCardProps) {
             <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
               <div className="text-center text-white">
                 <AlertTriangle className="w-8 h-8 mx-auto mb-2 text-red-400" />
-                <span className="font-bold text-sm">EXPIRED</span>
+                <span className="font-bold text-sm">KEDALUWARSA</span>
               </div>
             </div>
           )}
           {isUrgent && !isExpired && (
             <Badge className="absolute top-3 right-3 bg-[#CC2B52] text-white animate-pulse font-bold text-xs sm:text-sm">
               <Clock className="w-3 h-3 mr-1" />
-              TODAY ONLY
+              KHUSUS HARI INI
             </Badge>
           )}
           {!isExpired && (
@@ -63,7 +63,7 @@ export function ProductCard({ product }: ProductCardProps) {
             </Badge>
           )}
           <div className="absolute bottom-3 left-3 bg-black/50 backdrop-blur-sm rounded-full px-2 py-1">
-            <span className="text-white text-xs">{product.sold} sold</span>
+            <span className="text-white text-xs">{product.sold} terjual</span>
           </div>
         </div>
         <div className="p-4">
@@ -99,18 +99,18 @@ export function ProductCard({ product }: ProductCardProps) {
               {product.seller} • {product.location}
             </span>
           </div>
-          {/* Freshness Information */}
+          {/* Informasi Kesegaran */}
           <div className="mb-4 p-3 bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20 rounded-xl border border-green-200 dark:border-green-800">
             <div className="flex items-center space-x-2 mb-2">
               <Utensils className="w-4 h-4 text-green-600 dark:text-green-400" />
               <span className="text-sm font-semibold text-green-700 dark:text-green-300">
-                Freshness Info
+                Informasi Kesegaran
               </span>
             </div>
             <div className="space-y-1">
               <div className="flex items-center justify-between text-xs">
                 <span className="text-gray-600 dark:text-gray-400">
-                  Best by:
+                  Baik digunakan sebelum:
                 </span>
                 <span
                   className={`font-medium ${
@@ -124,7 +124,7 @@ export function ProductCard({ product }: ProductCardProps) {
               </div>
               <div className="flex items-center justify-between text-xs">
                 <span className="text-gray-600 dark:text-gray-400">
-                  Good for:
+                  Baik untuk:
                 </span>
                 <span
                   className={`font-medium ${
@@ -152,50 +152,52 @@ export function ProductCard({ product }: ProductCardProps) {
               Rp{product.originalPrice.toLocaleString("id-ID")}
             </span>
           </div>
-          {/* Action Buttons */}
+          {/* Tombol Aksi */}
           {isExpired ? (
             <Button
               disabled
               className="w-full bg-gray-400 text-gray-600 rounded-2xl h-10 sm:h-12 font-semibold cursor-not-allowed text-sm sm:text-base"
             >
               <AlertTriangle className="w-4 h-4 mr-2" />
-              Expired
+              Kedaluwarsa
             </Button>
           ) : (
             <div className="space-y-2">
-              {/* Primary Actions Row */}
+              {/* Baris Aksi Utama */}
               <div className="flex flex-col space-y-2 sm:flex-row sm:space-x-2 sm:space-y-0">
                 <Link href="/cart" className="flex-1">
                   <Button
-                    className={`w-full rounded-xl h-10 font-semibold shadow-lg hover:shadow-xl transition-all text-xs sm:text-sm md:text-base ${
+                    className={`w-full rounded-xl h-10 sm:h-11 font-semibold shadow-lg hover:shadow-xl transition-all text-xs sm:text-sm ${
                       isUrgent
                         ? "bg-gradient-to-r from-[#CC2B52] to-[#AF1740] hover:from-[#AF1740] hover:to-[#740938] text-white"
                         : "bg-gradient-to-r from-[#AF1740] to-[#CC2B52] hover:from-[#740938] hover:to-[#AF1740] text-white"
                     }`}
                   >
-                    <ShoppingCart className="w-4 h-4 mr-1" />
-                    Add to Cart
+                    <ShoppingCart className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+                    <span className="whitespace-nowrap">
+                      Tambah ke Keranjang
+                    </span>
                   </Button>
                 </Link>
                 <Button
-                  className={`flex-1 rounded-xl h-10 font-semibold shadow-lg hover:shadow-xl transition-all text-xs sm:text-sm md:text-base ${
+                  className={`w-full flex-1 rounded-xl h-10 sm:h-11 font-semibold shadow-lg hover:shadow-xl transition-all text-xs sm:text-sm ${
                     isUrgent
                       ? "bg-gradient-to-r from-[#740938] to-[#AF1740] hover:from-[#CC2B52] hover:to-[#AF1740] text-white"
                       : "bg-gradient-to-r from-[#740938] to-[#AF1740] hover:from-[#AF1740] hover:to-[#CC2B52] text-white"
                   }`}
                 >
-                  <Zap className="w-4 h-4 mr-1" />
-                  Buy Now
+                  <Zap className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+                  <span className="whitespace-nowrap">Beli Sekarang</span>
                 </Button>
               </div>
-              {/* View Details Button */}
+              {/* Tombol Lihat Detail */}
               <Link href={`/product/${product.id}`} className="block">
                 <Button
                   variant="outline"
-                  className="w-full border-[#AF1740] text-[#AF1740] hover:bg-[#AF1740] hover:text-white rounded-xl h-10 font-medium bg-transparent dark:border-[#DE7C7D] dark:text-[#DE7C7D] dark:hover:bg-[#DE7C7D] dark:hover:text-gray-900 text-xs sm:text-sm md:text-base"
+                  className="w-full border-[#AF1740] text-[#AF1740] hover:bg-[#AF1740] hover:text-white rounded-xl h-10 font-medium bg-transparent dark:border-[#DE7C7D] dark:text-[#DE7C7D] dark:hover:bg-[#DE7C7D] dark:hover:text-gray-900 text-xs sm:text-sm"
                 >
                   <Info className="w-4 h-4 mr-2" />
-                  View Details
+                  Lihat Detail
                 </Button>
               </Link>
             </div>

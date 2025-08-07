@@ -36,19 +36,19 @@ export function ThemeToggle() {
           onClick={() => setTheme("light")}
           className="dark:hover:bg-gray-700 dark:text-gray-300"
         >
-          Light
+          Terang
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => setTheme("dark")}
           className="dark:hover:bg-gray-700 dark:text-gray-300"
         >
-          Dark
+          Gelap
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => setTheme("system")}
           className="dark:hover:bg-gray-700 dark:text-gray-300"
         >
-          System
+          Sistem
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

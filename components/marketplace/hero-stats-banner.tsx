@@ -19,7 +19,8 @@ export function HeroStatsBanner({
               🌍 Rescue Food Marketplace
             </h1>
             <p className="text-[#DE7C7D] text-base sm:text-lg mb-4 sm:mb-6">
-              Join thousands of food heroes saving the planet one meal at a time
+              Temukan dan selamatkan makanan berkualitas dari restoran lokal
+              dengan harga terjangkau!
             </p>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
               <div className="bg-white/20 backdrop-blur-sm rounded-xl p-3 sm:p-4">
@@ -30,7 +31,7 @@ export function HeroStatsBanner({
                   {availableItemsCount}
                 </div>
                 <div className="text-[#DE7C7D] text-xs sm:text-sm">
-                  Items Available
+                  Produk Tersedia
                 </div>
               </div>
               <div className="bg-white/20 backdrop-blur-sm rounded-xl p-3 sm:p-4">
@@ -39,7 +40,7 @@ export function HeroStatsBanner({
                 </div>
                 <div className="text-xl sm:text-2xl font-bold">52%</div>
                 <div className="text-[#DE7C7D] text-xs sm:text-sm">
-                  Avg. Discount
+                  Rata-rata Diskon
                 </div>
               </div>
               <div className="bg-white/20 backdrop-blur-sm rounded-xl p-3 sm:p-4">
@@ -50,7 +51,7 @@ export function HeroStatsBanner({
                   {urgentItemsCount}
                 </div>
                 <div className="text-[#DE7C7D] text-xs sm:text-sm">
-                  Urgent Items
+                  Produk Mendesak
                 </div>
               </div>
               <div className="bg-white/20 backdrop-blur-sm rounded-xl p-3 sm:p-4">
@@ -59,7 +60,7 @@ export function HeroStatsBanner({
                 </div>
                 <div className="text-xl sm:text-2xl font-bold">2.8K</div>
                 <div className="text-[#DE7C7D] text-xs sm:text-sm">
-                  Happy Customers
+                  Pembeli Puas
                 </div>
               </div>
             </div>

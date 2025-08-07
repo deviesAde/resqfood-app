@@ -34,7 +34,7 @@ export function CartNavigation({ totalItems }: CartNavigationProps) {
             </Link>
             <Badge className="bg-gradient-to-r from-[#AF1740] to-[#CC2B52] text-white ml-2 dark:from-[#FF4D6D] dark:to-[#CC2B52]">
               <ShoppingBag className="w-3 h-3 mr-1" />
-              Cart ({totalItems})
+              Keranjang ({totalItems})
             </Badge>
           </div>
           <div className="flex items-center space-x-4">
@@ -48,7 +48,7 @@ export function CartNavigation({ totalItems }: CartNavigationProps) {
                 variant="outline"
                 className="border-[#740938] text-[#740938] hover:bg-[#740938] hover:text-white bg-transparent rounded-full dark:border-[#FFC0CB] dark:text-[#FFC0CB] dark:hover:bg-[#FFC0CB] dark:hover:text-gray-900"
               >
-                Continue Shopping
+                Lanjutkan Belanja
               </Button>
             </Link>
           </div>

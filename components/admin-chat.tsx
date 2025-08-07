@@ -55,7 +55,7 @@ const adminContacts: Contact[] = [
   {
     id: "1",
     name: "Golden Crust Bakery",
-    avatar: "GB",
+    avatar: "GC",
     lastMessage: "Butuh bantuan verifikasi produk",
     timestamp: "sekarang",
     unreadCount: 3,
@@ -66,8 +66,8 @@ const adminContacts: Contact[] = [
   },
   {
     id: "2",
-    name: "Sarah Johnson",
-    avatar: "SJ",
+    name: "Dewi Lestari",
+    avatar: "DL",
     lastMessage: "Masalah pembayaran pesanan saya",
     timestamp: "2m",
     unreadCount: 1,
@@ -90,8 +90,8 @@ const adminContacts: Contact[] = [
   },
   {
     id: "4",
-    name: "Fresh Valley Farm",
-    avatar: "FV",
+    name: "Dapur Fanny",
+    avatar: "DF",
     lastMessage: "Pertanyaan tentang tarif komisi",
     timestamp: "1j",
     unreadCount: 2,
@@ -102,7 +102,7 @@ const adminContacts: Contact[] = [
   },
   {
     id: "5",
-    name: "Mike Chen",
+    name: "Mila Citra",
     avatar: "MC",
     lastMessage: "Aplikasi crash saat upload foto",
     timestamp: "3j",

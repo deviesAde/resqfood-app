@@ -37,10 +37,10 @@ export function SettingsTab({ profileData, setProfileData }: SettingsTabProps) {
     <div className="space-y-8">
       <div>
         <h2 className="text-3xl font-bold text-[#740938] dark:text-gray-50">
-          Account Settings
+          Pengaturan Akun
         </h2>
         <p className="text-gray-600 dark:text-gray-400">
-          Manage your preferences and account security
+          Kelola preferensi dan keamanan akun Anda
         </p>
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -49,17 +49,17 @@ export function SettingsTab({ profileData, setProfileData }: SettingsTabProps) {
           <CardHeader>
             <CardTitle className="text-[#740938] flex items-center dark:text-gray-50">
               <Bell className="w-5 h-5 mr-2" />
-              Notifications
+              Notifikasi
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="flex items-center justify-between">
               <div>
                 <h4 className="font-semibold text-[#740938] dark:text-gray-50">
-                  Push Notifications
+                  Notifikasi Push
                 </h4>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Get notified about urgent items and deals
+                  Dapatkan pemberitahuan tentang item mendesak dan penawaran
                 </p>
               </div>
               <input
@@ -73,10 +73,10 @@ export function SettingsTab({ profileData, setProfileData }: SettingsTabProps) {
             <div className="flex items-center justify-between">
               <div>
                 <h4 className="font-semibold text-[#740938] dark:text-gray-50">
-                  Email Newsletter
+                  Buletin Email
                 </h4>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Weekly updates and tips
+                  Pembaruan dan tips mingguan
                 </p>
               </div>
               <input
@@ -90,10 +90,10 @@ export function SettingsTab({ profileData, setProfileData }: SettingsTabProps) {
             <div className="flex items-center justify-between">
               <div>
                 <h4 className="font-semibold text-[#740938] dark:text-gray-50">
-                  Recommendations
+                  Rekomendasi
                 </h4>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Personalized food suggestions
+                  Saran makanan yang dipersonalisasi
                 </p>
               </div>
               <input
@@ -111,7 +111,7 @@ export function SettingsTab({ profileData, setProfileData }: SettingsTabProps) {
           <CardHeader>
             <CardTitle className="text-[#740938] flex items-center dark:text-gray-50">
               <Shield className="w-5 h-5 mr-2" />
-              Security
+              Keamanan
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -119,19 +119,19 @@ export function SettingsTab({ profileData, setProfileData }: SettingsTabProps) {
               variant="outline"
               className="w-full border-[#740938] text-[#740938] hover:bg-[#740938] hover:text-white bg-transparent rounded-full justify-start dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white"
             >
-              Change Password
+              Ubah Kata Sandi
             </Button>
             <Button
               variant="outline"
               className="w-full border-[#DE7C7D]/30 text-gray-700 hover:bg-[#DE7C7D]/20 rounded-full justify-start bg-transparent dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white"
             >
-              Two-Factor Authentication
+              Autentikasi Dua Faktor
             </Button>
             <Button
               variant="outline"
               className="w-full border-[#DE7C7D]/30 text-gray-700 hover:bg-[#DE7C7D]/20 rounded-full justify-start bg-transparent dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white"
             >
-              Download Data
+              Unduh Data
             </Button>
           </CardContent>
         </Card>
@@ -141,7 +141,7 @@ export function SettingsTab({ profileData, setProfileData }: SettingsTabProps) {
           <CardHeader>
             <CardTitle className="text-[#740938] flex items-center dark:text-gray-50">
               <CreditCard className="w-5 h-5 mr-2" />
-              Payment Methods
+              Metode Pembayaran
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -156,7 +156,7 @@ export function SettingsTab({ profileData, setProfileData }: SettingsTabProps) {
                       •••• •••• •••• 4242
                     </div>
                     <div className="text-sm text-gray-600 dark:text-gray-400">
-                      Expires 12/26
+                      Berakhir 12/26
                     </div>
                   </div>
                 </div>
@@ -167,7 +167,7 @@ export function SettingsTab({ profileData, setProfileData }: SettingsTabProps) {
               variant="outline"
               className="w-full border-[#740938] text-[#740938] hover:bg-[#740938] hover:text-white bg-transparent rounded-full dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white"
             >
-              Add Payment Method
+              Tambah Metode Pembayaran
             </Button>
           </CardContent>
         </Card>
@@ -176,18 +176,18 @@ export function SettingsTab({ profileData, setProfileData }: SettingsTabProps) {
         <Card className="border-2 border-[#DE7C7D]/30 rounded-2xl shadow-lg bg-gradient-to-br from-[#740938] via-[#AF1740] to-[#CC2B52] text-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-700 dark:border-gray-600">
           <CardContent className="p-6 text-center">
             <Gift className="w-12 h-12 mx-auto mb-4 text-[#DE7C7D] dark:text-gray-400" />
-            <h3 className="text-lg font-bold mb-2">Invite Friends</h3>
+            <h3 className="text-lg font-bold mb-2">Undang Teman</h3>
             <p className="text-[#DE7C7D] text-sm mb-4 dark:text-gray-300">
               Bagikan teman Anda dan dapatkan diskon untuk pembelian berikutnya!
             </p>
             <div className="bg-white/20 rounded-lg p-3 mb-4">
               <div className="text-sm text-[#DE7C7D] mb-1 dark:text-gray-300">
-              Kode Anda
+                Kode Anda
               </div>
               <div className="font-bold text-lg">AGB2025</div>
             </div>
             <Button className="bg-white text-[#740938] hover:bg-[#DE7C7D]/20 rounded-full px-6 font-semibold shadow-lg w-full">
-              Share Code
+              Bagikan Kode
             </Button>
           </CardContent>
         </Card>

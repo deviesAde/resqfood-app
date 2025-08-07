@@ -37,13 +37,13 @@ export function Header({ searchTerm, setSearchTerm }: HeaderProps) {
     <nav className="bg-white/95 dark:bg-gray-900/95 backdrop-blur-md shadow-sm border-b border-[#DE7C7D]/30 dark:border-gray-700 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Left Section: Logo and Back Button */}
+          {/* Bagian Kiri: Logo dan Tombol Kembali */}
           <div className="flex items-center space-x-2 sm:space-x-4">
             <Link href="/" className="flex items-center space-x-2 group">
               <ArrowLeft className="w-5 h-5 text-[#740938] dark:text-[#DE7C7D] group-hover:text-[#AF1740] transition-colors" />
               <Image
                 src="/logo/logo.png"
-                alt="resQfood Logo"
+                alt="Logo resQfood"
                 width={32}
                 height={32}
                 className="rounded-lg group-hover:scale-105 transition-transform"
@@ -56,29 +56,29 @@ export function Header({ searchTerm, setSearchTerm }: HeaderProps) {
               Marketplace
             </Badge>
           </div>
-          {/* Center Search Bar (Hidden on small screens, visible on md and up) */}
+          {/* Pencarian Tengah (Tersembunyi di layar kecil, terlihat di md ke atas) */}
           <div className="flex-1 max-w-2xl mx-4 sm:mx-8 hidden md:block">
             <div className="relative">
               <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
               <Input
-                placeholder="Search for rescued food..."
+                placeholder="Cari produk, kategori, atau penjual..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="pl-12 pr-12 h-12 rounded-full border-2 border-[#DE7C7D]/30 focus:border-[#AF1740] bg-[#DE7C7D]/10 dark:bg-gray-800/50 text-lg shadow-sm w-full"
               />
-              {/* Desktop Search Button with icon */}
+              {/* Tombol Pencarian Desktop dengan ikon */}
               <Button
-                size="icon" // Make it an icon button
-                className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-[#AF1740] to-[#CC2B52] hover:from-[#740938] hover:to-[#AF1740] text-white rounded-full w-8 h-8" // Adjusted size
+                size="icon"
+                className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-[#AF1740] to-[#CC2B52] hover:from-[#740938] hover:to-[#AF1740] text-white rounded-full w-8 h-8"
               >
-                <Search className="w-4 h-4" /> {/* Magnifying glass icon */}
-                <span className="sr-only">Search</span>
+                <Search className="w-4 h-4" />
+                <span className="sr-only">Cari</span>
               </Button>
             </div>
           </div>
-          {/* Right Section: Desktop Navigation / Mobile Menu Trigger */}
+          {/* Bagian Kanan: Navigasi Desktop / Trigger Menu Mobile */}
           <div className="flex items-center space-x-2 sm:space-x-4">
-            {/* Desktop Navigation (Hidden on md and down, visible on md and up) */}
+            {/* Navigasi Desktop (Tersembunyi di md ke bawah, terlihat di md ke atas) */}
             <div className="hidden md:flex items-center space-x-2 sm:space-x-4">
               <NotificationDropdown
                 notifications={[]}
@@ -93,56 +93,55 @@ export function Header({ searchTerm, setSearchTerm }: HeaderProps) {
                       {cartItemCount}
                     </span>
                   )}
-                  <span className="sr-only">Cart</span>
+                  <span className="sr-only">Keranjang</span>
                 </Button>
               </Link>
               <UserMenu cartItemCount={cartItemCount} />
               <Button className="bg-gradient-to-r from-[#AF1740] to-[#CC2B52] hover:from-[#740938] hover:to-[#AF1740] text-white rounded-full px-4 sm:px-6 shadow-lg text-sm sm:text-base">
-                <Link href="/auth/register">Become Seller</Link>
+                <Link href="/auth/register">Jadi Penjual</Link>
               </Button>
               <ThemeToggle />
             </div>
-            {/* Mobile Menu Trigger (Visible on md and down) */}
+            {/* Trigger Menu Mobile (Terlihat di md ke bawah) */}
             <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
               <SheetTrigger asChild className="md:hidden">
                 <Button variant="ghost" size="icon">
                   <Menu className="w-6 h-6 text-[#740938] dark:text-[#DE7C7D]" />
-                  <span className="sr-only">Toggle menu</span>
+                  <span className="sr-only">Buka menu</span>
                 </Button>
               </SheetTrigger>
               <SheetContent
                 side="right"
                 className="w-[250px] sm:w-[300px] bg-white dark:bg-gray-900 p-4"
               >
-                <SheetTitle className="sr-only">Mobile Menu</SheetTitle>
+                <SheetTitle className="sr-only">Menu Mobile</SheetTitle>
                 <div className="flex flex-col items-start space-y-6 pt-8">
-                  {/* Mobile Search Bar inside Sheet */}
+                  {/* Pencarian Mobile dalam Sheet */}
                   <div className="relative w-full mb-4">
                     <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                     <Input
-                      placeholder="Search..."
+                      placeholder="Cari..."
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
                       className="pl-10 pr-10 h-10 rounded-full border-2 border-[#DE7C7D]/30 focus:border-[#AF1740] bg-[#DE7C7D]/10 dark:bg-gray-800/50 text-sm w-full"
                     />
-                    {/* Mobile Search Button with icon */}
+                    {/* Tombol Pencarian Mobile dengan ikon */}
                     <Button
-                      size="icon" // Make it an icon button
-                      className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-[#AF1740] to-[#CC2B52] hover:from-[#740938] hover:to-[#AF1740] text-white rounded-full w-7 h-7" // Adjusted size
+                      size="icon"
+                      className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-[#AF1740] to-[#CC2B52] hover:from-[#740938] hover:to-[#AF1740] text-white rounded-full w-7 h-7"
                     >
-                      <Search className="w-4 h-4" />{" "}
-                      {/* Magnifying glass icon */}
-                      <span className="sr-only">Search</span>
+                      <Search className="w-4 h-4" />
+                      <span className="sr-only">Cari</span>
                     </Button>
                   </div>
-                  {/* Notifications Link with Badge */}
+                  {/* Tautan Notifikasi dengan Badge */}
                   <Link
                     href="/notifications"
                     className="flex items-center w-full text-gray-700 dark:text-gray-300 hover:text-[#740938] dark:hover:text-[#DE7C7D] transition-colors text-base font-medium"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     <Bell className="w-5 h-5 mr-3" />
-                    Notifications
+                    Notifikasi
                     {unreadNotificationCount > 0 && (
                       <Badge className="ml-auto bg-[#CC2B52] text-white text-xs px-1.5 py-0.5 rounded-full min-w-[18px] h-4 flex items-center justify-center animate-pulse">
                         {unreadNotificationCount > 9
@@ -151,48 +150,48 @@ export function Header({ searchTerm, setSearchTerm }: HeaderProps) {
                       </Badge>
                     )}
                   </Link>
-                  {/* Profile Link */}
+                  {/* Tautan Profil */}
                   <Link
                     href="/profile"
                     className="flex items-center w-full text-gray-700 dark:text-gray-300 hover:text-[#740938] dark:hover:text-[#DE7C7D] transition-colors text-base font-medium"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     <User className="w-5 h-5 mr-3" />
-                    Profile
+                    Profil Saya
                   </Link>
-                  {/* Cart Link (already present in mobile menu) */}
+                  {/* Tautan Keranjang */}
                   <Link
                     href="/cart"
                     className="flex items-center w-full text-gray-700 dark:text-gray-300 hover:text-[#740938] dark:hover:text-[#DE7C7D] transition-colors text-base font-medium"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     <ShoppingCart className="w-5 h-5 mr-3" />
-                    Cart
+                    Keranjang
                     {cartItemCount > 0 && (
                       <Badge className="ml-auto bg-[#CC2B52] text-white text-xs px-1.5 py-0.5 rounded-full min-w-[18px] h-4 flex items-center justify-center animate-pulse">
                         {cartItemCount > 9 ? "9+" : cartItemCount}
                       </Badge>
                     )}
                   </Link>
-                  {/* Logout Button */}
+                  {/* Tombol Keluar */}
                   <Button
                     variant="ghost"
                     className="w-full justify-start text-gray-700 dark:text-gray-300 hover:text-[#740938] dark:hover:text-[#DE7C7D] transition-colors text-base font-medium"
                     onClick={() => {
-                      // Handle logout logic here
+                      // Logika logout di sini
                       setIsMenuOpen(false);
                     }}
                   >
                     <LogOut className="w-5 h-5 mr-3" />
-                    Log out
+                    Keluar
                   </Button>
-                  {/* Become Seller Button */}
+                  {/* Tombol Jadi Penjual */}
                   <Button className="w-full bg-gradient-to-r from-[#AF1740] to-[#CC2B52] hover:from-[#740938] hover:to-[#AF1740] text-white rounded-full px-6 shadow-lg text-base">
                     <Link
                       href="/auth/register"
                       onClick={() => setIsMenuOpen(false)}
                     >
-                      Become Seller
+                      Jadi Penjual
                     </Link>
                   </Button>
                 </div>

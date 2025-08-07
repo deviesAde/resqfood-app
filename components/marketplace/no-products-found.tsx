@@ -14,16 +14,16 @@ export function NoProductsFound({ onClearFilters }: NoProductsFoundProps) {
         <Search className="w-12 h-12 sm:w-16 sm:h-16 text-[#740938] dark:text-[#DE7C7D]" />
       </div>
       <h3 className="text-xl sm:text-2xl font-bold text-[#740938] dark:text-[#DE7C7D] mb-2 sm:mb-4">
-        No products found
+        Tidak Ada Produk Ditemukan
       </h3>
       <p className="text-gray-600 dark:text-gray-400 text-base sm:text-lg mb-4 sm:mb-6">
-        Try adjusting your search or filters
+        Silakan coba pencarian lain atau atur ulang filter.
       </p>
       <Button
         onClick={onClearFilters}
         className="bg-gradient-to-r from-[#AF1740] to-[#CC2B52] hover:from-[#740938] hover:to-[#AF1740] text-white rounded-full px-6 sm:px-8 text-sm sm:text-base"
       >
-        Clear Filters
+        Atur Ulang Filter
       </Button>
     </div>
   );

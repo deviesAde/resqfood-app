@@ -28,7 +28,7 @@ export function ProfileHeader() {
               </span>
             </Link>
             <Badge className="bg-gradient-to-r from-[#AF1740] to-[#CC2B52] text-white ml-2">
-              Profile
+              Profil
             </Badge>
           </div>
           <div className="flex items-center space-x-2 sm:space-x-4">
@@ -60,7 +60,7 @@ export function ProfileHeader() {
                 <span className="md:hidden">
                   <ShoppingBag className="w-5 h-5" />
                 </span>
-                <span className="hidden md:block">Browse Food</span>
+                <span className="hidden md:block">Cari Produk</span>
               </Button>
             </Link>
             <ThemeToggle />

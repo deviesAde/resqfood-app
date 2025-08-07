@@ -31,7 +31,7 @@ export default function FloatingLiveChat() {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: 1,
-      text: "Hi there! 👋 Welcome to resQfood! I'm Dhiya, your dedicated food rescue specialist. I'm here to help you save food, save money, and make a real impact! How can I assist you today?",
+      text: "Halo! Saya Dhiya, Spesialis Penyelamatan Makanan Anda. Ada yang bisa saya bantu hari ini?",
       sender: "agent",
       timestamp: new Date(),
       agentName: "Dhiya",
@@ -92,66 +92,67 @@ export default function FloatingLiveChat() {
 
     if (
       message.includes("password") ||
+      message.includes("kata sandi") ||
       message.includes("login") ||
-      message.includes("sign in")
+      message.includes("masuk")
     ) {
-      return "I can definitely help with login issues! 🔐 Here are your options:\n\n• Use the 'Forgot Password' link on the login page\n• I can guide you through the reset process\n• Check if Caps Lock is on\n• Try clearing your browser cache\n\nWould you like me to walk you through any of these steps?";
+      return "Baik! Mari kita atasi masalah masuk Anda. 🔐\n\n**Langkah-langkah untuk mengatur ulang kata sandi:**\n1. Kunjungi halaman masuk resQfood\n2. Klik 'Lupa Kata Sandi?'\n3. Masukkan email Anda\n4. Periksa email untuk tautan pengaturan ulang\n5. Ikuti instruksi untuk membuat kata sandi baru\n\nJika Anda masih mengalami masalah, saya di sini untuk membantu!";
     }
 
     if (
-      message.includes("account") ||
+      message.includes("akun") ||
+      message.includes("daftar") ||
       message.includes("register") ||
-      message.includes("sign up") ||
-      message.includes("join")
+      message.includes("bergabung")
     ) {
-      return "Awesome! Creating your resQfood account is super easy! 🎉\n\n✨ **Welcome Bonus**: Get 20% off your first food rescue!\n\n**Quick steps:**\n1. Click 'Join resQfood'\n2. Fill out the simple form\n3. Verify your email\n4. Start saving food & money!\n\nNeed help with any specific part of the registration?";
+      return "Bagus! Mari kita buat akun Anda. 📝\n\n**Cara membuat akun di resQfood:**\n1. Kunjungi halaman pendaftaran\n2. Isi formulir dengan data Anda\n3. Verifikasi email Anda\n4. Mulai jelajahi makanan yang bisa diselamatkan\n\nProsesnya cepat dan mudah!";
     }
 
     if (
-      message.includes("food") ||
-      message.includes("rescue") ||
-      message.includes("how") ||
-      message.includes("work")
+      message.includes("makanan") ||
+      message.includes("selamatkan") ||
+      message.includes("bagaimana") ||
+      message.includes("kerja")
     ) {
-      return "Great question! Food rescue is our passion! 🥗💚\n\n**Here's how it works:**\n• We partner with local stores & restaurants\n• They offer surplus food at 50-70% off\n• You rescue it before it goes to waste\n• Everyone wins - you save money, planet stays happy!\n\n**Your impact so far:** 2.3M+ meals rescued by our community!\n\nWant to know about specific food categories or locations?";
+      return "Pertama-tama, terima kasih telah tertarik dengan penyelamatan makanan! 🥗\n\n**Cara kerja resQfood:**\n1. **Daftar gratis:** Buat akun dalam beberapa detik\n2. **Jelajahi penawaran:** Temukan produk yang hampir kadaluarsa dari bisnis lokal\n3. **Pesan dengan harga diskon:** Dapatkan makanan berkualitas dengan harga terjangkau\n4. **Ambil pesanan Anda:** Kunjungi lokasi bisnis untuk mengambil pesanan Anda\n5. **Selamatkan makanan:** Nikmati makanan sambil mengurangi limbah";
     }
 
     if (
-      message.includes("price") ||
-      message.includes("cost") ||
-      message.includes("save") ||
-      message.includes("money")
+      message.includes("harga") ||
+      message.includes("biaya") ||
+      message.includes("hemat") ||
+      message.includes("uang")
     ) {
-      return "You'll love our savings! 💰\n\n**Average savings:** 50-70% off retail prices\n**Welcome bonus:** 20% off your first rescue\n**No membership fees:** Pay only for what you rescue\n\n**Example savings:**\n• $50 grocery bill → Pay just $15-25\n• Fresh produce, bakery items, prepared meals\n• Premium organic foods at amazing prices\n\nReady to start saving?";
+      return "Pertanyaan yang bagus! 💰\n\n**Harga di resQfood:**\n- **Diskon hingga 70%** untuk produk yang hampir kadaluarsa\n- **Tidak ada biaya berlangganan** - bayar hanya untuk apa yang Anda pesan\n- **Harga transparan** - lihat total sebelum checkout\n- **Banyak penawaran harian** - hemat lebih banyak dengan setiap pembelian\n\nDengan resQfood, Anda tidak hanya menghemat uang, tetapi juga membantu mengurangi limbah makanan!";
     }
 
     if (
-      message.includes("help") ||
-      message.includes("support") ||
-      message.includes("problem") ||
-      message.includes("issue")
+      message.includes("bantuan") ||
+      message.includes("dukungan") ||
+      message.includes("masalah") ||
+      message.includes("kendala")
     ) {
-      return "I'm here to help! 💪 Our support team is amazing:\n\n**Instant help:**\n• Live chat (that's me!) - Right now\n• Phone: 1-800-RESQFOOD - Immediate\n• Email: help@resqfood.com - Within 2 hours\n\n**Common solutions:**\n• Password resets\n• Account questions\n• Order assistance\n• Technical issues\n\nWhat specific issue can I help you solve?";
+      return "Baik! Saya di sini untuk membantu Anda. 🌟\n\n**Cara mendapatkan bantuan:**\n- **Chat dengan saya:** Saya akan menjawab pertanyaan Anda secara real-time\n- **Email kami:** Kirim pesan ke support@resqfood.com\n- **Hubungi kami:** Telepon 1-800-RESQFOOD (24/7)\n\nMasalah apa yang Anda alami?";
     }
 
     if (
-      message.includes("hi") ||
-      message.includes("hello") ||
-      message.includes("hey")
+      message.includes("hai") ||
+      message.includes("halo") ||
+      message.includes("hallo")
     ) {
-      return "Hello! So great to meet you! 😊✨\n\nI'm Dhiya, and I'm super excited to help you start your food rescue journey! Whether you're here to:\n\n🥗 Learn about food rescue\n💰 Start saving money on groceries\n🌍 Make an environmental impact\n🔐 Get help with your account\n\nI've got you covered! What brings you to resQfood today?";
+      return "Halo! 👋 Saya Dhiya, Spesialis Penyelamatan Makanan Anda. Ada yang bisa saya bantu hari ini?";
     }
 
     if (
-      message.includes("location") ||
+      message.includes("lokasi") ||
       message.includes("area") ||
-      message.includes("near") ||
-      message.includes("where")
+      message.includes("dekat") ||
+      message.includes("dimana")
     ) {
-      return "We're expanding rapidly! 📍\n\n**Currently available in:**\n• 50+ major cities across the US\n• Growing to new areas monthly\n• Partnered with 1,000+ local businesses\n\n**To check your area:**\n1. Create your account\n2. Enter your zip code\n3. See available rescues nearby\n\nEven if we're not in your area yet, join our waitlist - you'll be first to know when we arrive! 🚀";
+      return "Tentu! resQfood tersedia di berbagai lokasi. 📍\n\n**Cara memeriksa ketersediaan di area Anda:**\n1. Kunjungi halaman utama resQfood\n2. Masukkan kode pos atau nama kota Anda\n3. Lihat daftar bisnis yang berpartisipasi di daerah Anda\n\nJika Anda tidak melihat bisnis di area Anda, kami terus memperluas jangkauan kami, jadi pantau terus!";
     }
 
-    return "Thanks for reaching out! 🌟 I'd love to help you with that!\n\nFor detailed assistance, I can:\n• Answer questions about food rescue\n• Help with account issues\n• Connect you with our specialist team\n• Guide you through getting started\n\n**Quick options:**\n📧 Email: help@resqfood.com\n📞 Call: 1-800-RESQFOOD\n💬 Keep chatting with me!\n\nWhat would be most helpful for you right now?";
+    return "Terima kasih telah menghubungi kami! Saya Dhiya, Spesialis Penyelamatan Makanan Anda. Ada yang bisa saya bantu hari ini? 😊";
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -162,11 +163,17 @@ export default function FloatingLiveChat() {
   };
 
   const quickActions = [
-    { text: "I need help with my password", label: "🔐 Password Help" },
-    { text: "How do I create an account?", label: "📝 Create Account" },
-    { text: "Tell me about food rescue", label: "🥗 Food Rescue" },
-    { text: "What are your prices?", label: "💰 Pricing" },
-    { text: "Is resQfood available in my area?", label: "📍 Locations" },
+    {
+      text: "Saya butuh bantuan dengan kata sandi saya",
+      label: "🔐 Bantuan Kata Sandi",
+    },
+    { text: "Bagaimana cara membuat akun?", label: "📝 Buat Akun" },
+    {
+      text: "Ceritakan tentang penyelamatan makanan",
+      label: "🥗 Penyelamatan Makanan",
+    },
+    { text: "Berapa harga Anda?", label: "💰 Harga" },
+    { text: "Apakah resQfood tersedia di area saya?", label: "📍 Lokasi" },
   ];
 
   if (!isOpen) {
@@ -193,7 +200,7 @@ export default function FloatingLiveChat() {
             <div className="flex items-center space-x-2">
               <Sparkles className="w-4 h-4 text-[#DE7C7D]" />
               <span className="font-medium">
-                Need help? Chat with Dhiya! 💬
+                Butuh bantuan? Chat dengan Dhiya! 💬
               </span>
             </div>
             <div className="absolute top-full right-6 w-0 h-0 border-l-4 border-r-4 border-t-6 border-transparent border-t-[#AF1740]"></div>
@@ -214,7 +221,7 @@ export default function FloatingLiveChat() {
             <div className="relative">
               <Image
                 src="/landing/avatar.png"
-                alt="Dhiya - Food Rescue Specialist"
+                alt="Dhiya - Spesialis Penyelamatan Makanan"
                 width={40}
                 height={40}
                 className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-[#AF1740] shadow-lg"
@@ -228,7 +235,7 @@ export default function FloatingLiveChat() {
               <div className="flex items-center space-x-1 sm:space-x-2">
                 <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-green-400 rounded-full"></div>
                 <p className="text-gray-600 dark:text-gray-400 text-xs">
-                  Food Rescue Specialist • Online
+                  Spesialis Penyelamatan Makanan • Online
                 </p>
               </div>
             </div>
@@ -237,7 +244,7 @@ export default function FloatingLiveChat() {
             <Link
               href="/chat"
               className="hidden sm:flex text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-800 w-8 h-8 p-0 rounded-full transition-all duration-200 items-center justify-center"
-              aria-label="Expand chat"
+              aria-label="Perluas chat"
             >
               <Maximize2 className="w-4 h-4" />
             </Link>
@@ -246,7 +253,7 @@ export default function FloatingLiveChat() {
               variant="ghost"
               size="sm"
               className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-800 w-8 h-8 p-0 rounded-full transition-all duration-200"
-              aria-label="Close chat"
+              aria-label="Tutup chat"
             >
               <X className="w-4 h-4" />
             </Button>
@@ -259,16 +266,18 @@ export default function FloatingLiveChat() {
             <div className="flex items-center space-x-2 sm:space-x-4">
               <div className="flex items-center space-x-1">
                 <Clock className="w-3 h-3" />
-                <span className="hidden sm:inline">Avg response: 30s</span>
+                <span className="hidden sm:inline">
+                  Waktu respon rata-rata: 30s
+                </span>
                 <span className="sm:hidden">30s</span>
               </div>
               <div className="flex items-center space-x-1">
                 <Phone className="w-3 h-3" />
                 <span className="hidden md:inline">1-800-RESQFOOD</span>
-                <span className="md:hidden">Call</span>
+                <span className="md:hidden">Telepon</span>
               </div>
             </div>
-            <div className="text-[#AF1740] font-medium">24/7 Support</div>
+            <div className="text-[#AF1740] font-medium">Dukungan 24/7</div>
           </div>
         </div>
 
@@ -297,7 +306,7 @@ export default function FloatingLiveChat() {
                           "/placeholder.svg?height=32&width=32" ||
                           "/placeholder.svg"
                         }
-                        alt={message.agentName || "Agent"}
+                        alt={message.agentName || "Agen"}
                         width={32}
                         height={32}
                         className="w-6 h-6 sm:w-8 sm:h-8 rounded-full border border-gray-200 dark:border-gray-700"
@@ -342,7 +351,7 @@ export default function FloatingLiveChat() {
                   <div className="bg-gray-100 dark:bg-gray-800 rounded-2xl px-3 py-2 sm:px-4 sm:py-3 border border-gray-200 dark:border-gray-700">
                     <div className="flex items-center space-x-1">
                       <span className="text-gray-600 dark:text-gray-400 text-xs sm:text-sm mr-2">
-                        Dhiya is typing
+                        Dhiya sedang mengetik
                       </span>
                       <div className="flex space-x-1">
                         <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-[#AF1740] rounded-full animate-bounce"></div>
@@ -390,15 +399,15 @@ export default function FloatingLiveChat() {
               value={newMessage}
               onChange={(e) => setNewMessage(e.target.value)}
               onKeyPress={handleKeyPress}
-              placeholder="Ask Dhiya anything about resQfood..."
+              placeholder="Tanyakan apapun tentang resQfood kepada Dhiya..."
               className="flex-1 h-10 sm:h-11 rounded-xl border-gray-200 dark:border-gray-700 focus:border-[#AF1740] focus:ring-[#AF1740]/20 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder:text-gray-500 dark:placeholder:text-gray-400 shadow-inner text-sm"
-              aria-label="Type your message"
+              aria-label="Ketik pesan Anda"
             />
             <Button
               onClick={handleSendMessage}
               disabled={!newMessage.trim()}
               className="w-10 h-10 sm:w-11 sm:h-11 p-0 bg-gradient-to-r from-[#AF1740] to-[#CC2B52] hover:from-[#CC2B52] hover:to-[#AF1740] disabled:opacity-50 disabled:cursor-not-allowed rounded-xl shadow-lg transition-all duration-200 hover:scale-105"
-              aria-label="Send message"
+              aria-label="Kirim pesan"
             >
               <Send className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
             </Button>

@@ -32,60 +32,60 @@ const sampleNotifications: Notification[] = [
   {
     id: "1",
     type: "urgent",
-    title: "Urgent: Items Expiring Soon!",
+    title: "Penting: Barang Akan Segera Kedaluwarsa!",
     message:
-      "5 items from Golden Crust Bakery expire in 2 hours. Rescue them now at 60% off!",
-    timestamp: "2 minutes ago",
+      "5 produk dari Golden Crust Bakery akan kedaluwarsa dalam 2 jam. Selamatkan sekarang dengan diskon 60%!",
+    timestamp: "2 menit lalu",
     read: false,
-    actionLabel: "View Items",
+    actionLabel: "Lihat Produk",
     actionUrl: "/marketplace",
     icon: <Clock className="w-4 h-4" />,
   },
   {
     id: "2",
     type: "success",
-    title: "Order Confirmed!",
+    title: "Pesanan Dikonfirmasi!",
     message:
-      "Your order of Artisan Sourdough Bread has been confirmed. Pickup ready in 30 minutes.",
-    timestamp: "15 minutes ago",
+      "Pesanan Roti Sourdough Artisan Anda telah dikonfirmasi. Siap diambil dalam 30 menit.",
+    timestamp: "15 menit lalu",
     read: false,
-    actionLabel: "Track Order",
+    actionLabel: "Lacak Pesanan",
     actionUrl: "/orders",
     icon: <CheckCircle className="w-4 h-4" />,
   },
   {
     id: "3",
     type: "achievement",
-    title: "Food Hero Badge Earned! 🏆",
+    title: "Lencana Pahlawan Makanan Didapat! 🏆",
     message:
-      "Congratulations! You've rescued 50 items and earned the 'Food Hero' badge.",
-    timestamp: "1 hour ago",
+      "Selamat! Anda telah menyelamatkan 50 produk dan mendapatkan lencana 'Pahlawan Makanan'.",
+    timestamp: "1 jam lalu",
     read: false,
-    actionLabel: "View Profile",
+    actionLabel: "Lihat Profil",
     actionUrl: "/profile",
     icon: <Star className="w-4 h-4" />,
   },
   {
     id: "4",
     type: "info",
-    title: "New Seller Joined",
+    title: "Penjual Baru Bergabung",
     message:
-      "Patisserie Belle just joined resQfood! Check out their fresh pastries and desserts.",
-    timestamp: "3 hours ago",
+      "Patisserie Belle baru saja bergabung dengan resQfood! Lihat kue dan dessert segar mereka.",
+    timestamp: "3 jam lalu",
     read: true,
-    actionLabel: "Visit Store",
+    actionLabel: "Kunjungi Toko",
     actionUrl: "/seller/patisserie-belle",
     icon: <Users className="w-4 h-4" />,
   },
   {
     id: "5",
     type: "warning",
-    title: "Price Drop Alert",
+    title: "Peringatan Harga Turun",
     message:
-      "Premium Coffee Beans from Roast Masters dropped to $12.99 (was $24.99). Limited time!",
-    timestamp: "5 hours ago",
+      "Kopi Premium dari Roast Masters turun menjadi $12.99 (dari $24.99). Waktu terbatas!",
+    timestamp: "5 jam lalu",
     read: true,
-    actionLabel: "Buy Now",
+    actionLabel: "Beli Sekarang",
     actionUrl: "/marketplace",
     icon: <TrendingUp className="w-4 h-4" />,
   },
@@ -203,12 +203,12 @@ export function NotificationDropdown({
                     <Bell className="w-5 h-5 text-[#740938] dark:text-[#DE7C7D]" />
                     <div>
                       <h3 className="font-bold text-[#740938] dark:text-[#DE7C7D]">
-                        Notifications
+                        Notifikasi
                       </h3>
                       <p className="text-xs text-gray-600 dark:text-gray-400">
                         {unreadCount > 0
-                          ? `${unreadCount} unread`
-                          : "All caught up!"}
+                          ? `${unreadCount} belum dibaca`
+                          : "Semua sudah dibaca!"}
                       </p>
                     </div>
                   </div>
@@ -220,7 +220,7 @@ export function NotificationDropdown({
                         onClick={handleMarkAllRead}
                         className="text-[#740938] hover:bg-[#DE7C7D]/20 text-xs px-2 py-1 h-auto dark:text-[#DE7C7D] dark:hover:bg-gray-700"
                       >
-                        Mark all read
+                        Tandai semua sudah dibaca
                       </Button>
                     )}
                     <Button
@@ -240,10 +240,10 @@ export function NotificationDropdown({
                   <div className="p-6 text-center">
                     <Bell className="w-12 h-12 text-gray-300 mx-auto mb-3" />
                     <h4 className="font-semibold text-gray-500 dark:text-gray-400 mb-1">
-                      No notifications
+                      Tidak ada notifikasi
                     </h4>
                     <p className="text-gray-400 text-sm">
-                      You're all caught up!
+                      Anda sudah mengecek semuanya!
                     </p>
                   </div>
                 ) : (
@@ -353,7 +353,7 @@ export function NotificationDropdown({
                       onClick={() => (window.location.href = "/notifications")}
                       className="text-[#740938] hover:bg-[#DE7C7D]/20 text-xs px-2 py-1 h-auto dark:text-[#DE7C7D] dark:hover:bg-gray-700"
                     >
-                      View All Notifications
+                      Lihat Semua Notifikasi
                     </Button>
                     <Button
                       variant="ghost"

@@ -32,7 +32,7 @@ export function CategoryNavigation({
     <div className="bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-b border-[#DE7C7D]/30 dark:border-gray-700 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col sm:flex-row items-center justify-between py-3 space-y-3 sm:space-y-0">
-          {/* Categories - now wraps and centers on small screens */}
+          {/* Kategori - sekarang wrap dan center di layar kecil */}
           <div className="flex flex-wrap justify-center gap-2 sm:gap-4">
             {categories.slice(0, 6).map((category) => (
               <button
@@ -48,7 +48,7 @@ export function CategoryNavigation({
               </button>
             ))}
           </div>
-          {/* Filter and View Mode buttons - now wraps and centers on small screens */}
+          {/* Tombol Filter dan Mode Tampilan - sekarang wrap dan center di layar kecil */}
           <div className="flex flex-wrap justify-center items-center gap-2 sm:space-x-3">
             <Button
               variant="outline"
@@ -65,7 +65,8 @@ export function CategoryNavigation({
               ) : (
                 <Eye className="w-3 h-3 mr-1" />
               )}
-              {showExpired ? "Hide" : "Show"} Expired ({expiredProductsLength})
+              {showExpired ? "Sembunyikan" : "Tampilkan"} Kedaluwarsa (
+              {expiredProductsLength})
             </Button>
             <Button
               variant="outline"
@@ -74,7 +75,7 @@ export function CategoryNavigation({
               className="border-[#DE7C7D]/30 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-[#DE7C7D]/20 text-xs"
             >
               <SlidersHorizontal className="w-3 h-3 mr-1" />
-              Filters
+              Filter
             </Button>
             <div className="flex border border-[#DE7C7D]/30 dark:border-gray-600 rounded-lg">
               <Button

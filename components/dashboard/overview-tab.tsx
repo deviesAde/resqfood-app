@@ -62,7 +62,7 @@ export function OverviewTab({ stats, flaggedProducts }: OverviewTabProps) {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
           <div>
             <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold mb-2">
-              Selamat Datang di Dasbor Admin 🚀
+              Selamat Datang di Dashboard Admin 🚀
             </h1>
             <p className="text-sm sm:text-base lg:text-lg opacity-90">
               Kelola pengguna, penjual, produk, dan kesehatan platform secara

@@ -60,9 +60,9 @@ interface Contact {
 const contacts: Contact[] = [
   {
     id: "1",
-    name: "Sarah Chen",
-    avatar: "SC",
-    lastMessage: "Is the sourdough bread still available?",
+    name: "Budi Santoso",
+    avatar: "BS",
+    lastMessage: "Apakah roti tawar masih tersedia?",
     timestamp: "now",
     unreadCount: 2,
     isOnline: true,
@@ -73,7 +73,7 @@ const contacts: Contact[] = [
     id: "2",
     name: "Admin Support",
     avatar: "AS",
-    lastMessage: "Your account verification is complete",
+    lastMessage: "Akun Anda telah diverifikasi",
     timestamp: "5m",
     unreadCount: 0,
     isOnline: true,
@@ -82,9 +82,9 @@ const contacts: Contact[] = [
   },
   {
     id: "3",
-    name: "Mike Johnson",
-    avatar: "MJ",
-    lastMessage: "Thank you for the fresh bagels!",
+    name: "Dewi Maharani",
+    avatar: "DM",
+    lastMessage: "Roti tawarnya enak banget!",
     timestamp: "2h",
     unreadCount: 0,
     isOnline: false,
@@ -93,9 +93,9 @@ const contacts: Contact[] = [
   },
   {
     id: "4",
-    name: "Lisa Wong",
-    avatar: "LW",
-    lastMessage: "Can I pick up at 3 PM?",
+    name: "Ani Setiawan",
+    avatar: "AS",
+    lastMessage: "Apakah ada diskon untuk pembelian besar?",
     timestamp: "1d",
     unreadCount: 1,
     isOnline: true,
@@ -107,7 +107,7 @@ const contacts: Contact[] = [
 const sampleMessages: Message[] = [
   {
     id: "1",
-    text: "Hi! Is the sourdough bread still available?",
+    text: "Halo! Apakah roti tawar masih tersedia?",
     sender: "other",
     timestamp: new Date(Date.now() - 300000),
     status: "read",
@@ -115,7 +115,7 @@ const sampleMessages: Message[] = [
   },
   {
     id: "2",
-    text: "Yes! We have 3 loaves left. Fresh from this morning.",
+    text: "Ya, masih tersedia! Masih ada beberapa yang bisa dipesan.",
     sender: "user",
     timestamp: new Date(Date.now() - 240000),
     status: "read",
@@ -123,7 +123,7 @@ const sampleMessages: Message[] = [
   },
   {
     id: "3",
-    text: "Perfect! Can I reserve 2 loaves?",
+    text: "Bagus! Saya mau pesan 2 roti tawar.",
     sender: "other",
     timestamp: new Date(Date.now() - 180000),
     status: "read",
@@ -137,15 +137,15 @@ const sampleMessages: Message[] = [
     status: "read",
     type: "order",
     orderData: {
-      id: "ORD-001",
-      items: ["Sourdough Bread x2"],
+      id: "ORD-006",
+      items: ["Roti Tawar x2"],
       total: 7.98,
       status: "Reserved",
     },
   },
   {
     id: "5",
-    text: "Great! Here's my pickup location:",
+    text: "Terima kasih! Ini lokasi saya:",
     sender: "other",
     timestamp: new Date(Date.now() - 60000),
     status: "read",
@@ -159,7 +159,7 @@ const sampleMessages: Message[] = [
     status: "read",
     type: "location",
     locationData: {
-      address: "123 Main Street, Downtown",
+      address: "Jl. Kebon Jeruk No. 123, Jakarta",
       coordinates: "1.2966, 103.8558",
     },
   },

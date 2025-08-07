@@ -36,13 +36,13 @@ export function ProfileSidebar({
 }: ProfileSidebarProps) {
   return (
     <div className="lg:col-span-1 space-y-6">
-      {/* Profile Card */}
+      {/* Kartu Profil */}
       <Card className="border-2 border-[#DE7C7D]/30 rounded-2xl shadow-lg bg-gradient-to-br from-white to-[#DE7C7D]/10 dark:from-gray-800 dark:to-gray-900 dark:border-gray-700">
         <CardContent className="p-6 text-center">
           <div className="relative inline-block mb-4">
             <Image
               src={profileData.avatar || "/placeholder.svg"}
-              alt="Profile"
+              alt="Profil"
               width={150}
               height={150}
               className="w-24 h-24 rounded-full object-cover border-4 border-[#DE7C7D]/30 shadow-lg mx-auto dark:border-gray-700"
@@ -59,9 +59,9 @@ export function ProfileSidebar({
           </p>
           <div className="flex justify-center space-x-2 mb-4">
             <Badge className="bg-gradient-to-r from-[#AF1740] to-[#CC2B52] text-white">
-              VIP Member
+              VIP
             </Badge>
-            <Badge className="bg-green-500 text-white">Food Hero</Badge>
+            <Badge className="bg-green-500 text-white">Pahlawan Makanan</Badge>
           </div>
           <div className="grid grid-cols-2 gap-3 text-sm">
             <div className="bg-white rounded-lg p-3 border border-[#DE7C7D]/20 dark:bg-gray-900 dark:border-gray-700">
@@ -69,20 +69,20 @@ export function ProfileSidebar({
                 {userStats.itemsRescued}
               </div>
               <div className="text-gray-600 dark:text-gray-400">
-                Items Rescued
+                Item Diselamatkan
               </div>
             </div>
             <div className="bg-white rounded-lg p-3 border border-[#DE7C7D]/20 dark:bg-gray-900 dark:border-gray-700">
               <div className="font-bold text-[#CC2B52] text-lg">
                 {totalPoints}
               </div>
-              <div className="text-gray-600 dark:text-gray-400">Points</div>
+              <div className="text-gray-600 dark:text-gray-400">Poin</div>
             </div>
           </div>
         </CardContent>
       </Card>
 
-      {/* Navigation Tabs */}
+      {/* Tab Navigasi */}
       <Card className="border-2 border-[#DE7C7D]/30 rounded-2xl shadow-lg dark:border-gray-700 dark:bg-gray-800">
         <CardContent className="p-4">
           <nav className="space-y-2">
@@ -104,18 +104,18 @@ export function ProfileSidebar({
         </CardContent>
       </Card>
 
-      {/* Quick Stats */}
+      {/* Statistik Cepat */}
       <Card className="border-2 border-[#DE7C7D]/30 rounded-2xl shadow-lg bg-gradient-to-br from-white to-green-50 dark:from-gray-800 dark:to-gray-900 dark:border-gray-700">
         <CardHeader>
           <CardTitle className="text-[#740938] text-lg flex items-center dark:text-gray-50">
             <Leaf className="w-5 h-5 mr-2" />
-            Environmental Impact
+            Dampak Lingkungan
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="text-center p-4 bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl text-white">
             <div className="text-2xl font-bold">{userStats.wasteReduced}kg</div>
-            <div className="text-green-100 text-sm">Waste Prevented</div>
+            <div className="text-green-100 text-sm">Limbah Dicegah</div>
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div className="text-center p-3 bg-blue-50 rounded-lg border border-blue-200 dark:bg-blue-950 dark:border-blue-800">
@@ -123,7 +123,7 @@ export function ProfileSidebar({
                 {userStats.co2Prevented}kg
               </div>
               <div className="text-blue-500 text-xs dark:text-blue-400">
-                CO2 Saved
+                CO2 Dihindari
               </div>
             </div>
             <div className="text-center p-3 bg-purple-50 rounded-lg border border-purple-200 dark:bg-purple-950 dark:border-purple-800">
@@ -131,7 +131,7 @@ export function ProfileSidebar({
                 {userStats.currentStreak}
               </div>
               <div className="text-purple-500 text-xs dark:text-purple-400">
-                Day Streak
+                Hari Streak
               </div>
             </div>
           </div>

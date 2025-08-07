@@ -1,5 +1,5 @@
 "use client";
-import { ThemeToggle } from "@/components/theme-toggle"; // Tambahkan import ini
+import { ThemeToggle } from "@/components/theme-toggle";
 import { useState, useEffect, useRef } from "react";
 import { DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import type React from "react";
@@ -67,7 +67,6 @@ export function TopNavigation({
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Replace the searchData array with tab-based data
   const searchData: SearchResult[] = [
     {
       id: "overview",
@@ -147,17 +146,14 @@ export function TopNavigation({
         item.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
         item.category.toLowerCase().includes(searchQuery.toLowerCase())
     );
-    setSearchResults(filtered.slice(0, 6)); // Limit to 6 results
+    setSearchResults(filtered.slice(0, 6));
   }, [searchQuery]);
 
-  // Handle search input focus
   const handleSearchFocus = () => {
     setIsSearchOpen(true);
   };
 
-  // Handle search input blur
   const handleSearchBlur = (e: React.FocusEvent) => {
-    // Delay to allow clicking on search results
     setTimeout(() => {
       if (!searchRef.current?.contains(e.relatedTarget as Node)) {
         setIsSearchOpen(false);
@@ -165,16 +161,13 @@ export function TopNavigation({
     }, 200);
   };
 
-  // Replace the handleResultClick function
   const handleResultClick = (result: SearchResult) => {
-    // Add to recent searches
     const newRecentSearches = [
       result.title,
       ...recentSearches.filter((s) => s !== result.title),
     ].slice(0, 5);
     setRecentSearches(newRecentSearches);
     localStorage.setItem("recentSearches", JSON.stringify(newRecentSearches));
-    // Change active tab instead of navigation
     if (setActiveTab && result.id !== "#") {
       setActiveTab(result.id);
     }
@@ -182,7 +175,6 @@ export function TopNavigation({
     setIsSearchOpen(false);
   };
 
-  // Load recent searches from localStorage
   useEffect(() => {
     const saved = localStorage.getItem("recentSearches");
     if (saved) {
@@ -190,26 +182,25 @@ export function TopNavigation({
     }
   }, []);
 
-  // Handle clear search
   const clearSearch = () => {
     setSearchQuery("");
     setSearchResults([]);
   };
 
-  // Handle recent search click
   const handleRecentSearchClick = (searchTerm: string) => {
     setSearchQuery(searchTerm);
   };
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-40 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 transition-all duration-300 ${
         isScrolled
           ? "shadow-lg backdrop-blur-sm bg-white/95 dark:bg-gray-800/95"
           : ""
       }`}
     >
       <div className="flex h-16 items-center px-4">
+        {/* Logo and Mobile Menu Button */}
         <div className="flex items-center space-x-2">
           <Button
             variant="ghost"
@@ -234,17 +225,15 @@ export function TopNavigation({
             </span>
           </div>
         </div>
-        
+
+        {/* Theme Toggle */}
         <div className="ml-4">
           <ThemeToggle />
         </div>
 
-        {/* Enhanced Search Bar */}
-        <div
-          className="hidden lg:flex items-center flex-1 max-w-md mx-4 relative"
-          ref={searchRef}
-        >
-          <div className="relative w-full">
+        {/* Desktop Search Bar - Moved to center with proper positioning */}
+        <div className="hidden lg:flex items-center justify-center flex-1 px-4">
+          <div className="relative w-full max-w-xl" ref={searchRef}>
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 z-10" />
             <Input
               placeholder="Cari di dashboard..."
@@ -264,86 +253,83 @@ export function TopNavigation({
                 <X className="w-3 h-3" />
               </Button>
             )}
-          </div>
 
-          {/* Search Results Dropdown */}
-          {isSearchOpen && (
-            <div className="absolute top-full left-0 right-0 mt-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow-lg z-[60] max-h-96 overflow-y-auto">
-              {searchQuery.trim() === "" ? (
-                // Show recent searches when no query
-                <div className="p-4">
-                  <h4 className="text-sm font-medium text-gray-900 dark:text-gray-100 mb-3 flex items-center">
-                    <Clock className="w-4 h-4 mr-2 text-gray-400" />
-                    Pencarian Terkini
-                  </h4>
-                  {recentSearches.length > 0 ? (
-                    <div className="space-y-1">
-                      {recentSearches.map((search, index) => (
-                        <button
-                          key={index}
-                          onClick={() => handleRecentSearchClick(search)}
-                          className="w-full text-left px-3 py-2 text-sm text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
-                        >
-                          {search}
-                        </button>
-                      ))}
-                    </div>
-                  ) : (
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
-                      Belum ada pencarian terkini
-                    </p>
-                  )}
-                </div>
-              ) : searchResults.length > 0 ? (
-                // Show search results
-                <div className="p-2">
-                  <div className="px-3 py-2 text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide">
-                    Hasil Pencarian ({searchResults.length})
-                  </div>
-                  {searchResults.map((result) => (
-                    <button
-                      key={result.id}
-                      onClick={() => handleResultClick(result)}
-                      className="flex items-start space-x-3 px-3 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors group w-full text-left"
-                    >
-                      <div className="flex-shrink-0 mt-0.5 text-[#AF1740] dark:text-[#DE7C7D]">
-                        {result.icon}
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center space-x-2">
-                          <p className="text-sm font-medium text-gray-900 dark:text-gray-100 group-hover:text-[#AF1740] dark:group-hover:text-[#DE7C7D] transition-colors">
-                            {result.title}
-                          </p>
-                          <Badge
-                            variant="outline"
-                            className="text-xs border-[#DE7C7D]/30 text-[#740938] dark:text-[#DE7C7D]"
+            {/* Search Results Dropdown - Adjusted positioning */}
+            {isSearchOpen && (
+              <div className="absolute top-full left-0 right-0 mt-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow-lg z-[60] max-h-96 overflow-y-auto">
+                {searchQuery.trim() === "" ? (
+                  <div className="p-4">
+                    <h4 className="text-sm font-medium text-gray-900 dark:text-gray-100 mb-3 flex items-center">
+                      <Clock className="w-4 h-4 mr-2 text-gray-400" />
+                      Pencarian Terkini
+                    </h4>
+                    {recentSearches.length > 0 ? (
+                      <div className="space-y-1">
+                        {recentSearches.map((search, index) => (
+                          <button
+                            key={index}
+                            onClick={() => handleRecentSearchClick(search)}
+                            className="w-full text-left px-3 py-2 text-sm text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
                           >
-                            {result.category}
-                          </Badge>
-                        </div>
-                        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 line-clamp-1">
-                          {result.description}
-                        </p>
+                            {search}
+                          </button>
+                        ))}
                       </div>
-                    </button>
-                  ))}
-                </div>
-              ) : (
-                // No results found
-                <div className="p-4 text-center">
-                  <div className="text-gray-400 mb-2">
-                    <Search className="w-8 h-8 mx-auto" />
+                    ) : (
+                      <p className="text-sm text-gray-500 dark:text-gray-400">
+                        Belum ada pencarian terkini
+                      </p>
+                    )}
                   </div>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">
-                    Tidak ada hasil untuk "{searchQuery}"
-                  </p>
-                  <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
-                    Coba kata kunci yang berbeda
-                  </p>
-                </div>
-              )}
-            </div>
-          )}
+                ) : searchResults.length > 0 ? (
+                  <div className="p-2">
+                    <div className="px-3 py-2 text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide">
+                      Hasil Pencarian ({searchResults.length})
+                    </div>
+                    {searchResults.map((result) => (
+                      <button
+                        key={result.id}
+                        onClick={() => handleResultClick(result)}
+                        className="flex items-start space-x-3 px-3 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors group w-full text-left"
+                      >
+                        <div className="flex-shrink-0 mt-0.5 text-[#AF1740] dark:text-[#DE7C7D]">
+                          {result.icon}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center space-x-2">
+                            <p className="text-sm font-medium text-gray-900 dark:text-gray-100 group-hover:text-[#AF1740] dark:group-hover:text-[#DE7C7D] transition-colors">
+                              {result.title}
+                            </p>
+                            <Badge
+                              variant="outline"
+                              className="text-xs border-[#DE7C7D]/30 text-[#740938] dark:text-[#DE7C7D]"
+                            >
+                              {result.category}
+                            </Badge>
+                          </div>
+                          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 line-clamp-1">
+                            {result.description}
+                          </p>
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="p-4 text-center">
+                    <div className="text-gray-400 mb-2">
+                      <Search className="w-8 h-8 mx-auto" />
+                    </div>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                      Tidak ada hasil untuk "{searchQuery}"
+                    </p>
+                    <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
+                      Coba kata kunci yang berbeda
+                    </p>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Mobile Search Button */}
@@ -358,6 +344,7 @@ export function TopNavigation({
           </Button>
         </div>
 
+        {/* User Menu */}
         <div className="ml-auto flex items-center space-x-4">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -395,7 +382,7 @@ export function TopNavigation({
         </div>
       </div>
 
-      {/* Mobile Search Bar */}
+      {/* Mobile Search Bar - Full width below header */}
       {isSearchOpen && (
         <div className="lg:hidden border-t border-gray-200 dark:border-gray-700 p-4 bg-white dark:bg-gray-800">
           <div className="relative">
@@ -419,7 +406,7 @@ export function TopNavigation({
             )}
           </div>
 
-          {/* Mobile Search Results */}
+          {/* Mobile Search Results - Full width below search bar */}
           {searchResults.length > 0 && (
             <div className="mt-4 space-y-2">
               {searchResults.map((result) => (

@@ -511,7 +511,7 @@ export default function ProductDetailPage() {
                 <div className="absolute top-4 left-4">
                   <Badge className="bg-[#CC2B52] text-white animate-pulse text-lg px-4 py-2">
                     <Zap className="w-4 h-4 mr-2" />
-                    URGENT - Kedaluwarsa Hari Ini!
+                    SEGERA - Kedaluwarsa Hari Ini!
                   </Badge>
                 </div>
               )}

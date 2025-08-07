@@ -61,7 +61,7 @@ export default function SellerTopNav({
                 </span>
               </Link>
               <Badge className="bg-gradient-to-r from-[#AF1740] to-[#CC2B52] text-white ml-2">
-                Profile
+                Profil Toko
               </Badge>
             </div>
           </div>
@@ -71,7 +71,7 @@ export default function SellerTopNav({
             <div className="relative w-full">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
               <Input
-                placeholder="Cari produk..."
+                placeholder="Cari..."
                 className="pl-10 w-full rounded-full border-[#DE7C7D]/30 dark:border-gray-600 focus:border-[#AF1740] dark:focus:border-[#AF1740] bg-[#DE7C7D]/10 dark:bg-gray-700"
               />
             </div>

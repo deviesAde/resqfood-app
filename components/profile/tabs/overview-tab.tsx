@@ -60,18 +60,18 @@ export function OverviewTab({
           <div className="flex items-center justify-between mb-6">
             <div>
               <h1 className="text-3xl font-bold text-[#740938] mb-2 dark:text-gray-50">
-                Welcome back, {profileData.name.split(" ")[0]}! 👋
+                Selamat datang kembali, {profileData.name.split(" ")[0]}! 👋
               </h1>
               <p className="text-gray-600 text-lg dark:text-gray-400">
-                You've saved{" "}
+                Anda telah menghemat{" "}
                 <span className="font-bold text-[#AF1740]">
                   ${userStats.totalSaved}
                 </span>{" "}
-                and prevented{" "}
+                dan mencegah{" "}
                 <span className="font-bold text-green-600">
                   {userStats.wasteReduced}kg
                 </span>{" "}
-                of waste!
+                sampah!
               </p>
             </div>
             <Button
@@ -79,7 +79,7 @@ export function OverviewTab({
               className="bg-gradient-to-r from-[#AF1740] to-[#CC2B52] hover:from-[#740938] hover:to-[#AF1740] text-white rounded-full px-6 shadow-lg"
             >
               <Edit className="w-4 h-4 mr-2" />
-              Edit Profile
+              Edit Profil
             </Button>
           </div>
           {!isEditing ? (
@@ -106,13 +106,13 @@ export function OverviewTab({
                 <div className="flex items-center space-x-3">
                   <Calendar className="w-5 h-5 text-gray-500 dark:text-gray-400" />
                   <span className="text-gray-700 dark:text-gray-300">
-                    Member since {userStats.memberSince}
+                    Member sejak {userStats.memberSince}
                   </span>
                 </div>
               </div>
               <div>
                 <h3 className="font-semibold text-[#740938] mb-2 dark:text-gray-50">
-                  About
+                  Tentang
                 </h3>
                 <p className="text-gray-700 leading-relaxed dark:text-gray-300">
                   {profileData.bio}
@@ -127,7 +127,7 @@ export function OverviewTab({
                     htmlFor="name"
                     className="text-[#740938] font-semibold dark:text-gray-50"
                   >
-                    Full Name
+                    Nama Lengkap
                   </Label>
                   <Input
                     id="name"
@@ -160,7 +160,7 @@ export function OverviewTab({
                     htmlFor="phone"
                     className="text-[#740938] font-semibold dark:text-gray-50"
                   >
-                    Phone
+                    Telepon
                   </Label>
                   <Input
                     id="phone"
@@ -176,7 +176,7 @@ export function OverviewTab({
                     htmlFor="location"
                     className="text-[#740938] font-semibold dark:text-gray-50"
                   >
-                    Location
+                    Lokasi
                   </Label>
                   <Input
                     id="location"
@@ -214,7 +214,7 @@ export function OverviewTab({
                   className="bg-gradient-to-r from-[#AF1740] to-[#CC2B52] hover:from-[#740938] hover:to-[#AF1740] text-white rounded-full px-6 shadow-lg"
                 >
                   <Save className="w-4 h-4 mr-2" />
-                  Save Changes
+                  Simpan Perubahan
                 </Button>
                 <Button
                   onClick={handleCancel}
@@ -222,7 +222,7 @@ export function OverviewTab({
                   className="border-gray-300 text-gray-600 hover:bg-gray-100 rounded-full px-6 bg-transparent dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white"
                 >
                   <X className="w-4 h-4 mr-2" />
-                  Cancel
+                  Batal
                 </Button>
               </div>
             </div>
@@ -241,7 +241,7 @@ export function OverviewTab({
               ${userStats.totalSaved}
             </div>
             <div className="text-gray-600 text-sm dark:text-gray-400">
-              Total Saved
+              Total Penghematan
             </div>
           </CardContent>
         </Card>
@@ -254,7 +254,7 @@ export function OverviewTab({
               {userStats.wasteReduced}kg
             </div>
             <div className="text-gray-600 text-sm dark:text-gray-400">
-              Waste Prevented
+              Sampah Dihindari
             </div>
           </CardContent>
         </Card>
@@ -267,7 +267,7 @@ export function OverviewTab({
               {userStats.totalOrders}
             </div>
             <div className="text-gray-600 text-sm dark:text-gray-400">
-              Total Orders
+              Total Pesanan
             </div>
           </CardContent>
         </Card>
@@ -280,7 +280,7 @@ export function OverviewTab({
               {userStats.currentStreak}
             </div>
             <div className="text-gray-600 text-sm dark:text-gray-400">
-              Day Streak
+              Hari Streak
             </div>
           </CardContent>
         </Card>

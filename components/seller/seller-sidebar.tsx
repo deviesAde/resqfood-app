@@ -28,7 +28,7 @@ interface SellerSidebarProps {
 }
 
 const sidebarItems = [
-  { id: "dashboard", label: "Dasbor", icon: Home },
+  { id: "dashboard", label: "Dashboard", icon: Home },
   { id: "products", label: "Produk Saya", icon: Package },
   { id: "orders", label: "Pesanan", icon: ShoppingBag },
   { id: "analytics", label: "Analitik", icon: BarChart3 },

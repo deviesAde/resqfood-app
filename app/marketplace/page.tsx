@@ -29,8 +29,8 @@ const products: Product[] = [
     urgent: true,
     sold: 45,
     status: "available",
-    bestBy: "Today",
-    goodFor: "3 days if refrigerated",
+    bestBy: "Hari Ini",
+    goodFor: "3 hari jika disimpan di tempat sejuk",
   },
   {
     id: 2,
@@ -165,18 +165,18 @@ const categories = [
 ];
 
 const sortOptions = [
-  "Expiry (Urgent First)",
-  "Price (Low to High)",
-  "Price (High to Low)",
+  "Kadaluarsa (Segera)",
+  "Harga (Rendah ke Tinggi)",
+  "Harga (Tinggi ke Rendah)",
   "Rating",
-  "Discount",
-  "Most Popular",
+  "Diskon",
+  "Paling Populer",
 ];
 
 export default function MarketplacePage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("Semua");
-  const [sortBy, setSortBy] = useState("Expiry (Urgent First)");
+  const [sortBy, setSortBy] = useState("Kadaluarsa (Segera)");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [showFilters, setShowFilters] = useState(false);
   const [showExpired, setShowExpired] = useState(false);
@@ -193,19 +193,19 @@ export default function MarketplacePage() {
     })
     .sort((a, b) => {
       switch (sortBy) {
-        case "Expiry (Urgent First)":
+        case "Kadaluarsa (Segera)":
           if (a.status === "expired" && b.status !== "expired") return 1;
           if (b.status === "expired" && a.status !== "expired") return -1;
           return a.expiryDays - b.expiryDays;
-        case "Price (Low to High)":
+        case "Harga (Rendah ke Tinggi)":
           return a.discountedPrice - b.discountedPrice;
-        case "Price (High to Low)":
+        case "Harga (Tinggi ke Rendah)":
           return b.discountedPrice - a.discountedPrice;
         case "Rating":
           return b.rating - a.rating;
-        case "Discount":
+        case "Diskon":
           return b.discount - a.discount;
-        case "Most Popular":
+        case "Paling Populer":
           return b.sold - a.sold;
         default:
           return 0;
@@ -223,7 +223,7 @@ export default function MarketplacePage() {
   const handleClearFilters = () => {
     setSearchTerm("");
     setSelectedCategory("Semua");
-    setSortBy("Expiry (Urgent First)");
+    setSortBy("Kadaluarsa (Segera)");
     setShowExpired(false);
   };
 

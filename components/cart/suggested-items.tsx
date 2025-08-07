@@ -11,7 +11,7 @@ export function SuggestedItems() {
       <CardHeader>
         <CardTitle className="text-[#740938] flex items-center dark:text-[#FFC0CB]">
           <Heart className="w-5 h-5 mr-2" />
-          You might also like
+          Kamu Mungkin Suka Ini
         </CardTitle>
       </CardHeader>
       <CardContent>

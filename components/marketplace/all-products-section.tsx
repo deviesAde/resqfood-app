@@ -22,11 +22,11 @@ export function AllProductsSection({
     <div className="mb-8">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 space-y-3 sm:space-y-0">
         <h2 className="text-xl sm:text-2xl font-bold text-[#740938] dark:text-[#DE7C7D]">
-          All Rescued Food
+          🛒 Semua Produk Tersedia
         </h2>
         <div className="flex items-center space-x-2 sm:space-x-4">
           <span className="text-sm text-gray-600 dark:text-gray-400">
-            Showing {filteredProducts.length} products
+            Menampilkan {filteredProducts.length} produk
           </span>
           <select
             value={sortBy}
@@ -42,7 +42,7 @@ export function AllProductsSection({
         </div>
       </div>
       {viewMode === "grid" ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 overflow-hidden">
+        <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 gap-6">
           {filteredProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}

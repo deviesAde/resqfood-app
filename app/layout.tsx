@@ -9,7 +9,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "resQfood - Rescue Food Marketplace",
   description:
-    "Join the food rescue movement and save money while reducing waste",
+    "Bergabunglah dengan resQfood, Dapatkan makanan berkualitas dengan harga terjangkau sambil membantu mengurangi limbah makanan.",
 };
 
 export default function RootLayout({

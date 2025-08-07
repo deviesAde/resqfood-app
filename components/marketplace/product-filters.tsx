@@ -21,7 +21,7 @@ export function ProductFilters({
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
             <div>
               <label className="block text-sm font-medium text-[#740938] dark:text-[#DE7C7D] mb-2">
-                Sort By
+                Urutkan Berdasarkan
               </label>
               <select
                 value={sortBy}
@@ -37,7 +37,7 @@ export function ProductFilters({
             </div>
             <div>
               <label className="block text-sm font-medium text-[#740938] dark:text-[#DE7C7D] mb-2">
-                Price Range
+                Rentang Harga
               </label>
               <div className="flex space-x-2">
                 <Input
@@ -52,15 +52,14 @@ export function ProductFilters({
             </div>
             <div>
               <label className="block text-sm font-medium text-[#740938] dark:text-[#DE7C7D] mb-2">
-                Location
+                Lokasi
               </label>
               <select className="w-full h-10 rounded-lg border-2 border-[#DE7C7D]/30 dark:border-gray-600 focus:border-[#AF1740] bg-white dark:bg-gray-800 px-3 text-gray-700 dark:text-gray-300 text-sm">
-                <option>All Locations</option>
-                <option>Downtown</option>
-                <option>Midtown</option>
-                <option>Uptown</option>
-                <option>Westside</option>
-                <option>Eastside</option>
+                <option>Semua Lokasi</option>
+                <option>0-1 Km</option>
+                <option>1-5 Km</option>
+                <option>5-10 Km</option>
+                <option>10+ Km</option>
               </select>
             </div>
             <div>
@@ -68,10 +67,10 @@ export function ProductFilters({
                 Rating
               </label>
               <select className="w-full h-10 rounded-lg border-2 border-[#DE7C7D]/30 dark:border-gray-600 focus:border-[#AF1740] bg-white dark:bg-gray-800 px-3 text-gray-700 dark:text-gray-300 text-sm">
-                <option>All Ratings</option>
-                <option>4.5+ Stars</option>
-                <option>4.0+ Stars</option>
-                <option>3.5+ Stars</option>
+                <option>Semua Rating</option>
+                <option>4.5+ Bintang</option>
+                <option>4.0+ Bintang</option>
+                <option>3.5+ Bintang</option>
               </select>
             </div>
           </div>
