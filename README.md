@@ -38,7 +38,7 @@ Platform ini memungkinkan toko, restoran, dan produsen makanan untuk menjual pro
 
 ## 📁 Struktur Proyek
 
-```bash
+
 
 resqfood-app/
 ├── app/ # Routing dan halaman utama (Next.js App Router)
@@ -62,6 +62,7 @@ Copy
 Edit
 
 ---
+
 
 ## ⚙️ Instalasi
 
